@@ -1,8 +1,58 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
 import styles from '../styles/Home.module.css'
+import { Artboard } from './components/Artboard'
+import { Box } from './components/Box'
+import React, { useState } from 'react'
+import { ToolbarItem } from './components/ToolbarItem'
+
+const Container = () => {
+  const [boxes, setBoxes] = useState({})
+
+  const ToolbarItems = {
+    a: { title: 'Image', top: 0, left: 0 },
+    b: { title: 'Button', top: 0, left: 0 },
+    c: { title: 'Date', top: 0, left: 0 },
+    d: { title: 'Text', top: 0, left: 0 }
+  }
+
+  return (
+    <div className="flex min-h-screen">
+      <DndProvider backend={HTML5Backend}>
+        <aside className="flex-1 w-1/5 py-8 px-4 bg-slate-900">
+          <h3>Menu</h3>
+          <nav className="flex flex-col">
+            {Object.keys(ToolbarItems).map((key) => {
+              const { left, top, title } = ToolbarItems[key]
+              
+              return (
+                <ToolbarItem
+                  key={key}
+                  title={title}
+                  setBox={() => {
+                    setBoxes(boxes => ({
+                      ...boxes,
+                      [key]: { left, top, title}
+                    }))
+                  }}
+                />
+              )
+            })} 
+          </nav>
+        </aside>
+        <main className="w-4/5">
+          <Artboard boxes={boxes} setBoxes={setBoxes} />
+        </main>
+      </DndProvider>
+    </div>
+  )
+}
+
+const MemoizedContainer = React.memo(Container)
 
 export default function Home() {
+
   return (
     <div className={styles.container}>
       <Head>
@@ -11,58 +61,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+      <main>
+        <MemoizedContainer />
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
       </footer>
     </div>
   )
