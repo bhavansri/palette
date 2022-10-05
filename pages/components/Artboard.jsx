@@ -36,7 +36,7 @@ export const Artboard = ({boxes, setBoxes}) => {
     )
 
     return (
-        <div ref={dropRef} style={styles} className="h-full bg-stone-100">
+        <div ref={dropRef} style={styles} className="h-full bg-stone-300">
             {Object.keys(boxes).map((key) => {
                 const { left, top, title } = boxes[key]
                 return (
