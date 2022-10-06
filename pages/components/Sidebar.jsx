@@ -1,22 +1,18 @@
 import Image from "next/image"
 import { useState } from "react"
 import { useOutsideClick } from "../utils/hooks"
+import { ColorPicker } from "./ColorPicker"
 
-const Sidebar = () => {
+const Sidebar = ({ focusedPage, onPageChange }) => {
     const [expanded, setExpanded] = useState(false)
-    
-    const ref = useOutsideClick(() => {
-        console.log("Hello")
-        setExpanded(false)
-    })
     
     const HoverLink = ({ children }) => (
         <a onMouseOver={ () => { setExpanded(true) }}>{children}</a>
     )
 
     return (
-        <aside ref={ref} className={`flex ${ expanded ? 'w-96' : 'w-48' } pt-12`} style={{ transition: 'width 0.5s' }}>
-            <nav className={`${expanded ? 'pr-5 border-r border-slate-800' : 'pr-0 border-0'} overflow-y-auto`}>
+        <aside className={`flex ${ expanded ? 'w-96' : 'w-48' } pt-12`}>
+            <nav className="overflow-y-auto">
                 <ul className="menu menu-compact p-2">
                     <li className="menu-title">
                         <span>Design Elements</span>
@@ -45,6 +41,9 @@ const Sidebar = () => {
                     <li><HoverLink><Image src="/icons/date.svg" alt="Date Icon" height={30} width={30} /><span className="text-xs">Date</span></HoverLink></li>
                 </ul>
             </nav>
+            <div className={`${ expanded ? 'block' : 'hidden' } ml-5 py-12`}>
+                <ColorPicker color={focusedPage.backgroundColor} onChange={(value) => { onPageChange('backgroundColor', value) }} />
+            </div>
         </aside>
     )
 }

@@ -5,8 +5,7 @@ export const useOutsideClick = (callback, outerBound) => {
   
     useEffect(() => {
         const handleClick = (event) => {
-            const withinOuterLimit =  (outerBound !== undefined) ? outerBound.current.contains(event.target) : true
-            if (ref.current && !ref.current.contains(event.target) && withinOuterLimit) {
+            if (ref.current && !ref.current.contains(event.target) && outerBound.current.contains(event.target)) {
                 callback()
             }
         }
