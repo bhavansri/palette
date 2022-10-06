@@ -9,10 +9,11 @@ import { ToolbarItem } from './components/ToolbarItem'
 import Image from 'next/image'
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
-import { Canvas } from './components/Canvas'
+import { MemoizedCanvas } from './components/Canvas'
 
 const Container = () => {
-  const [pages, setPages] = useState([])
+  const [pages, setPages] = useState([{ id: 1 }])
+  const [selectedPage, setSelectedPage] = useState(null)
   const [boxes, setBoxes] = useState({})
 
   const ToolbarItems = {
@@ -25,14 +26,15 @@ const Container = () => {
   return (
     <div className="flex h-screen">
       <DndProvider backend={HTML5Backend}>
-        <div className="overflow-y-auto">
-          <Sidebar />
-        </div>
+        <Sidebar />
         <main className="p-7 h-screen flex-1 overflow-y-auto">
           <Navbar onAddPage={() => {
             setPages([...pages, { id: pages.length + 1 }])
           }} />
-          <Canvas pages={pages} />
+          <MemoizedCanvas pages={pages} selectedPage={selectedPage} onSelectPage={(pageId) => {
+            const selectedPage = pages.filter(currPage => currPage.id === pageId)[0]
+            setSelectedPage(selectedPage)
+          }} onDeselectPage={() => { setSelectedPage(null) }} />
         </main>
       </DndProvider>
     </div>
