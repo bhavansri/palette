@@ -3,7 +3,7 @@ import { useState } from "react"
 import { ColorPicker } from "./ColorPicker"
 import PhotoPicker from "./PhotoPicker"
 
-const Sidebar = ({ focusedPage, onPageChange }) => {
+const Sidebar = ({ page, onPageChange }) => {
     const [colorsExpanded, setColorsExpanded] = useState(false)
     const [imagesExpanded, setImagesExpanded] = useState(false)
     
@@ -41,7 +41,7 @@ const Sidebar = ({ focusedPage, onPageChange }) => {
             {
                 colorsExpanded && (
                     <div className="h-full ml-5 py-12">
-                        <ColorPicker color={focusedPage.backgroundColor} onChange={(value) => { onPageChange('backgroundColor', value) }} />
+                        <ColorPicker color={page.backgroundColor} onChange={(value) => { onPageChange('backgroundColor', value) }} />
                     </div>)
             }
             {

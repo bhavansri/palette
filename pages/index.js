@@ -8,39 +8,19 @@ import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
 
 const Container = () => {
-  const [pages, setPages] = useState([{ id: 1, backgroundColor: '#fff' }])
-  const [selectedPageId, setSelectedPageId] = useState(null)
+  const [page, setPage] = useState({ backgroundColor: '#fff' })
 
-  const focusedPage = (selectedPageId === null) ? pages[0] : pages.filter(page => page.id === selectedPageId)
-  
   const onPageChange = (property, value) => {
-    const focusedId = focusedPage.id
-
-    const newPages = pages.map(page => {
-      if (page.id === focusedId) {
-        return {...page, [property]: value}
-      }
-
-      return page
-    })
-
-    setPages(newPages)
+    setPage(page => ({...page, [property]: value}))
   }
 
   return (
     <div className="flex h-screen">
       <DndProvider backend={HTML5Backend}>
-        <Sidebar focusedPage={focusedPage} onPageChange={onPageChange} />
+        <Sidebar page={page} onPageChange={onPageChange} />
         <main className="p-7 h-screen flex-1 overflow-y-auto">
-          <Navbar onAddPage={() => {
-            const newPage = { id: pages.length + 1, backgroundColor: '#fff' }
-            setPages(currentPages => [...currentPages, newPage])
-          }} />
-          <Canvas pages={pages} selectedPageId={selectedPageId} onSelectPage={(pageId) => {
-            setSelectedPageId(pageId)
-          }} onDeselectPage={() => {
-            setSelectedPageId(null)
-          }} />
+          <Navbar />
+          <Canvas page={page} />
         </main>
       </DndProvider>
     </div>
