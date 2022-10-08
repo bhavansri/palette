@@ -1,6 +1,4 @@
 import Head from 'next/head'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { DndProvider } from 'react-dnd'
 import styles from '../styles/Home.module.css'
 import React, { useState } from 'react'
 import Canvas from './components/Canvas'
@@ -16,13 +14,11 @@ const Container = () => {
 
   return (
     <div className="flex h-screen">
-      <DndProvider backend={HTML5Backend}>
-        <Sidebar page={page} onPageChange={onPageChange} />
+       <Sidebar page={page} onPageChange={onPageChange} />
         <main className="p-7 h-screen flex-1 overflow-y-auto">
           <Navbar />
           <Canvas page={page} />
         </main>
-      </DndProvider>
     </div>
   )
 }
