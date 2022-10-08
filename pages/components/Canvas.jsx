@@ -1,7 +1,10 @@
-import React, { useRef } from "react"
+import React, { useCallback, useRef } from "react"
+import { useDrop } from "react-dnd"
+import { ItemTypes } from "../utils/ItemTypes"
 import Page from "./Page"
 
 const Canvas = ({ page }) => {
+    
     const canvasRef = useRef()
 
     return (
