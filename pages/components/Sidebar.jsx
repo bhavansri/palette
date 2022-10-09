@@ -3,7 +3,7 @@ import { useState } from "react"
 import { ColorPicker } from "./ColorPicker"
 import PhotoPicker from "./PhotoPicker"
 
-const Sidebar = ({ page, onPageChange }) => {
+const Sidebar = ({ page, onPageChange, onImageSelect }) => {
     const [colorsExpanded, setColorsExpanded] = useState(false)
     const [imagesExpanded, setImagesExpanded] = useState(false)
     
@@ -47,7 +47,7 @@ const Sidebar = ({ page, onPageChange }) => {
             {
                 imagesExpanded && (
                     <div className="h-full ml-5 overflow-y-auto">
-                        <PhotoPicker />
+                        <PhotoPicker handleOnClick={onImageSelect} />
                     </div>)
             }
         </aside>

@@ -1,12 +1,14 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import React, { useState } from 'react'
-import Canvas from './components/Canvas'
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
+import Page from './components/Page'
+import { ItemTypes } from './utils/ItemTypes'
 
 const Container = () => {
   const [page, setPage] = useState({ backgroundColor: '#fff' })
+  const [blocks, setBlocks] = useState([])
 
   const onPageChange = (property, value) => {
     setPage(page => ({...page, [property]: value}))
@@ -14,10 +16,48 @@ const Container = () => {
 
   return (
     <div className="flex h-screen">
-       <Sidebar page={page} onPageChange={onPageChange} />
+      <Sidebar
+        page={page}
+        onPageChange={onPageChange}
+        onImageSelect={(photoURL) => {
+          setBlocks(prevBlocks => {
+            return [...prevBlocks, { type: ItemTypes.IMAGE, id: prevBlocks.length + 1, x: 20, y: 80, width: 170, height: 200, url: photoURL }]
+          })
+        }} />
         <main className="p-7 h-screen flex-1 overflow-y-auto">
           <Navbar />
-          <Canvas page={page} />
+          <div className="min-h-full bg-stone-300 flex flex-col items-center justify-around py-5">
+          <Page
+            backgroundColor={page.backgroundColor}
+            blocks={blocks}
+            setSize={(id, width, height) => {
+              setBlocks(prevBlocks => {
+                const newBlocks = prevBlocks.map(prevBlock => {
+                    if (prevBlock.id === id) {
+                        return { ...prevBlock, width, height }
+                    }
+
+                    return prevBlock
+                })
+                
+                return newBlocks
+              })
+            }}
+            setPosition={(id, x, y) => {
+              setBlocks(prevBlocks => {
+                const newBlocks = prevBlocks.map(prevBlock => {
+                  if (prevBlock.id === id) {
+                      return {...prevBlock, x, y}
+                  }
+                  
+                  return prevBlock
+                })
+                
+                return newBlocks
+              })
+            }}
+          />
+          </div>
         </main>
     </div>
   )

@@ -5,7 +5,7 @@ const api = createApi({
     accessKey: "xgcleP01T474D-5Vgh9-irgsHMdp34GaOWPkFNe3JbU"
 })
 
-const StockPhoto = ({ photo }) => {
+const StockPhoto = ({ photo, handleOnClick }) => {
     const { user, urls } = photo
     const [isHovering, setIsHovering] = useState(false)
 
@@ -19,7 +19,7 @@ const StockPhoto = ({ photo }) => {
 
     return (
         <div className="flex flex-col items-center">
-            <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} style={{ backgroundImage: `url(${urls.regular})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', height: '175px', width: '150px' }}>
+            <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} onClick={() => { handleOnClick(urls.regular) }} style={{ backgroundImage: `url(${urls.regular})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', height: '175px', width: '150px' }}>
                 {isHovering && <a className="text-xs font-bold underline text-black mt-2 ml-2" href={`https://unsplash.com/@${user.username}`}>
                     {user.name}
                 </a>}
@@ -28,7 +28,7 @@ const StockPhoto = ({ photo }) => {
     )
 }
 
-const PhotoPicker = () => {
+const PhotoPicker = ({ handleOnClick }) => {
     const [photos, setPhotosResponse] = useState(null)
     const [searchTerm, setSearchTerm] = useState("mountains")
 
@@ -46,7 +46,7 @@ const PhotoPicker = () => {
     if (photos === null) {
         return <div>Loading...</div>
     } else if (photos.errors) {
-        return <div>{console.log(photos)}</div>
+        return <div>{photos.errors[0]}</div>
     } else {
         return (
             <div className="flex flex-col">
@@ -61,7 +61,7 @@ const PhotoPicker = () => {
                 <ul className="list-none py-2">
                     {photos.results.map(photo => (
                         <li key={photo.id} className="mb-3">
-                            <StockPhoto photo={photo}/>
+                            <StockPhoto photo={photo} handleOnClick={handleOnClick} />
                         </li>
                     ))}
                 </ul>
