@@ -1,18 +1,30 @@
 import { ItemTypes } from "../utils/ItemTypes"
 import ImageElement from "./ImageElement"
+import TextElement from "./TextElement"
 
 const Page = ({ backgroundColor, blocks, setSize, setPosition }) => {
     
     return (
         <div style={{ backgroundColor: backgroundColor }} className="relative artboard shadow-xl phone-1 mb-5">
             {blocks.map(block => {
+                const id = block.id
+
                 if (block.type === ItemTypes.IMAGE) {
-                    const id = block.id
                     return (
                         <ImageElement
-                            key={block.id}
-                            id={block.id}
-                            image={block}
+                            key={id}
+                            id={id}
+                            block={block}
+                            setSize={setSize}
+                            setPosition={setPosition}
+                        />
+                    )
+                } else if (block.type === ItemTypes.TEXT) {
+                    return (
+                        <TextElement
+                            key={id}
+                            id={id}
+                            block={block}
                             setSize={setSize}
                             setPosition={setPosition}
                         />

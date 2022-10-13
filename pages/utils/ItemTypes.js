@@ -1,3 +1,4 @@
 export const ItemTypes = {
-    IMAGE: 'IMAGE'
+    IMAGE: 'IMAGE',
+    TEXT: 'TEXT'
 }

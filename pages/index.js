@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
 import Page from './components/Page'
@@ -14,6 +14,10 @@ const Container = () => {
     setPage(page => ({...page, [property]: value}))
   }
 
+  useEffect(() => {
+    console.log(blocks)
+  })
+
   return (
     <div className="flex h-screen">
       <Sidebar
@@ -23,7 +27,13 @@ const Container = () => {
           setBlocks(prevBlocks => {
             return [...prevBlocks, { type: ItemTypes.IMAGE, id: prevBlocks.length + 1, x: 20, y: 80, width: 170, height: 200, url: photoURL }]
           })
-        }} />
+        }}
+        onTextSelect={(font, color) => {
+          setBlocks(prevBlocks => {
+            return [...prevBlocks, { type: ItemTypes.TEXT, id: prevBlocks.length + 1, x: 20, y: 80, height: 30, font, color }]
+          })
+        }}
+        />
         <main className="p-7 h-screen flex-1 overflow-y-auto">
           <Navbar />
           <div className="min-h-full bg-stone-300 flex flex-col items-center justify-around py-5">

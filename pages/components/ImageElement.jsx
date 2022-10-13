@@ -1,6 +1,6 @@
 import { Rnd } from 'react-rnd'
 
-const ImageElement = ({ id, image, setSize, setPosition }) => {
+const ImageElement = ({ id, block, setSize, setPosition }) => {
 
     const onResize = (event, direction, ref, delta) => {
         const { width, height } = ref.style
@@ -15,8 +15,8 @@ const ImageElement = ({ id, image, setSize, setPosition }) => {
     }
 
     return (
-        <Rnd default={image} onResize={onResize} onDragStop={onDragStop} bounds="parent" lockAspectRatio={true}>
-            <div className="w-full h-full" style={{ backgroundImage: `url(${image.url})`, backgroundRepeat: 'no-repeat', backgroundSize: '100%' }} />
+        <Rnd default={block} onResize={onResize} onDragStop={onDragStop} bounds="parent" lockAspectRatio={true}>
+            <div className="w-full h-full" style={{ backgroundImage: `url(${block.url})`, backgroundRepeat: 'no-repeat', backgroundSize: '100%' }} />
         </Rnd>
     )
 }

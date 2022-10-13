@@ -2,11 +2,19 @@ import Image from "next/image"
 import { useState } from "react"
 import { ColorPicker } from "./ColorPicker"
 import PhotoPicker from "./PhotoPicker"
+import { TextPicker } from "./TextPicker"
 
-const Sidebar = ({ page, onPageChange, onImageSelect }) => {
+const Sidebar = ({ page, onPageChange, onImageSelect, onTextSelect }) => {
     const [colorsExpanded, setColorsExpanded] = useState(false)
     const [imagesExpanded, setImagesExpanded] = useState(false)
+    const [textExpanded, setTextExpanded] = useState(false)
     
+    const onTextEditorExpanded = () => {
+        setTextExpanded(true)
+
+        onTextSelect("cinzel", "#000000")
+    }
+
     return (
         <aside className="flex items-start pt-12 overflow-y-auto">
             <nav>
@@ -14,7 +22,7 @@ const Sidebar = ({ page, onPageChange, onImageSelect }) => {
                     <li className="menu-title">
                         <span>Design Elements</span>
                     </li>
-                    <li><a><Image src="/icons/text.svg" alt="Text Icon" height={30} width={30} /><span className="text-xs">Text</span></a></li>
+                    <li><a onClick={onTextEditorExpanded}><Image src="/icons/text.svg" alt="Text Icon" height={30} width={30} /><span className="text-xs">Text</span></a></li>
                     <li><a onClick={() => { setImagesExpanded(true) }}><Image src="/icons/image.svg" alt="Image Icon" height={30} width={30} /><span className="text-xs">Image</span></a></li>
                     <li><a onClick={() => { setColorsExpanded(true) }} ><Image src="/icons/background.svg" alt="Background Icon" height={30} width={30} /><span className="text-xs">Colors</span></a></li>
                 </ul>
@@ -48,6 +56,12 @@ const Sidebar = ({ page, onPageChange, onImageSelect }) => {
                 imagesExpanded && (
                     <div className="h-full ml-5 overflow-y-auto">
                         <PhotoPicker handleOnClick={onImageSelect} />
+                    </div>)
+            }
+            {
+                textExpanded && (
+                    <div className="h-full ml-5 py-12">
+                        <TextPicker onTextSelect={onTextSelect} />
                     </div>)
             }
         </aside>
