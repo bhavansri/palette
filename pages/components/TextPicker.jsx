@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Select from 'react-select'
-import { HexColorPicker } from "react-colorful"
+import { TextAlignments, TextSizes } from '../utils/types'
+import { presetColors } from '../utils/config'
 
 const options = [
     { value: 'cinzel', label: 'Cinzel' },
@@ -14,7 +15,7 @@ const options = [
 ]
 
 export const TextPicker = ({ selectedBlock, setSelectedBlock }) => {
-    const { id, font, color } = selectedBlock
+    const { id, font, color, size, alignment } = selectedBlock
     const [colorPickerOpen, setColorPickerOpen] = useState(false)
     
     return (
@@ -25,24 +26,32 @@ export const TextPicker = ({ selectedBlock, setSelectedBlock }) => {
                 onChange={(selectedOption) => setSelectedBlock({ id: id, font: selectedOption.value})}
                 options={options}
             />
-            <div className='inline-flex justify-between'>
-                <span>{color}</span>
-                <div className='relative'>
-                    <div style={{ backgroundColor: color }} onClick={() => { setColorPickerOpen(true) }} className="w-7 h-7 border-2 cursor-pointer" />
-                    { colorPickerOpen && <div className="absolute right-0" style={{ top: 'calc(100% + 2px)' }}>
-                        <HexColorPicker color={color} onChange={(color) => setSelectedBlock({ id, color })} />
-                    </div>}
-                </div>
+            <div className='flex flex-col justify-between'>
+                <span>Color: {color}</span>
+                <div className="flex">
+                {presetColors.map((presetColor) => (
+                    <button
+                        key={presetColor}
+                        className="w-6 h-6 m-1 cursor-pointer"
+                        style={{ background: presetColor }}
+                        onClick={() => setSelectedBlock({ id: id, color: presetColor })}
+                    />
+                ))}
+            </div>
             </div>
             <div>
                 <div className='label-text mb-2'>
                     Size
                 </div>
                 <div className="btn-group">
-                    <button className="btn btn-sm">sm</button>
-                    <button className="btn btn-sm btn-active">md</button>
-                    <button className="btn btn-sm">lg</button>
-                    <button className="btn btn-sm">xl</button>
+                    {Object.keys(TextSizes).map((key, index) => {
+                        const value = TextSizes[key]
+                        return (
+                            <button key={index} className={`btn btn-sm ${(value === size ? 'btn-active': '' )}`} onClick={() => setSelectedBlock({ id, size: value })}>
+                                {value}
+                            </button>
+                        )
+                    })}
                 </div>
             </div>
             <div>
@@ -50,9 +59,14 @@ export const TextPicker = ({ selectedBlock, setSelectedBlock }) => {
                     Alignment
                 </div>
                 <div className="btn-group">
-                    <button className="btn btn-sm">left</button>
-                    <button className="btn btn-sm btn-active">center</button>
-                    <button className="btn btn-sm">right</button>
+                    {Object.keys(TextAlignments).map((key, index) => {
+                        const value = TextAlignments[key]
+                        return (
+                            <button key={index} className={`btn btn-sm ${(value === alignment ? 'btn-active': '' )}`} onClick={() => setSelectedBlock({ id, alignment: value })}>
+                                {value}
+                            </button>
+                        )
+                    })}
                 </div>
             </div>
         </div>

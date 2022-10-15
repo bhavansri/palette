@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { Rnd } from 'react-rnd'
 import { handleStyles } from '../utils/config'
 import { useOutsideClick } from '../utils/hooks'
+import { TextAlignments, TextSizes } from '../utils/types'
 
 const calculateWidth = (text, font) => {
     const canvas = document.createElement('canvas')
@@ -13,7 +14,7 @@ const calculateWidth = (text, font) => {
 }
 
 const TextElement = ({ block, setBlock, blockSelected, pageRef }) => {
-    const { id, text, font, color } = block
+    const { id, text, font, color, size, alignment } = block
     const [isDragging, setDragging] = useState(false)
     const [selected, setSelected] = useState(true)
 
@@ -48,6 +49,30 @@ const TextElement = ({ block, setBlock, blockSelected, pageRef }) => {
 
     const ref = useOutsideClick(() => handleSelection(false), pageRef)
 
+    const textAlignment = () => {
+        switch (alignment) {
+            case TextAlignments.left:
+                return 'text-left'
+            case TextAlignments.center:
+                return 'text-center'
+            case TextAlignments.right:
+                return 'text-right'
+        }
+    }
+
+    const textSize = () => {
+        switch (size) {
+            case TextSizes.sm:
+                return 'text-sm'
+            case TextSizes.md:
+                return 'text-md'
+            case TextSizes.lg:
+                return 'text-lg'
+            case TextSizes.xl:
+                return 'text-xl'
+        }
+    }
+
     return (
         <Rnd
             className={`${selected ? 'border border-blue-500' : 'border-0' } overflow-hidden text-ellipsis whitespace-nowrap`}
@@ -59,7 +84,7 @@ const TextElement = ({ block, setBlock, blockSelected, pageRef }) => {
         >
             {
                 <input
-                    className={`bg-transparent outline-none ${isDragging ? 'cursor-move' : 'cursor-auto'}`}
+                    className={`${textSize()} ${textAlignment()} bg-transparent outline-none ${isDragging ? 'cursor-move' : 'cursor-auto'}`}
                     type="text"
                     ref={ref}
                     value={text}

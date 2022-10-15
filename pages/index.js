@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
 import Page from './components/Page'
-import { ItemTypes } from './utils/ItemTypes'
+import { ItemTypes } from './utils/types'
 
 const Container = () => {
   const [page, setPage] = useState({ backgroundColor: '#fff' })
@@ -16,7 +16,15 @@ const Container = () => {
   }
 
   const addImageHandler = (url) => {
-    const imageBlock = { type: ItemTypes.IMAGE, id: blocks.length + 1, x: 20, y: 80, width: 170, height: 200, url: url }
+    const imageBlock = {
+      type: ItemTypes.IMAGE,
+      id: blocks.length + 1,
+      x: 20,
+      y: 80,
+      width: 170,
+      height: 200,
+      url: url
+    }
     
     setBlocks(prevBlocks => [...prevBlocks, imageBlock])
     setSelectedBlock(imageBlock)
@@ -31,7 +39,9 @@ const Container = () => {
       height: 30,
       text: "Text Placeholder",
       font: 'Cinzel',
-      color: '#000000'
+      color: '#000000',
+      size: 'md',
+      alignment: 'left'
     }
 
     setBlocks(prevBlocks => [...prevBlocks, textBlock])

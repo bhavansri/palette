@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { ItemTypes } from "../utils/ItemTypes"
+import { ItemTypes } from "../utils/types"
 import ImageElement from "./ImageElement"
 import TextElement from "./TextElement"
 

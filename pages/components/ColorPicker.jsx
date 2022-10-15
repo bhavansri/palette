@@ -1,8 +1,7 @@
 import { HexColorPicker } from "react-colorful"
+import { presetColors } from "../utils/config"
 
 export const ColorPicker = ({ color, onChange }) => {
-    const presetColors = ["#ffbe0b", "#fb5607", "#ff006e", "#8338ec", "#3a86ff"]
-
     return (
         <div>
             <HexColorPicker color={color} onChange={onChange} />
