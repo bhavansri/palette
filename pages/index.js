@@ -19,7 +19,6 @@ const Container = () => {
     const imageBlock = { type: ItemTypes.IMAGE, id: blocks.length + 1, x: 20, y: 80, width: 170, height: 200, url: url }
     
     setBlocks(prevBlocks => [...prevBlocks, imageBlock])
-
     setSelectedBlock(imageBlock)
   }
 
@@ -27,6 +26,7 @@ const Container = () => {
     const textBlock = { type: ItemTypes.TEXT, id: blocks.length + 1, x: 20, y: 80, height: 30 }
 
     setBlocks(prevBlocks => [...prevBlocks, textBlock])
+    setSelectedBlock(textBlock)
   }
 
   useEffect(() => {
