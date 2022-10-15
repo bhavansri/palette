@@ -3,11 +3,9 @@ import { Rnd } from 'react-rnd'
 import { useOutsideClick } from '../utils/hooks'
 import { handleStyles } from '../utils/config'
 
-const ImageElement = ({ block, setBlock }) => {
+const ImageElement = ({ block, setBlock, blockSelected }) => {
     const { id } = block
     const [selected, setSelected] = useState(true)
-
-    const ref = useOutsideClick(() => setSelected(false))
 
     const onResize = (event, direction, ref, delta) => {
         const { width, height } = ref.style
@@ -21,6 +19,18 @@ const ImageElement = ({ block, setBlock }) => {
         setBlock({ id: id, x: x, y: y })
     }
 
+    const handleSelection = (isSelected) => {
+        setSelected(isSelected)
+
+        if (isSelected) {
+            blockSelected(block)
+        } else {
+            blockSelected(null)
+        }
+    }
+
+    const ref = useOutsideClick(() => handleSelection(false))
+    
     return (
         <Rnd
             default={block}

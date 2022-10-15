@@ -52,9 +52,7 @@ const Container = () => {
               setBlocks(prevBlocks => {
                 const newBlocks = prevBlocks.map(prevBlock => {
                   if (prevBlock.id === blockProps.id) {
-                    const newBlock = Object.assign(prevBlock, blockProps)
-                    setSelectedBlock(newBlock)
-                    return newBlock
+                    return Object.assign(prevBlock, blockProps)
                   }
 
                   return prevBlock
@@ -62,6 +60,9 @@ const Container = () => {
 
                 return newBlocks
               })
+            }}
+            blockSelected={(selectedBlock) => {
+              setSelectedBlock(selectedBlock)
             }}
           />
           </div>
