@@ -30,24 +30,24 @@ const Sidebar = ({ page, onPageChange, onImageSelect, onTextSelect }) => {
         switch (editor) {
             case Editors.Text:
                 return (
-                    <div className="h-full ml-5 py-12">
+                    <div className="h-full ml-5 overflow-y-auto py-12">
                         <TextPicker onTextSelect={onTextSelect} />
                     </div>
                 )
             case Editors.BackgroundColor:
                 return (
-                    <div className="h-full ml-5 py-12">
+                    <div className="h-full ml-5 overflow-y-auto py-12">
                         <ColorPicker color={page.backgroundColor} onChange={(value) => { onPageChange('backgroundColor', value) }} />
                     </div>
                 )
             case Editors.Image:
                 return (
-                    <div className="h-full ml-5 overflow-y-auto">
+                    <div className="h-full ml-5 overflow-y-auto py-12">
                         <PhotoPicker handleOnClick={onImageSelect} />
                     </div>
                 )
             default:
-                return (<></>)
+                return <></>
         }
     }
 
