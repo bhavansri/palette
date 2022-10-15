@@ -3,7 +3,8 @@ import { Rnd } from 'react-rnd'
 import { useOutsideClick } from '../utils/hooks'
 import { handleStyles } from '../utils/config'
 
-const ImageElement = ({ id, block, setSize, setPosition }) => {
+const ImageElement = ({ block, setBlock }) => {
+    const { id } = block
     const [selected, setSelected] = useState(true)
 
     const onSelect = () => {
@@ -19,13 +20,13 @@ const ImageElement = ({ id, block, setSize, setPosition }) => {
     const onResize = (event, direction, ref, delta) => {
         const { width, height } = ref.style
 
-        setSize(id, width, height)
+        setBlock({ id: id, width: width, height: height })
     }
 
     const onDragStop = (event, direction) => {
         const { x, y } = direction
 
-        setPosition(id, x, y)
+        setBlock({ id: id, x: x, y: y })
         onDeselect()
     }
 

@@ -10,7 +10,8 @@ const calculateWidth = (text, font) => {
     return context.measureText(text).width
 }
 
-const TextElement = ({ id, block, setSize, setPosition }) => {
+const TextElement = ({ block, setBlock }) => {
+    const { id } = block
     const [text, setText] = useState("Placeholder Text")
     const [width, setWidth] = useState(100)
     const [isEditing, setEditing] = useState(false)
@@ -19,17 +20,19 @@ const TextElement = ({ id, block, setSize, setPosition }) => {
     const onResize = (event, direction, ref, delta) => {
         const { height } = ref.style
         const width = calculateWidth(text, block.font)
-
+        
         setDragging(true)
         setWidth(width)
-        setSize(id, width, height)
+
+        setBlock({ id: id, width: width, height: height })
     }
 
     const onDragStop = (event, direction) => {
         const { x, y } = direction
-
+        
         setDragging(true)
-        setPosition(id, x, y)
+
+        setBlock({ id: id, x: x, y: y })
     }
 
     return (

@@ -36,29 +36,16 @@ const Container = () => {
           <Page
             backgroundColor={page.backgroundColor}
             blocks={blocks}
-            setSize={(id, width, height) => {
+            setBlock={(blockProps) => {
               setBlocks(prevBlocks => {
                 const newBlocks = prevBlocks.map(prevBlock => {
-                    if (prevBlock.id === id) {
-                        return { ...prevBlock, width, height }
-                    }
-
-                    return prevBlock
-                })
-                
-                return newBlocks
-              })
-            }}
-            setPosition={(id, x, y) => {
-              setBlocks(prevBlocks => {
-                const newBlocks = prevBlocks.map(prevBlock => {
-                  if (prevBlock.id === id) {
-                      return {...prevBlock, x, y}
+                  if (prevBlock.id === blockProps.id) {
+                    return Object.assign(prevBlock, blockProps)
                   }
-                  
+
                   return prevBlock
                 })
-                
+
                 return newBlocks
               })
             }}

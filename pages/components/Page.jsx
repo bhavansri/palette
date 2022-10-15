@@ -2,7 +2,7 @@ import { ItemTypes } from "../utils/ItemTypes"
 import ImageElement from "./ImageElement"
 import TextElement from "./TextElement"
 
-const Page = ({ backgroundColor, blocks, setSize, setPosition }) => {
+const Page = ({ backgroundColor, blocks, setBlock }) => {
     
     return (
         <div style={{ backgroundColor: backgroundColor }} className="relative artboard shadow-xl phone-1 mb-5">
@@ -13,20 +13,16 @@ const Page = ({ backgroundColor, blocks, setSize, setPosition }) => {
                     return (
                         <ImageElement
                             key={id}
-                            id={id}
                             block={block}
-                            setSize={setSize}
-                            setPosition={setPosition}
+                            setBlock={setBlock}
                         />
                     )
                 } else if (block.type === ItemTypes.TEXT) {
                     return (
                         <TextElement
                             key={id}
-                            id={id}
                             block={block}
-                            setSize={setSize}
-                            setPosition={setPosition}
+                            setBlock={setBlock}
                         />
                     )
                 }
