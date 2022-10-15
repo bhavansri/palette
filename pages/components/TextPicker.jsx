@@ -13,9 +13,8 @@ const options = [
     { value: 'playfair-display', label: 'Playfair Display' }
 ]
 
-export const TextPicker = ({ onTextSelect }) => {
-    const [font, setFont] = useState('cinzel')
-    const [color, setColor] = useState('#00000')
+export const TextPicker = ({ selectedBlock, setSelectedBlock }) => {
+    const { id, font, color } = selectedBlock
     const [colorPickerOpen, setColorPickerOpen] = useState(false)
     
     return (
@@ -23,8 +22,7 @@ export const TextPicker = ({ onTextSelect }) => {
             <Select
                 value={font}
                 className="w-full"
-                placeholder="Choose Font"
-                onChange={(selectedOption) => { setFont(selectedOption) }}
+                onChange={(selectedOption) => setSelectedBlock({ id: id, font: selectedOption.value})}
                 options={options}
             />
             <div className='inline-flex justify-between'>

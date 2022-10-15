@@ -23,21 +23,45 @@ const Container = () => {
   }
 
   const addTextHandler = () => {
-    const textBlock = { type: ItemTypes.TEXT, id: blocks.length + 1, x: 20, y: 80, height: 30, text: "Text Placeholder" }
+    const textBlock = {
+      type: ItemTypes.TEXT,
+      id: blocks.length + 1,
+      x: 20,
+      y: 80,
+      height: 30,
+      text: "Text Placeholder",
+      font: 'Cinzel',
+      color: '#000000'
+    }
 
     setBlocks(prevBlocks => [...prevBlocks, textBlock])
     setSelectedBlock(textBlock)
   }
 
-  useEffect(() => {
-    console.log(selectedBlock)
-  })
+  const updateBlock = (blockProps) => {
+    setBlocks(prevBlocks => {
+      const newBlocks = prevBlocks.map(prevBlock => {
+        if (prevBlock.id === blockProps.id) {
+          return Object.assign(prevBlock, blockProps)
+        }
 
+        return prevBlock
+      })
+
+      return newBlocks
+    })
+  }
+
+  useEffect(() => {
+    console.log(blocks)
+  })
+  
   return (
     <div className="flex h-screen">
       <Sidebar
         page={page}
         selectedBlock={selectedBlock}
+        setSelectedBlock={updateBlock}
         onPageChange={onPageChange}
         onImageSelect={addImageHandler}
         onTextSelect={addTextHandler}
@@ -48,19 +72,7 @@ const Container = () => {
           <Page
             backgroundColor={page.backgroundColor}
             blocks={blocks}
-            setBlock={(blockProps) => {
-              setBlocks(prevBlocks => {
-                const newBlocks = prevBlocks.map(prevBlock => {
-                  if (prevBlock.id === blockProps.id) {
-                    return Object.assign(prevBlock, blockProps)
-                  }
-
-                  return prevBlock
-                })
-
-                return newBlocks
-              })
-            }}
+            setBlock={updateBlock}
             blockSelected={(selectedBlock) => {
               setSelectedBlock(selectedBlock)
             }}

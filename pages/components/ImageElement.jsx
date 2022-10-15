@@ -3,7 +3,7 @@ import { Rnd } from 'react-rnd'
 import { useOutsideClick } from '../utils/hooks'
 import { handleStyles } from '../utils/config'
 
-const ImageElement = ({ block, setBlock, blockSelected }) => {
+const ImageElement = ({ block, setBlock, blockSelected, pageRef }) => {
     const { id } = block
     const [selected, setSelected] = useState(true)
 
@@ -29,7 +29,7 @@ const ImageElement = ({ block, setBlock, blockSelected }) => {
         }
     }
 
-    const ref = useOutsideClick(() => handleSelection(false))
+    const ref = useOutsideClick(() => handleSelection(false), pageRef)
     
     return (
         <Rnd

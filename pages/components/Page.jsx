@@ -1,11 +1,13 @@
+import { useRef } from "react"
 import { ItemTypes } from "../utils/ItemTypes"
 import ImageElement from "./ImageElement"
 import TextElement from "./TextElement"
 
 const Page = ({ backgroundColor, blocks, setBlock, blockSelected }) => {
-    
+    const pageRef = useRef()
+
     return (
-        <div style={{ backgroundColor: backgroundColor }} className="relative artboard shadow-xl phone-1 mb-5">
+        <div ref={pageRef} style={{ backgroundColor: backgroundColor }} className="relative artboard shadow-xl phone-1 mb-5">
             {blocks.map(block => {
                 const id = block.id
 
@@ -16,6 +18,7 @@ const Page = ({ backgroundColor, blocks, setBlock, blockSelected }) => {
                             block={block}
                             setBlock={setBlock}
                             blockSelected={blockSelected}
+                            pageRef={pageRef}
                         />
                     )
                 } else if (block.type === ItemTypes.TEXT) {
@@ -25,6 +28,7 @@ const Page = ({ backgroundColor, blocks, setBlock, blockSelected }) => {
                             block={block}
                             setBlock={setBlock}
                             blockSelected={blockSelected}
+                            pageRef={pageRef}
                         />
                     )
                 }

@@ -12,8 +12,8 @@ const calculateWidth = (text, font) => {
     return context.measureText(text).width
 }
 
-const TextElement = ({ block, setBlock, blockSelected }) => {
-    const { id, text } = block
+const TextElement = ({ block, setBlock, blockSelected, pageRef }) => {
+    const { id, text, font, color } = block
     const [isDragging, setDragging] = useState(false)
     const [selected, setSelected] = useState(true)
 
@@ -46,7 +46,7 @@ const TextElement = ({ block, setBlock, blockSelected }) => {
         }
     }
 
-    const ref = useOutsideClick(() => handleSelection(false))
+    const ref = useOutsideClick(() => handleSelection(false), pageRef)
 
     return (
         <Rnd
@@ -64,6 +64,7 @@ const TextElement = ({ block, setBlock, blockSelected }) => {
                     ref={ref}
                     value={text}
                     onChange={onTextChange}
+                    style={{ color, fontFamily: font }}
                     onClick={e => handleSelection(true)}
                     onDoubleClick={e => e.target.select()}
                 />

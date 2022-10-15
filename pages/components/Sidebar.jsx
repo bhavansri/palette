@@ -10,12 +10,12 @@ const Editors = {
     Text: 'TextEditor'
 }
 
-const Sidebar = ({ page, onPageChange, onImageSelect, onTextSelect }) => {
+const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, onTextSelect }) => {
     const [editor, setEditor] = useState('')
     
     const onTextEditorExpanded = () => {
         setEditor(Editors.Text)
-        onTextSelect("cinzel", "#000000")
+        onTextSelect()
     }
 
     const onImageEditorExpanded = () => {
@@ -31,7 +31,7 @@ const Sidebar = ({ page, onPageChange, onImageSelect, onTextSelect }) => {
             case Editors.Text:
                 return (
                     <div className="h-full ml-5 overflow-y-auto py-12">
-                        <TextPicker onTextSelect={onTextSelect} />
+                        <TextPicker selectedBlock={selectedBlock} setSelectedBlock={setSelectedBlock} />
                     </div>
                 )
             case Editors.BackgroundColor:
@@ -83,7 +83,7 @@ const Sidebar = ({ page, onPageChange, onImageSelect, onTextSelect }) => {
                 </ul>
             </nav>
             {
-                displaySideToolbar()
+                selectedBlock && displaySideToolbar()
             }
         </aside>
     )
