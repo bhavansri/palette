@@ -10,12 +10,15 @@ const Editors = {
     Text: 'TextEditor'
 }
 
-const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, onTextSelect }) => {
+const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, createNewTextBlock }) => {
     const [editor, setEditor] = useState('')
     
     const onTextEditorExpanded = () => {
         setEditor(Editors.Text)
-        onTextSelect()
+        
+        if (selectedBlock === null) {
+            createNewTextBlock()
+        }
     }
 
     const onImageEditorExpanded = () => {

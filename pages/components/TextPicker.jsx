@@ -30,7 +30,7 @@ export const TextPicker = ({ selectedBlock, setSelectedBlock }) => {
                 <div className='relative'>
                     <div style={{ backgroundColor: color }} onClick={() => { setColorPickerOpen(true) }} className="w-7 h-7 border-2 cursor-pointer" />
                     { colorPickerOpen && <div className="absolute right-0" style={{ top: 'calc(100% + 2px)' }}>
-                        <HexColorPicker color={color} onChange={setColor} />
+                        <HexColorPicker color={color} onChange={(color) => setSelectedBlock({ id, color })} />
                     </div>}
                 </div>
             </div>

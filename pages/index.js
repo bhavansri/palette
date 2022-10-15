@@ -22,7 +22,7 @@ const Container = () => {
     setSelectedBlock(imageBlock)
   }
 
-  const addTextHandler = () => {
+  const createNewTextBlock = () => {
     const textBlock = {
       type: ItemTypes.TEXT,
       id: blocks.length + 1,
@@ -64,7 +64,7 @@ const Container = () => {
         setSelectedBlock={updateBlock}
         onPageChange={onPageChange}
         onImageSelect={addImageHandler}
-        onTextSelect={addTextHandler}
+        createNewTextBlock={createNewTextBlock}
         />
         <main className="p-7 h-screen flex-1 overflow-y-auto">
           <Navbar />
