@@ -27,22 +27,18 @@ const ImageElement = ({ block, setBlock }) => {
         const { x, y } = direction
 
         setBlock({ id: id, x: x, y: y })
-        onDeselect()
     }
 
     return (
         <Rnd
             default={block}
             onResize={onResize}
-            onResizeStart={onSelect}
-            onResizeStop={onDeselect}
-            onDragStart={onSelect}
             onDragStop={onDragStop}
             bounds="parent"
             lockAspectRatio={true}
             resizeHandleStyles={selected ? handleStyles : {}}
             className={ selected ? 'border border-blue-500' : 'border-0'}>
-            <div ref={ref} className="w-full h-full" style={{ backgroundImage: `url(${block.url})`, backgroundRepeat: 'no-repeat', backgroundSize: '100%' }} />
+            <div ref={ref} onClick={() => setSelected(true)} className="w-full h-full" style={{ backgroundImage: `url(${block.url})`, backgroundRepeat: 'no-repeat', backgroundSize: '100%' }} />
         </Rnd>
     )
 }

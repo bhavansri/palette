@@ -9,26 +9,38 @@ import { ItemTypes } from './utils/ItemTypes'
 const Container = () => {
   const [page, setPage] = useState({ backgroundColor: '#fff' })
   const [blocks, setBlocks] = useState([])
+  const [selectedBlock, setSelectedBlock] = useState(null)
 
   const onPageChange = (property, value) => {
     setPage(page => ({...page, [property]: value}))
   }
 
+  const addImageHandler = (url) => {
+    const imageBlock = { type: ItemTypes.IMAGE, id: blocks.length + 1, x: 20, y: 80, width: 170, height: 200, url: url }
+    
+    setBlocks(prevBlocks => [...prevBlocks, imageBlock])
+
+    setSelectedBlock(imageBlock)
+  }
+
+  const addTextHandler = () => {
+    const textBlock = { type: ItemTypes.TEXT, id: blocks.length + 1, x: 20, y: 80, height: 30 }
+
+    setBlocks(prevBlocks => [...prevBlocks, textBlock])
+  }
+
+  useEffect(() => {
+    console.log(selectedBlock)
+  })
+
   return (
     <div className="flex h-screen">
       <Sidebar
         page={page}
+        selectedBlock={selectedBlock}
         onPageChange={onPageChange}
-        onImageSelect={(photoURL) => {
-          setBlocks(prevBlocks => {
-            return [...prevBlocks, { type: ItemTypes.IMAGE, id: prevBlocks.length + 1, x: 20, y: 80, width: 170, height: 200, url: photoURL }]
-          })
-        }}
-        onTextSelect={(font, color) => {
-          setBlocks(prevBlocks => {
-            return [...prevBlocks, { type: ItemTypes.TEXT, id: prevBlocks.length + 1, x: 20, y: 80, height: 30, font, color }]
-          })
-        }}
+        onImageSelect={addImageHandler}
+        onTextSelect={addTextHandler}
         />
         <main className="p-7 h-screen flex-1 overflow-y-auto">
           <Navbar />
@@ -40,7 +52,9 @@ const Container = () => {
               setBlocks(prevBlocks => {
                 const newBlocks = prevBlocks.map(prevBlock => {
                   if (prevBlock.id === blockProps.id) {
-                    return Object.assign(prevBlock, blockProps)
+                    const newBlock = Object.assign(prevBlock, blockProps)
+                    setSelectedBlock(newBlock)
+                    return newBlock
                   }
 
                   return prevBlock
