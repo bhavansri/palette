@@ -13,20 +13,19 @@ const calculateWidth = (text, font) => {
 }
 
 const TextElement = ({ block, setBlock, blockSelected }) => {
-    const { id } = block
-    const [text, setText] = useState("Placeholder Text")
-    const [width, setWidth] = useState(100)
-    const [isEditing, setEditing] = useState(false)
+    const { id, text } = block
     const [isDragging, setDragging] = useState(false)
     const [selected, setSelected] = useState(true)
+
+    const onTextChange = (event) => {
+        setBlock({ id: id, text: event.target.value })
+    }
 
     const onResize = (event, direction, ref, delta) => {
         const { height } = ref.style
         const width = calculateWidth(text, block.font)
         
         setDragging(true)
-        setWidth(width)
-
         setBlock({ id: id, width: width, height: height })
     }
 
@@ -34,7 +33,6 @@ const TextElement = ({ block, setBlock, blockSelected }) => {
         const { x, y } = direction
         
         setDragging(true)
-
         setBlock({ id: id, x: x, y: y })
     }
 
@@ -65,8 +63,7 @@ const TextElement = ({ block, setBlock, blockSelected }) => {
                     type="text"
                     ref={ref}
                     value={text}
-                    onBlur={() => setEditing(false)}
-                    onChange={e => setText(e.target.value)}
+                    onChange={onTextChange}
                     onClick={e => handleSelection(true)}
                     onDoubleClick={e => e.target.select()}
                 />

@@ -23,7 +23,7 @@ const Container = () => {
   }
 
   const addTextHandler = () => {
-    const textBlock = { type: ItemTypes.TEXT, id: blocks.length + 1, x: 20, y: 80, height: 30 }
+    const textBlock = { type: ItemTypes.TEXT, id: blocks.length + 1, x: 20, y: 80, height: 30, text: "Text Placeholder" }
 
     setBlocks(prevBlocks => [...prevBlocks, textBlock])
     setSelectedBlock(textBlock)
