@@ -4,15 +4,51 @@ import { ColorPicker } from "./ColorPicker"
 import PhotoPicker from "./PhotoPicker"
 import { TextPicker } from "./TextPicker"
 
+const Editors = {
+    BackgroundColor: 'BackgroundColor',
+    Image: 'ImagePicker',
+    Text: 'TextEditor'
+}
+
 const Sidebar = ({ page, onPageChange, onImageSelect, onTextSelect }) => {
-    const [colorsExpanded, setColorsExpanded] = useState(false)
-    const [imagesExpanded, setImagesExpanded] = useState(false)
-    const [textExpanded, setTextExpanded] = useState(false)
+    const [editor, setEditor] = useState('')
     
     const onTextEditorExpanded = () => {
-        setTextExpanded(true)
-
+        setEditor(Editors.Text)
         onTextSelect("cinzel", "#000000")
+    }
+
+    const onImageEditorExpanded = () => {
+        setEditor(Editors.Image)
+    }
+
+    const onBGEditorExpanded = () => {
+        setEditor(Editors.BackgroundColor)
+    }
+
+    const displaySideToolbar = () => {
+        switch (editor) {
+            case Editors.Text:
+                return (
+                    <div className="h-full ml-5 py-12">
+                        <TextPicker onTextSelect={onTextSelect} />
+                    </div>
+                )
+            case Editors.BackgroundColor:
+                return (
+                    <div className="h-full ml-5 py-12">
+                        <ColorPicker color={page.backgroundColor} onChange={(value) => { onPageChange('backgroundColor', value) }} />
+                    </div>
+                )
+            case Editors.Image:
+                return (
+                    <div className="h-full ml-5 overflow-y-auto">
+                        <PhotoPicker handleOnClick={onImageSelect} />
+                    </div>
+                )
+            default:
+                return (<></>)
+        }
     }
 
     return (
@@ -23,8 +59,8 @@ const Sidebar = ({ page, onPageChange, onImageSelect, onTextSelect }) => {
                         <span>Design Elements</span>
                     </li>
                     <li><a onClick={onTextEditorExpanded}><Image src="/icons/text.svg" alt="Text Icon" height={30} width={30} /><span className="text-xs">Text</span></a></li>
-                    <li><a onClick={() => { setImagesExpanded(true) }}><Image src="/icons/image.svg" alt="Image Icon" height={30} width={30} /><span className="text-xs">Image</span></a></li>
-                    <li><a onClick={() => { setColorsExpanded(true) }} ><Image src="/icons/background.svg" alt="Background Icon" height={30} width={30} /><span className="text-xs">Colors</span></a></li>
+                    <li><a onClick={onImageEditorExpanded}><Image src="/icons/image.svg" alt="Image Icon" height={30} width={30} /><span className="text-xs">Image</span></a></li>
+                    <li><a onClick={onBGEditorExpanded} ><Image src="/icons/background.svg" alt="Background Icon" height={30} width={30} /><span className="text-xs">Colors</span></a></li>
                 </ul>
                 <div className='divider'></div>
                 <ul className="menu menu-compact p-2">
@@ -47,22 +83,7 @@ const Sidebar = ({ page, onPageChange, onImageSelect, onTextSelect }) => {
                 </ul>
             </nav>
             {
-                colorsExpanded && (
-                    <div className="h-full ml-5 py-12">
-                        <ColorPicker color={page.backgroundColor} onChange={(value) => { onPageChange('backgroundColor', value) }} />
-                    </div>)
-            }
-            {
-                imagesExpanded && (
-                    <div className="h-full ml-5 overflow-y-auto">
-                        <PhotoPicker handleOnClick={onImageSelect} />
-                    </div>)
-            }
-            {
-                textExpanded && (
-                    <div className="h-full ml-5 py-12">
-                        <TextPicker onTextSelect={onTextSelect} />
-                    </div>)
+                displaySideToolbar()
             }
         </aside>
     )
