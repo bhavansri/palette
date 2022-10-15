@@ -13,10 +13,9 @@ const calculateWidth = (text, font) => {
     return context.measureText(text).width
 }
 
-const TextElement = ({ block, setBlock, blockSelected, pageRef }) => {
+const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef }) => {
     const { id, text, font, color, size, alignment } = block
     const [isDragging, setDragging] = useState(false)
-    const [selected, setSelected] = useState(true)
 
     const onTextChange = (event) => {
         setBlock({ id: id, text: event.target.value })
@@ -38,12 +37,10 @@ const TextElement = ({ block, setBlock, blockSelected, pageRef }) => {
     }
 
     const handleSelection = (isSelected) => {
-        setSelected(isSelected)
-
         if (isSelected) {
-            blockSelected(block)
+            didSelectBlock(block)
         } else {
-            blockSelected(null)
+            didSelectBlock(null)
         }
     }
 
@@ -75,9 +72,9 @@ const TextElement = ({ block, setBlock, blockSelected, pageRef }) => {
 
     return (
         <Rnd
-            className={`${selected ? 'border border-blue-500' : 'border-0' } overflow-hidden text-ellipsis whitespace-nowrap`}
+            className={`${isSelected ? 'border border-blue-500' : 'border-0' } overflow-hidden text-ellipsis whitespace-nowrap`}
             default={block}
-            resizeHandleStyles={selected ? handleStyles : {}}
+            resizeHandleStyles={isSelected ? handleStyles : {}}
             onResize={onResize}
             onDragStop={onDragStop}
             bounds="parent"

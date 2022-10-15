@@ -3,13 +3,14 @@ import { ItemTypes } from "../utils/types"
 import ImageElement from "./ImageElement"
 import TextElement from "./TextElement"
 
-const Page = ({ backgroundColor, blocks, setBlock, blockSelected }) => {
+const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock }) => {
     const pageRef = useRef()
 
     return (
         <div ref={pageRef} style={{ backgroundColor: backgroundColor }} className="relative artboard shadow-xl phone-1 mb-5">
             {blocks.map(block => {
                 const id = block.id
+                const isSelected = selectedBlock !== null ? selectedBlock.id === id : false
 
                 if (block.type === ItemTypes.IMAGE) {
                     return (
@@ -17,7 +18,8 @@ const Page = ({ backgroundColor, blocks, setBlock, blockSelected }) => {
                             key={id}
                             block={block}
                             setBlock={setBlock}
-                            blockSelected={blockSelected}
+                            didSelectBlock={didSelectBlock}
+                            isSelected={isSelected}
                             pageRef={pageRef}
                         />
                     )
@@ -27,7 +29,8 @@ const Page = ({ backgroundColor, blocks, setBlock, blockSelected }) => {
                             key={id}
                             block={block}
                             setBlock={setBlock}
-                            blockSelected={blockSelected}
+                            didSelectBlock={didSelectBlock}
+                            isSelected={isSelected}
                             pageRef={pageRef}
                         />
                     )

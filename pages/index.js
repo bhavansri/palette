@@ -83,9 +83,10 @@ const Container = () => {
             backgroundColor={page.backgroundColor}
             blocks={blocks}
             setBlock={updateBlock}
-            blockSelected={(selectedBlock) => {
+            didSelectBlock={(selectedBlock) => {
               setSelectedBlock(selectedBlock)
             }}
+            selectedBlock={selectedBlock}
           />
           </div>
         </main>

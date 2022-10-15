@@ -3,9 +3,8 @@ import { Rnd } from 'react-rnd'
 import { useOutsideClick } from '../utils/hooks'
 import { handleStyles } from '../utils/config'
 
-const ImageElement = ({ block, setBlock, blockSelected, pageRef }) => {
+const ImageElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef }) => {
     const { id } = block
-    const [selected, setSelected] = useState(true)
 
     const onResize = (event, direction, ref, delta) => {
         const { width, height } = ref.style
@@ -20,12 +19,10 @@ const ImageElement = ({ block, setBlock, blockSelected, pageRef }) => {
     }
 
     const handleSelection = (isSelected) => {
-        setSelected(isSelected)
-
         if (isSelected) {
-            blockSelected(block)
+            didSelectBlock(block)
         } else {
-            blockSelected(null)
+            didSelectBlock(null)
         }
     }
 
@@ -38,9 +35,9 @@ const ImageElement = ({ block, setBlock, blockSelected, pageRef }) => {
             onDragStop={onDragStop}
             bounds="parent"
             lockAspectRatio={true}
-            resizeHandleStyles={selected ? handleStyles : {}}
-            className={ selected ? 'border border-blue-500' : 'border-0'}>
-            <div ref={ref} onClick={() => setSelected(true)} className="w-full h-full" style={{ backgroundImage: `url(${block.url})`, backgroundRepeat: 'no-repeat', backgroundSize: '100%' }} />
+            resizeHandleStyles={isSelected ? handleStyles : {}}
+            className={ isSelected ? 'border border-blue-500' : 'border-0'}>
+            <div ref={ref} onClick={() => handleSelection(true)} className="w-full h-full" style={{ backgroundImage: `url(${block.url})`, backgroundRepeat: 'no-repeat', backgroundSize: '100%' }} />
         </Rnd>
     )
 }

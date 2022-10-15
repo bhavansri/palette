@@ -14,11 +14,11 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
     const [editor, setEditor] = useState('')
     
     const onTextEditorExpanded = () => {
-        setEditor(Editors.Text)
-        
         if (selectedBlock === null) {
             createNewTextBlock()
         }
+        
+        setEditor(Editors.Text)
     }
 
     const onImageEditorExpanded = () => {
@@ -33,7 +33,7 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
         switch (editor) {
             case Editors.Text:
                 return (
-                    <div className="h-full ml-5 overflow-y-auto py-12">
+                    selectedBlock && <div className="h-full ml-5 overflow-y-auto py-12">
                         <TextPicker selectedBlock={selectedBlock} setSelectedBlock={setSelectedBlock} />
                     </div>
                 )
@@ -86,7 +86,7 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
                 </ul>
             </nav>
             {
-                selectedBlock && displaySideToolbar()
+                displaySideToolbar()
             }
         </aside>
     )
