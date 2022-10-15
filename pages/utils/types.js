@@ -15,3 +15,9 @@ export const TextAlignments = {
     center: 'center',
     right: 'right'
 }
+
+export const TextDecorations = {
+    bold: 'bold',
+    italic: 'italic',
+    underline: 'underline'
+}

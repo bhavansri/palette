@@ -1,7 +1,7 @@
-import { useState } from 'react'
 import Select from 'react-select'
-import { TextAlignments, TextSizes } from '../utils/types'
+import { TextAlignments, TextDecorations, TextSizes } from '../utils/types'
 import { presetColors } from '../utils/config'
+import Image from 'next/image'
 
 const options = [
     { value: 'cinzel', label: 'Cinzel' },
@@ -16,7 +16,6 @@ const options = [
 
 export const TextPicker = ({ selectedBlock, setSelectedBlock }) => {
     const { id, font, color, size, alignment } = selectedBlock
-    const [colorPickerOpen, setColorPickerOpen] = useState(false)
     
     return (
         <div className="flex flex-col gap-5 px-3">
@@ -26,6 +25,17 @@ export const TextPicker = ({ selectedBlock, setSelectedBlock }) => {
                 onChange={(selectedOption) => setSelectedBlock({ id: id, font: selectedOption.value})}
                 options={options}
             />
+            <div className="btn-group">
+                {Object.keys(TextDecorations).map((key, index) => {
+                    const value = TextDecorations[key]
+
+                    return (
+                        <button key={index} className='btn btn-sm'>
+                            <Image src={`/icons/${value}.svg`} alt={`${value} icon`} height={20} width={20} />
+                        </button>
+                    )
+                })}
+            </div>
             <div className='flex flex-col justify-between'>
                 <span>Color: {color}</span>
                 <div className="flex">
