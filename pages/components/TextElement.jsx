@@ -1,6 +1,5 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Rnd } from 'react-rnd'
-import Editable from './Editable'
 
 const calculateWidth = (text, font) => {
     const canvas = document.createElement('canvas')
@@ -14,11 +13,14 @@ const calculateWidth = (text, font) => {
 const TextElement = ({ id, block, setSize, setPosition }) => {
     const [text, setText] = useState("Placeholder Text")
     const [width, setWidth] = useState(100)
+    const [isEditing, setEditing] = useState(false)
+    const [isDragging, setDragging] = useState(false)
 
     const onResize = (event, direction, ref, delta) => {
         const { height } = ref.style
         const width = calculateWidth(text, block.font)
 
+        setDragging(true)
         setWidth(width)
         setSize(id, width, height)
     }
@@ -26,22 +28,28 @@ const TextElement = ({ id, block, setSize, setPosition }) => {
     const onDragStop = (event, direction) => {
         const { x, y } = direction
 
+        setDragging(true)
         setPosition(id, x, y)
     }
 
     return (
-        <Rnd className='border overflow-hidden text-ellipsis whitespace-nowrap' default={block} onResize={onResize} onDragStop={onDragStop} bounds="parent">
-            <Editable
-                text={text}
-                type="input"
-            >
+        <Rnd
+            className='overflow-hidden text-ellipsis whitespace-nowrap'
+            default={block}
+            onResize={onResize}
+            onDragStop={onDragStop}
+            bounds="parent"
+        >
+            {
                 <input
-                    className='w-full'
+                    className={`bg-transparent outline-none ${isDragging ? 'cursor-move' : 'cursor-auto'}`}
                     type="text"
                     value={text}
+                    onBlur={e => setEditing(false)}
                     onChange={e => setText(e.target.value)}
+                    onDoubleClick={e => e.target.select()}
                 />
-            </Editable>
+            }
         </Rnd>
     )
 }

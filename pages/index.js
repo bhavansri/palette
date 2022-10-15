@@ -14,10 +14,6 @@ const Container = () => {
     setPage(page => ({...page, [property]: value}))
   }
 
-  useEffect(() => {
-    console.log(blocks)
-  })
-
   return (
     <div className="flex h-screen">
       <Sidebar
