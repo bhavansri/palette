@@ -48,7 +48,7 @@ const TextElement = ({ block, setBlock }) => {
                     className={`bg-transparent outline-none ${isDragging ? 'cursor-move' : 'cursor-auto'}`}
                     type="text"
                     value={text}
-                    onBlur={e => setEditing(false)}
+                    onBlur={() => setEditing(false)}
                     onChange={e => setText(e.target.value)}
                     onDoubleClick={e => e.target.select()}
                 />

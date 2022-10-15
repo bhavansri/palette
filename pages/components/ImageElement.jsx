@@ -7,15 +7,7 @@ const ImageElement = ({ block, setBlock }) => {
     const { id } = block
     const [selected, setSelected] = useState(true)
 
-    const onSelect = () => {
-        setSelected(true)
-    }
-
-    const onDeselect = () => {
-        setSelected(false)
-    }
-
-    const ref = useOutsideClick(onDeselect)
+    const ref = useOutsideClick(() => setSelected(false))
 
     const onResize = (event, direction, ref, delta) => {
         const { width, height } = ref.style
