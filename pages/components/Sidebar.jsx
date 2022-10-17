@@ -1,17 +1,14 @@
 import Image from "next/image"
-import { useState } from "react"
+import { useRef, useState } from "react"
+import { Editors } from "../utils/types"
 import { ColorPicker } from "./ColorPicker"
 import PhotoPicker from "./PhotoPicker"
+import TextInputPicker from "./TextInputPicker"
 import { TextPicker } from "./TextPicker"
 
-const Editors = {
-    BackgroundColor: 'BackgroundColor',
-    Image: 'ImagePicker',
-    Text: 'TextEditor'
-}
-
-const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, createNewTextBlock }) => {
+const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, createNewTextBlock, onTextInputCreate }) => {
     const [editor, setEditor] = useState('')
+    const sidebarRef = useRef()
     
     const onTextEditorExpanded = () => {
         if (selectedBlock === null) {
@@ -29,24 +26,34 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
         setEditor(Editors.BackgroundColor)
     }
 
+    const onTextInputExpanded = () => {
+        setEditor(Editors.TextInput)
+    }
+
     const displaySideToolbar = () => {
         switch (editor) {
             case Editors.Text:
                 return (
-                    selectedBlock && <div className="h-full ml-5 overflow-y-auto py-12">
+                    selectedBlock && <div className="w-60 h-full ml-5 overflow-y-auto py-12">
                         <TextPicker selectedBlock={selectedBlock} setSelectedBlock={setSelectedBlock} />
                     </div>
                 )
             case Editors.BackgroundColor:
                 return (
-                    <div className="h-full ml-5 overflow-y-auto py-12">
+                    <div className="w-60 h-full ml-5 overflow-y-auto py-12">
                         <ColorPicker color={page.backgroundColor} onChange={(value) => { onPageChange('backgroundColor', value) }} />
                     </div>
                 )
             case Editors.Image:
                 return (
-                    <div className="h-full ml-5 overflow-y-auto py-12">
+                    <div className="w-60 h-full ml-5 overflow-y-auto py-12">
                         <PhotoPicker handleOnClick={onImageSelect} />
+                    </div>
+                )
+            case Editors.TextInput:
+                return (
+                    <div ref={sidebarRef} className="w-60 h-full ml-5 overflow-y-auto py-12">
+                        <TextInputPicker boundsRef={sidebarRef} onCreate={onTextInputCreate} />
                     </div>
                 )
             default:
@@ -70,19 +77,11 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
                     <li className="menu-title">
                         <span>Form Elements</span>
                     </li>
-                    <li><a><Image src="/icons/textfield.svg" alt="Short Answer Icon" height={30} width={30} /><span className="text-xs">Short Answer</span></a></li>
+                    <li><a onClick={onTextInputExpanded}><Image src="/icons/textfield.svg" alt="Short Answer Icon" height={30} width={30} /><span className="text-xs">Short Answer</span></a></li>
                     <li><a><Image src="/icons/textarea.svg" alt="Long Answer Icon" height={30} width={30} /><span className="text-xs">Long Answer</span></a></li>
                     <li><a><Image src="/icons/checkbox.svg" alt="Checkbox Icon" height={30} width={30} /><span className="text-xs">Checkbox</span></a></li>
                     <li><a><Image src="/icons/dropdown.svg" alt="Dropdown Icon" height={30} width={30} /><span className="text-xs">Dropdown</span></a></li>
-                </ul>
-                <div className='divider'></div>
-                <ul className="menu menu-compact p-2">
-                    <li className="menu-title">
-                        <span>Links</span>
-                    </li>
                     <li><a><Image src="/icons/button.svg" alt="Button Icon" height={30} width={30} /><span className="text-xs">Button</span></a></li>
-                    <li><a><Image src="/icons/location.svg" alt="Location Icon" height={30} width={30} /><span className="text-xs">Location</span></a></li>
-                    <li><a><Image src="/icons/date.svg" alt="Date Icon" height={30} width={30} /><span className="text-xs">Date</span></a></li>
                 </ul>
             </nav>
             {

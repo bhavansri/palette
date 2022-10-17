@@ -3,7 +3,7 @@ import { presetColors } from "../utils/config"
 
 export const ColorPicker = ({ color, onChange }) => {
     return (
-        <div>
+        <div className="flex flex-col items-center">
             <HexColorPicker color={color} onChange={onChange} />
             <div className="flex p-3 flex-wrap">
                 {presetColors.map((presetColor) => (

@@ -30,6 +30,22 @@ const Container = () => {
     setSelectedBlock(imageBlock)
   }
 
+  const addTextInputHandler = (label, textColor, bgColor) => {
+    const inputFieldBlock = {
+      type: ItemTypes.TEXT_INPUT,
+      id: blocks.length + 1,
+      x: 50,
+      y: 100,
+      height: 90,
+      label: label,
+      textColor: textColor,
+      bgColor: bgColor
+    }
+
+    setBlocks(prevBlocks => [...prevBlocks, inputFieldBlock])
+    setSelectedBlock(inputFieldBlock)
+  }
+
   const createNewTextBlock = () => {
     const textBlock = {
       type: ItemTypes.TEXT,
@@ -62,10 +78,6 @@ const Container = () => {
     })
   }
 
-  useEffect(() => {
-    console.log(blocks)
-  })
-  
   return (
     <div className="flex h-screen">
       <Sidebar
@@ -75,6 +87,7 @@ const Container = () => {
         onPageChange={onPageChange}
         onImageSelect={addImageHandler}
         createNewTextBlock={createNewTextBlock}
+        onTextInputCreate={addTextInputHandler}
         />
         <main className="p-7 h-screen flex-1 overflow-y-auto">
           <Navbar />

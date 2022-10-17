@@ -2,6 +2,7 @@ import { useRef } from "react"
 import { ItemTypes } from "../utils/types"
 import ImageElement from "./ImageElement"
 import TextElement from "./TextElement"
+import TextFieldElement from "./TextFieldElement"
 
 const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock }) => {
     const pageRef = useRef()
@@ -26,6 +27,17 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
                 } else if (block.type === ItemTypes.TEXT) {
                     return (
                         <TextElement
+                            key={id}
+                            block={block}
+                            setBlock={setBlock}
+                            didSelectBlock={didSelectBlock}
+                            isSelected={isSelected}
+                            pageRef={pageRef}
+                        />
+                    )
+                } else if (block.type === ItemTypes.TEXT_INPUT) {
+                    return (
+                        <TextFieldElement
                             key={id}
                             block={block}
                             setBlock={setBlock}
