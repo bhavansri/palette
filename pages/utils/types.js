@@ -2,13 +2,15 @@ export const Editors = {
     BackgroundColor: 'BackgroundColor',
     Image: 'ImagePicker',
     Text: 'TextEditor',
-    TextInput: 'TextInput'
+    TextInput: 'TextInput',
+    Dropdown: 'Dropdown'
 }
 
 export const ItemTypes = {
     IMAGE: 'IMAGE',
     TEXT: 'TEXT',
-    TEXT_INPUT: 'TEXT INPUT'
+    TEXT_INPUT: 'TEXT INPUT',
+    DROPDOWN_INPUT: 'DROPDOWN INPUT'
 }
 
 export const TextSizes = {

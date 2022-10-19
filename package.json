@@ -24,6 +24,7 @@
     "react-dom": "18.2.0",
     "react-rnd": "^10.3.7",
     "react-select": "^5.4.0",
+    "react-uuid": "^1.0.3",
     "unsplash-js": "^7.0.15"
   },
   "devDependencies": {

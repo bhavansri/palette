@@ -2,19 +2,17 @@ import Image from "next/image"
 import { useRef, useState } from "react"
 import { Editors } from "../utils/types"
 import { ColorPicker } from "./ColorPicker"
+import DropdownPicker from "./DropdownPicker"
 import PhotoPicker from "./PhotoPicker"
 import TextInputPicker from "./TextInputPicker"
 import { TextPicker } from "./TextPicker"
 
-const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, createNewTextBlock, onTextInputCreate }) => {
+const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, createNewTextBlock, onTextInputCreate, onDropdownInputCreate }) => {
     const [editor, setEditor] = useState('')
     const sidebarRef = useRef()
     
     const onTextEditorExpanded = () => {
-        if (selectedBlock === null) {
-            createNewTextBlock()
-        }
-        
+        createNewTextBlock()
         setEditor(Editors.Text)
     }
 
@@ -28,6 +26,10 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
 
     const onTextInputExpanded = () => {
         setEditor(Editors.TextInput)
+    }
+
+    const onDropdownInputExpanded = () => {
+        setEditor(Editors.Dropdown)
     }
 
     const displaySideToolbar = () => {
@@ -56,6 +58,12 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
                         <TextInputPicker boundsRef={sidebarRef} onCreate={onTextInputCreate} />
                     </div>
                 )
+            case Editors.Dropdown:
+                return (
+                    <div ref={sidebarRef} className="w-69 h-full ml-5 overflow-y-auto py-12">
+                        <DropdownPicker boundsRef={sidebarRef} onCreate={onDropdownInputCreate} />
+                    </div>
+                )
             default:
                 return <></>
         }
@@ -79,9 +87,9 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
                     </li>
                     <li><a onClick={onTextInputExpanded}><Image src="/icons/textfield.svg" alt="Short Answer Icon" height={30} width={30} /><span className="text-xs">Short Answer</span></a></li>
                     <li><a><Image src="/icons/textarea.svg" alt="Long Answer Icon" height={30} width={30} /><span className="text-xs">Long Answer</span></a></li>
-                    <li><a><Image src="/icons/checkbox.svg" alt="Checkbox Icon" height={30} width={30} /><span className="text-xs">Checkbox</span></a></li>
-                    <li><a><Image src="/icons/dropdown.svg" alt="Dropdown Icon" height={30} width={30} /><span className="text-xs">Dropdown</span></a></li>
+                    <li><a onClick={onDropdownInputExpanded}><Image src="/icons/dropdown.svg" alt="Dropdown Icon" height={30} width={30} /><span className="text-xs">Dropdown</span></a></li>
                     <li><a><Image src="/icons/button.svg" alt="Button Icon" height={30} width={30} /><span className="text-xs">Button</span></a></li>
+                    <li><a><Image src="/icons/checkbox.svg" alt="Checkbox Icon" height={30} width={30} /><span className="text-xs">Checkbox</span></a></li>
                 </ul>
             </nav>
             {

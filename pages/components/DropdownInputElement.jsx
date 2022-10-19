@@ -2,8 +2,8 @@ import { Rnd } from "react-rnd"
 import { handleStyles } from "../utils/config"
 import { useOutsideClick } from "../utils/hooks"
 
-const TextFieldElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, deleteBlock }) => {
-    const { id, bgColor, label, textColor } = block
+const DropdownInputElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, deleteBlock }) => {
+    const { id, bgColor, label, textColor, options } = block
 
     const onResize = (event, direction, ref, delta) => {
         const { width, height } = ref.style
@@ -32,7 +32,7 @@ const TextFieldElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef
     }
 
     const ref = useOutsideClick(() => handleSelection(false), pageRef)
-
+    
     return (
         <Rnd
             default={block}
@@ -41,17 +41,19 @@ const TextFieldElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef
             bounds="parent"
             lockAspectRatio={true}
             resizeHandleStyles={isSelected ? handleStyles : {}}
+            className={`flex items-center justify-center ${isSelected ? 'border border-blue-500' : 'border-0'}`}
             tabIndex={0}
-            onKeyDown={handleKeyDown}
-            className={`flex items-center justify-center p-2 ${isSelected ? 'border border-blue-500' : 'border-0'}`}>
+            onKeyDown={handleKeyDown}>
             <div ref={ref} onClick={() => handleSelection(true)} className="form-control w-full max-w-xs">
                 <label className="label">
                     <span className="label-text">{label}</span>
                 </label>
-                <input type="text" value="Placeholder" className="input input-sm input-bordered w-full max-w-xs" style={{ backgroundColor: bgColor, color: textColor }} />
+                <select className="select w-full max-w-xs" style={{ backgroundColor: bgColor, color: textColor }}>
+                    {options.map(option => <option key={option.id}>{option.text}</option>)}
+                </select>
             </div>
         </Rnd>
     )
 }
 
-export default TextFieldElement
+export default DropdownInputElement

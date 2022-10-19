@@ -13,9 +13,10 @@ const calculateWidth = (text, font) => {
     return context.measureText(text).width
 }
 
-const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef }) => {
+const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef, deleteBlock }) => {
     const { id, text, font, color, size, alignment } = block
     const [isDragging, setDragging] = useState(false)
+    const [edit, setEdit] = useState(false)
 
     const onTextChange = (event) => {
         setBlock({ id: id, text: event.target.value })
@@ -41,6 +42,7 @@ const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef }) =
             didSelectBlock(block)
         } else {
             didSelectBlock(null)
+            setEdit(false)
         }
     }
 
@@ -70,14 +72,22 @@ const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef }) =
         }
     }
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Backspace') {
+            deleteBlock()
+        }
+    }
+
     return (
         <Rnd
-            className={`${isSelected ? 'border border-blue-500' : 'border-0' } overflow-hidden text-ellipsis whitespace-nowrap`}
+            className={`${isSelected ? 'border border-blue-500' : 'border-0'} overflow-hidden text-ellipsis whitespace-nowrap`}
             default={block}
             resizeHandleStyles={isSelected ? handleStyles : {}}
             onResize={onResize}
             onDragStop={onDragStop}
             bounds="parent"
+            tabIndex={0}
+            onKeyDown={handleKeyDown}
         >
             {
                 <input
@@ -88,7 +98,11 @@ const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef }) =
                     onChange={onTextChange}
                     style={{ color, fontFamily: font }}
                     onClick={e => handleSelection(true)}
-                    onDoubleClick={e => e.target.select()}
+                    readOnly={!edit}
+                    onDoubleClick={(e) => {
+                        setEdit(true)
+                        e.target.select()
+                    }}
                 />
             }
         </Rnd>
