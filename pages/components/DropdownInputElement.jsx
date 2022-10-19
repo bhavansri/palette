@@ -46,9 +46,9 @@ const DropdownInputElement = ({ block, setBlock, didSelectBlock, isSelected, pag
             onKeyDown={handleKeyDown}>
             <div ref={ref} onClick={() => handleSelection(true)} className="form-control w-full max-w-xs">
                 <label className="label">
-                    <span className="label-text">{label}</span>
+                    <span className="label-text" style={{ color: textColor }}>{label}</span>
                 </label>
-                <select className="select w-full max-w-xs" style={{ backgroundColor: bgColor, color: textColor }}>
+                <select className="select w-full max-w-xs text-black" style={{ backgroundColor: bgColor }}>
                     {options.map(option => <option key={option.id}>{option.text}</option>)}
                 </select>
             </div>

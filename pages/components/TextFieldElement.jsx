@@ -46,9 +46,9 @@ const TextFieldElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef
             className={`flex items-center justify-center p-2 ${isSelected ? 'border border-blue-500' : 'border-0'}`}>
             <div ref={ref} onClick={() => handleSelection(true)} className="form-control w-full max-w-xs">
                 <label className="label">
-                    <span className="label-text">{label}</span>
+                    <span className="label-text" style={{ color: textColor }}>{label}</span>
                 </label>
-                <input type="text" value="Placeholder" className="input input-sm input-bordered w-full max-w-xs" style={{ backgroundColor: bgColor, color: textColor }} />
+                <input type="text" className="input input-sm input-bordered w-full max-w-xs" style={{ backgroundColor: bgColor }} />
             </div>
         </Rnd>
     )

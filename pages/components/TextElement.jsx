@@ -13,8 +13,8 @@ const calculateWidth = (text, font) => {
     return context.measureText(text).width
 }
 
-const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef, deleteBlock }) => {
-    const { id, text, font, color, size, alignment } = block
+const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef }) => {
+    const { id, text, font, color, size, alignment, bold, underline, italic } = block
     const [isDragging, setDragging] = useState(false)
     const [edit, setEdit] = useState(false)
 
@@ -62,19 +62,13 @@ const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef, del
     const textSize = () => {
         switch (size) {
             case TextSizes.sm:
-                return 'text-sm'
-            case TextSizes.md:
                 return 'text-md'
-            case TextSizes.lg:
+            case TextSizes.md:
                 return 'text-lg'
-            case TextSizes.xl:
+            case TextSizes.lg:
                 return 'text-xl'
-        }
-    }
-
-    const handleKeyDown = (event) => {
-        if (event.key === 'Backspace') {
-            deleteBlock()
+            case TextSizes.xl:
+                return 'text-2xl'
         }
     }
 
@@ -87,11 +81,10 @@ const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef, del
             onDragStop={onDragStop}
             bounds="parent"
             tabIndex={0}
-            onKeyDown={handleKeyDown}
         >
             {
                 <input
-                    className={`${textSize()} ${textAlignment()} bg-transparent outline-none ${isDragging ? 'cursor-move' : 'cursor-auto'}`}
+                    className={`${textSize()} ${textAlignment()} ${ bold ? 'font-bold' : '' } ${ italic ? 'italic' : '' } ${ underline ? 'underline' : '' } bg-transparent tracking-wider outline-none ${isDragging ? 'cursor-move' : 'cursor-auto'}`}
                     type="text"
                     ref={ref}
                     value={text}

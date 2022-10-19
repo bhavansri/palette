@@ -35,7 +35,6 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
                             didSelectBlock={didSelectBlock}
                             isSelected={isSelected}
                             pageRef={pageRef}
-                            deleteBlock={deleteBlock}
                         />
                     )
                 } else if (block.type === ItemTypes.TEXT_INPUT) {
