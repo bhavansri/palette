@@ -1,6 +1,7 @@
 import { useRef } from "react"
 import { ItemTypes } from "../utils/types"
 import DropdownInputElement from "./DropdownInputElement"
+import GraphicsElement from "./GraphicElement"
 import ImageElement from "./ImageElement"
 import TextElement from "./TextElement"
 import TextFieldElement from "./TextFieldElement"
@@ -17,6 +18,18 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
                 if (block.type === ItemTypes.IMAGE) {
                     return (
                         <ImageElement
+                            key={id}
+                            block={block}
+                            setBlock={setBlock}
+                            didSelectBlock={didSelectBlock}
+                            isSelected={isSelected}
+                            pageRef={pageRef}
+                            deleteBlock={deleteBlock}
+                        />
+                    )
+                } else if (block.type === ItemTypes.GRAPHIC) {
+                    return (
+                        <GraphicsElement
                             key={id}
                             block={block}
                             setBlock={setBlock}

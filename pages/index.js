@@ -17,6 +17,21 @@ const Container = () => {
     setPage(page => ({...page, [property]: value}))
   }
 
+  const addGraphicsHandler = (filename) => {
+    const graphicsBlock = {
+      type: ItemTypes.GRAPHIC,
+      id: uuid(),
+      x: 50,
+      y: 50,
+      width: 120,
+      height: 120,
+      filename
+    }
+
+    setBlocks(prevBlocks => [...prevBlocks, graphicsBlock])
+    setSelectedBlock(graphicsBlock)
+  }
+
   const addImageHandler = (url) => {
     const imageBlock = {
       type: ItemTypes.IMAGE,
@@ -119,6 +134,7 @@ const Container = () => {
         setSelectedBlock={updateBlock}
         onPageChange={onPageChange}
         onImageSelect={addImageHandler}
+        onGraphicsSelect={addGraphicsHandler}
         createNewTextBlock={createNewTextBlock}
         onTextInputCreate={addTextInputHandler}
         onDropdownInputCreate={addDropdownInputHandler}

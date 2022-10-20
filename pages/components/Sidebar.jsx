@@ -3,21 +3,27 @@ import { useRef, useState } from "react"
 import { Editors } from "../utils/types"
 import { ColorPicker } from "./ColorPicker"
 import DropdownPicker from "./DropdownPicker"
+import GraphicsPicker from "./GraphicsPicker"
 import PhotoPicker from "./PhotoPicker"
 import TextInputPicker from "./TextInputPicker"
 import { TextPicker } from "./TextPicker"
 
-const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, createNewTextBlock, onTextInputCreate, onDropdownInputCreate }) => {
+const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, onGraphicsSelect, createNewTextBlock, onTextInputCreate, onDropdownInputCreate }) => {
     const [editor, setEditor] = useState('')
     const sidebarRef = useRef()
     
     const onTextEditorExpanded = () => {
         createNewTextBlock()
+        
         setEditor(Editors.Text)
     }
 
     const onImageEditorExpanded = () => {
         setEditor(Editors.Image)
+    }
+
+    const onGraphicsEditorExpanded = () => {
+        setEditor(Editors.GraphicsPicker)
     }
 
     const onBGEditorExpanded = () => {
@@ -52,6 +58,12 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
                         <PhotoPicker handleOnClick={onImageSelect} />
                     </div>
                 )
+            case Editors.Illustrations:
+                return (
+                    <div className="w-36 h-full ml-5 overflow-y-auto py-12 px-5">
+                        <GraphicsPicker handleOnClick={onGraphicsSelect} />
+                    </div>
+                )
             case Editors.TextInput:
                 return (
                     <div ref={sidebarRef} className="w-60 h-full ml-5 overflow-y-auto py-12">
@@ -77,8 +89,9 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
                         <span>Design Elements</span>
                     </li>
                     <li><a onClick={onTextEditorExpanded}><Image src="/icons/text.svg" alt="Text Icon" height={30} width={30} /><span className="text-xs">Text</span></a></li>
-                    <li><a onClick={onImageEditorExpanded}><Image src="/icons/image.svg" alt="Image Icon" height={30} width={30} /><span className="text-xs">Image</span></a></li>
+                    <li><a onClick={onImageEditorExpanded}><Image src="/icons/image.svg" alt="Image Icon" height={30} width={30} /><span className="text-xs">Images</span></a></li>
                     <li><a onClick={onBGEditorExpanded} ><Image src="/icons/background.svg" alt="Background Icon" height={30} width={30} /><span className="text-xs">Colors</span></a></li>
+                    <li><a onClick={onGraphicsEditorExpanded} ><Image src="/icons/illustrations.svg" alt="Background Icon" height={30} width={30} /><span className="text-xs">Illustrations</span></a></li>
                 </ul>
                 <div className='divider'></div>
                 <ul className="menu menu-compact p-2">

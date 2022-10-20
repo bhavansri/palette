@@ -2,7 +2,6 @@ import Select from 'react-select'
 import { TextAlignments, TextDecorations, TextSizes } from '../utils/types'
 import { presetColors } from '../utils/config'
 import Image from 'next/image'
-import { useEffect } from 'react'
 
 const customStyles = {
     option: (provided, state) => ({
