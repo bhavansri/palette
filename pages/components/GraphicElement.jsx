@@ -45,7 +45,7 @@ const GraphicsElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef,
             className={isSelected ? 'border border-blue-500' : 'border-0'}
             tabIndex={0}
             onKeyDown={handleKeyDown}>
-            <div ref={ref} onClick={() => handleSelection(true)} className="w-full h-full" style={{ backgroundImage: `url(/illustrations/${block.filename})`, backgroundRepeat: 'no-repeat', backgroundSize: '100%' }} />
+            <div ref={ref} onClick={() => handleSelection(true)} className="w-full h-full" style={{ backgroundImage: `url(/illustrations/${block.filename})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain'}} />
         </Rnd>
     )
 }
