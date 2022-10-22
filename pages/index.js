@@ -32,6 +32,20 @@ const Container = () => {
     setSelectedBlock(graphicsBlock)
   }
 
+  const addVideoHandler = (width, height) => {
+    const videoBlock = {
+      type: ItemTypes.VIDEO,
+      id: uuid(),
+      x: 20,
+      y: 80,
+      width,
+      height
+    }
+
+    setBlocks(prevBlocks => [...prevBlocks, videoBlock])
+    setSelectedBlock(videoBlock)
+  }
+
   const addImageHandler = (url) => {
     const imageBlock = {
       type: ItemTypes.IMAGE,
@@ -135,6 +149,7 @@ const Container = () => {
         onPageChange={onPageChange}
         onImageSelect={addImageHandler}
         onGraphicsSelect={addGraphicsHandler}
+        onVideoSelect={addVideoHandler}
         createNewTextBlock={createNewTextBlock}
         onTextInputCreate={addTextInputHandler}
         onDropdownInputCreate={addDropdownInputHandler}

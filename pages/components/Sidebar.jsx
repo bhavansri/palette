@@ -7,8 +7,9 @@ import GraphicsPicker from "./GraphicsPicker"
 import PhotoPicker from "./PhotoPicker"
 import TextInputPicker from "./TextInputPicker"
 import { TextPicker } from "./TextPicker"
+import VideoPicker from "./VideoPicker"
 
-const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, onGraphicsSelect, createNewTextBlock, onTextInputCreate, onDropdownInputCreate }) => {
+const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, onGraphicsSelect, onVideoSelect, createNewTextBlock, onTextInputCreate, onDropdownInputCreate }) => {
     const [editor, setEditor] = useState('')
     const sidebarRef = useRef()
     
@@ -36,6 +37,10 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
 
     const onDropdownInputExpanded = () => {
         setEditor(Editors.Dropdown)
+    }
+
+    const onVideoEditorExpanded = () => {
+        setEditor(Editors.Video)
     }
 
     const displaySideToolbar = () => {
@@ -76,6 +81,12 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
                         <DropdownPicker boundsRef={sidebarRef} onCreate={onDropdownInputCreate} />
                     </div>
                 )
+            case Editors.Video:
+                return (
+                    <div ref={sidebarRef} className="w-69 h-full ml-5 overflow-y-auto py-12 px-5">
+                        <VideoPicker boundsRef={sidebarRef} onCreate={onVideoSelect} />
+                    </div>
+                )
             default:
                 return <></>
         }
@@ -92,6 +103,7 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
                     <li><a onClick={onImageEditorExpanded}><Image src="/icons/image.svg" alt="Image Icon" height={30} width={30} /><span className="text-xs">Images</span></a></li>
                     <li><a onClick={onBGEditorExpanded} ><Image src="/icons/background.svg" alt="Background Icon" height={30} width={30} /><span className="text-xs">Colors</span></a></li>
                     <li><a onClick={onGraphicsEditorExpanded} ><Image src="/icons/illustrations.svg" alt="Background Icon" height={30} width={30} /><span className="text-xs">Illustrations</span></a></li>
+                    <li><a onClick={onVideoEditorExpanded} ><Image src="/icons/video.svg" alt="Background Icon" height={30} width={30} /><span className="text-xs">Videos</span></a></li>
                 </ul>
                 <div className='divider'></div>
                 <ul className="menu menu-compact p-2">

@@ -1,9 +1,12 @@
-import { Rnd } from 'react-rnd'
-import { useOutsideClick } from '../utils/hooks'
-import { handleStyles } from '../utils/config'
+import { useState } from "react"
+import { Rnd } from "react-rnd"
+import { handleStyles } from "../utils/config"
+import { useOutsideClick } from "../utils/hooks"
+import YouTubeVideo from "./YoutubeVideo"
 
-const GraphicsElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, deleteBlock }) => {
-    const { id, filename } = block
+const VideoElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, deleteBlock }) => {
+    const { id, width, height } = block
+    const [disabled, setDisabled] = useState(true)
 
     const onResize = (event, direction, ref, delta) => {
         const { width, height } = ref.style
@@ -22,6 +25,7 @@ const GraphicsElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef,
             didSelectBlock(block)
         } else {
             didSelectBlock(null)
+            setDisabled(true)
         }
     }
 
@@ -32,7 +36,7 @@ const GraphicsElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef,
     }
 
     const ref = useOutsideClick(() => handleSelection(false), pageRef)
-    
+
     return (
         <Rnd
             default={block}
@@ -44,9 +48,11 @@ const GraphicsElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef,
             className={isSelected ? 'border border-blue-500' : 'border-0'}
             tabIndex={0}
             onKeyDown={handleKeyDown}>
-            <div ref={ref} onClick={() => handleSelection(true)} className="w-full h-full" style={{ backgroundImage: `url(/illustrations/${block.filename})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain'}} />
+            <div ref={ref} onClick={() => handleSelection(true)} onDoubleClick={() => { setDisabled(false) }} className="w-full h-full">
+                <YouTubeVideo width={width} height={height} disabled={disabled} />
+            </div>
         </Rnd>
     )
 }
 
-export default GraphicsElement
+export default VideoElement

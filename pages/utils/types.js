@@ -4,6 +4,7 @@ export const Editors = {
     Graphics: 'GraphicsPicker',
     Text: 'TextEditor',
     TextInput: 'TextInput',
+    Video: 'Video',
     Dropdown: 'Dropdown'
 }
 
@@ -12,6 +13,7 @@ export const ItemTypes = {
     IMAGE: 'IMAGE',
     TEXT: 'TEXT',
     TEXT_INPUT: 'TEXT INPUT',
+    VIDEO: 'VIDEO',
     DROPDOWN_INPUT: 'DROPDOWN INPUT',
 }
 
