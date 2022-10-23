@@ -43,7 +43,7 @@ const DropdownPicker = ({ boundsRef, onCreate }) => {
                 {dropdownOptions.map((option) => <><li key={option.id}><EditableLabel text={option.text} onChange={(e) => onOptionChange(e.target.value, option.id)}/></li></>)}
             </ul>
             <div>
-                <div ref={pickerRef} className={`mt-5 bg-gray-300 form-control w-full max-w-xs ${isEditing ? 'border border-blue-400' : 'border-0'} pt-2 pb-5 px-2`}>
+                <div ref={pickerRef} className={`mt-5 bg-stone-100 form-control w-full max-w-xs ${isEditing ? 'border border-blue-400' : 'border-0'} pt-2 pb-5 px-2`}>
                     <label className="label">
                         <span className="label-text" style={{ color: textColor }}><EditableLabel setEditMode={() => setIsEditing(true)} text={label} onChange={(e) => setLabel(e.target.value)}/></span>
                     </label>

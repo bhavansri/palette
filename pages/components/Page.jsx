@@ -1,5 +1,6 @@
 import { useRef } from "react"
 import { ItemTypes } from "../utils/types"
+import ButtonElement from "./ButtonElement"
 import DropdownInputElement from "./DropdownInputElement"
 import GraphicsElement from "./GraphicElement"
 import ImageElement from "./ImageElement"
@@ -78,6 +79,18 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
                 } else if (block.type === ItemTypes.VIDEO) {
                     return (
                         <VideoElement
+                            key={id}
+                            block={block}
+                            setBlock={setBlock}
+                            didSelectBlock={didSelectBlock}
+                            isSelected={isSelected}
+                            pageRef={pageRef}
+                            deleteBlock={deleteBlock}
+                        />
+                    )
+                } else if (block.type === ItemTypes.BUTTON) {
+                    return (
+                        <ButtonElement
                             key={id}
                             block={block}
                             setBlock={setBlock}

@@ -15,7 +15,7 @@ const TextInputPicker = ({ boundsRef, onCreate }) => {
 
     return (
         <div>
-            <div ref={pickerRef} className={`form-control w-full max-w-xs bg-gray-300 ${isEditing ? 'border border-blue-400' : 'border-0'} pt-2 pb-5 px-2`}>
+            <div ref={pickerRef} className={`form-control w-full max-w-xs bg-stone-100 ${isEditing ? 'border border-blue-400' : 'border-0'} pt-2 pb-5 px-2`}>
                 <label className="label">
                     <span className="label-text" style={{ color: textColor }}><EditableLabel setEditMode={() => setIsEditing(true)} text={label} onChange={(e) => setLabel(e.target.value)}/></span>
                 </label>

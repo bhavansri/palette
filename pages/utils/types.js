@@ -1,4 +1,5 @@
 export const Editors = {
+    Button: 'Button',
     BackgroundColor: 'BackgroundColor',
     Image: 'ImagePicker',
     Graphics: 'GraphicsPicker',
@@ -9,6 +10,7 @@ export const Editors = {
 }
 
 export const ItemTypes = {
+    BUTTON: 'BUTTON',
     GRAPHIC: 'GRAPHIC',
     IMAGE: 'IMAGE',
     TEXT: 'TEXT',
@@ -34,4 +36,13 @@ export const TextDecorations = {
     bold: 'bold',
     italic: 'italic',
     underline: 'underline'
+}
+
+export const ButtonTypes = {
+    default: 'default',
+    primary: 'primary',
+    secondary: 'secondary',
+    accent: 'accent',
+    ghost: 'ghost',
+    link: 'link'
 }
