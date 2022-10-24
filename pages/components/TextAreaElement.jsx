@@ -49,7 +49,7 @@ const TextAreaElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef,
                     <span className="label-text text-black">{label}</span>
                 </label>
                 {
-                    displayLines ? <textarea className="h-24 px-3 py-2 placeholder-black text-black" placeholder="Type Something" style={{ backgroundColor: bgColor, backgroundImage: 'linear-gradient(#000 1px, transparent 1px)', backgroundSize: '100% 30px', border: 0, outline: 0, lineHeight: '30px' }}></textarea> :
+                    displayLines ? <textarea className="bg-transparent h-24 px-3 py-2 text-sm text-black" style={{ backgroundImage: 'linear-gradient(#343A40 1px, transparent 1px)', backgroundSize: '100% 30px', border: 0, outline: 0, lineHeight: '30px' }}></textarea> :
                     <textarea className="textarea textarea-bordered text-black placeholder-black h-24" placeholder="Type Something" style={{ backgroundColor: bgColor }}></textarea>
                 }
             </div>
