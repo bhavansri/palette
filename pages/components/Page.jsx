@@ -3,6 +3,7 @@ import { ItemTypes } from "../../utils/types"
 import DropdownInputElement from "./DropdownInputElement"
 import GraphicsElement from "./GraphicElement"
 import ImageElement from "./ImageElement"
+import TextAreaElement from "./TextAreaElement"
 import TextElement from "./TextElement"
 import TextFieldElement from "./TextFieldElement"
 import VideoElement from "./VideoElement"
@@ -49,6 +50,18 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
                             didSelectBlock={didSelectBlock}
                             isSelected={isSelected}
                             pageRef={pageRef}
+                        />
+                    )
+                } else if (block.type === ItemTypes.TEXT_AREA) {
+                    return (
+                        <TextAreaElement
+                            key={id}
+                            block={block}
+                            setBlock={setBlock}
+                            didSelectBlock={didSelectBlock}
+                            isSelected={isSelected}
+                            pageRef={pageRef}
+                            deleteBlock={deleteBlock}
                         />
                     )
                 } else if (block.type === ItemTypes.TEXT_INPUT) {

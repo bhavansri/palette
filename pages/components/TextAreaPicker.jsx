@@ -8,9 +8,10 @@ const EditableLabel = ({ setEditMode, text, onChange }) => (
 
 const TextAreaPicker = ({ boundsRef, onCreate }) => {
     const [label, setLabel] = useState("Type a question here")
-    const [textColor, setTextColor] = useState('#000')
     const [bgColor, setBgColor] = useState("#D6D1D3")
     const [isEditing, setIsEditing] = useState(false)
+    const [displayLines, setDisplayLines] = useState(false)
+
     const pickerRef = useOutsideClick(() => setIsEditing(false), boundsRef)
 
     return (
@@ -19,7 +20,10 @@ const TextAreaPicker = ({ boundsRef, onCreate }) => {
                 <label className="label">
                     <span className="label-text text-white"><EditableLabel setEditMode={() => setIsEditing(true)} text={label} onChange={(e) => setLabel(e.target.value)}/></span>
                 </label>
-                <input type="textarea" className="textarea textarea-bordered text-black h-24" style={{ backgroundColor: bgColor }} />
+                {
+                    displayLines ? <textarea className="h-24 px-3 py-2 placeholder-black text-black" placeholder="Type Something" style={{ backgroundColor: bgColor, backgroundImage: 'linear-gradient(#000 1px, transparent 1px)', backgroundSize: '100% 30px', border: 0, outline: 0, lineHeight: '30px' }}></textarea> :
+                    <textarea className="textarea textarea-bordered text-black placeholder-black h-24" placeholder="Type Something" style={{ backgroundColor: bgColor }}></textarea>
+                }
             </div>
             <div className="mt-2">
                 <span className="label-text">Background Color</span>
@@ -34,7 +38,13 @@ const TextAreaPicker = ({ boundsRef, onCreate }) => {
                     ))}
                 </div>
             </div>
-            <button className="btn btn-wide mt-5 uppercase" onClick={() => onCreate(label, textColor, bgColor)}>Add to Page</button>
+            <div className="form-control">
+                <label className="label cursor-pointer">
+                    <span className="label-text">Display Text Lines?</span>
+                    <input type="checkbox" className="toggle toggle-primary" checked={displayLines} onClick={() => setDisplayLines(currDisplay => !currDisplay)} />
+                </label>
+            </div>
+            <button className="btn btn-wide mt-5 uppercase" onClick={() => onCreate(label, bgColor, displayLines)}>Add to Page</button>
         </div>
     )
 }

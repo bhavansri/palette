@@ -4,7 +4,6 @@ import uuid from 'react-uuid'
 
 import styles from '../styles/Home.module.css'
 import Sidebar from './components/Sidebar'
-import Navbar from './components/Navbar'
 import Page from './components/Page'
 import { ItemTypes } from '../utils/types'
 
@@ -74,6 +73,22 @@ const Container = () => {
 
     setBlocks(prevBlocks => [...prevBlocks, inputFieldBlock])
     setSelectedBlock(inputFieldBlock)
+  }
+
+  const addTextAreaInputHandler = (label, bgColor, shouldDisplayLines) => {
+    const textareaBlock = {
+      type: ItemTypes.TEXT_AREA,
+      id: uuid(),
+      x: 50,
+      y: 100,
+      height: 140,
+      label: label,
+      bgColor: bgColor,
+      displayLines: shouldDisplayLines
+    }
+
+    setBlocks(prevBlocks => [...prevBlocks, textareaBlock])
+    setSelectedBlock(textareaBlock)
   }
 
   const addDropdownInputHandler = (label, options, textColor, bgColor) => {
@@ -151,6 +166,7 @@ const Container = () => {
         onVideoSelect={addVideoHandler}
         createNewTextBlock={createNewTextBlock}
         onTextInputCreate={addTextInputHandler}
+        onTextAreaCreate={addTextAreaInputHandler}
         onDropdownInputCreate={addDropdownInputHandler}
         />
         <main className="p-7 h-screen flex-1 overflow-y-auto">

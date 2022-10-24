@@ -14,6 +14,7 @@ export const ItemTypes = {
     IMAGE: 'IMAGE',
     TEXT: 'TEXT',
     TEXT_INPUT: 'TEXT INPUT',
+    TEXT_AREA: 'TEXT AREA',
     VIDEO: 'VIDEO',
     DROPDOWN_INPUT: 'DROPDOWN INPUT',
 }
