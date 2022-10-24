@@ -35,8 +35,9 @@ const TextPicker = ({ selectedBlock, setSelectedBlock }) => {
             />
             <div className="btn-group">
                 {Object.keys(TextDecorations).map((key, index) => {
-                    const value = TextDecorations[key]
-                    const currStatus = selectedBlock[value]
+                    const value = TextDecorations[key] ?? ''
+                    const block = selectedBlock || {}
+                    const currStatus = block[value] ?? false
 
                     return (
                         <button key={index} className='btn btn-sm' onClick={() => setSelectedBlock({ id: id, [value]: !currStatus }) }>
