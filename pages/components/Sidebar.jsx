@@ -1,7 +1,6 @@
 import Image from "next/image"
 import { useRef, useState } from "react"
 import { Editors } from "../../utils/types"
-import ButtonPicker from "./ButtonPicker"
 import ColorPicker from "./ColorPicker"
 import DropdownPicker from "./DropdownPicker"
 import GraphicsPicker from "./GraphicsPicker"
@@ -10,7 +9,7 @@ import TextInputPicker from "./TextInputPicker"
 import TextPicker from "./TextPicker"
 import VideoPicker from "./VideoPicker"
 
-const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onButtonSelect, onImageSelect, onGraphicsSelect, onVideoSelect, createNewTextBlock, onTextInputCreate, onDropdownInputCreate }) => {
+const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, onGraphicsSelect, onVideoSelect, createNewTextBlock, onTextInputCreate, onDropdownInputCreate }) => {
     const [editor, setEditor] = useState('')
     const sidebarRef = useRef()
     
@@ -18,10 +17,6 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onButton
         createNewTextBlock()
         
         setEditor(Editors.Text)
-    }
-
-    const onButtonExpanded = () => {
-        setEditor(Editors.Button)
     }
 
     const onImageEditorExpanded = () => {
@@ -50,12 +45,6 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onButton
 
     const displaySideToolbar = () => {
         switch (editor) {
-            case Editors.Button:
-                return (
-                    <div className="w-60 h-full ml-5 overflow-y-auto py-12">
-                        <ButtonPicker handleOnClick={onButtonSelect}/>
-                    </div>
-                )
             case Editors.Text:
                 return (
                     selectedBlock && <div className="w-60 h-full ml-5 overflow-y-auto py-12">
@@ -123,7 +112,6 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onButton
                     </li>
                     <li><a onClick={onTextInputExpanded}><Image src="/icons/textfield.svg" alt="Short Answer Icon" height={30} width={30} /><span className="text-xs">Short Answer</span></a></li>
                     <li><a onClick={onDropdownInputExpanded}><Image src="/icons/dropdown.svg" alt="Dropdown Icon" height={30} width={30} /><span className="text-xs">Dropdown</span></a></li>
-                    <li><a onClick={onButtonExpanded}><Image src="/icons/button.svg" alt="Button Icon" height={30} width={30} /><span className="text-xs">Button</span></a></li>
                 </ul>
             </nav>
             {

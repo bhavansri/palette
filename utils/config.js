@@ -1,5 +1,3 @@
-import { ButtonTypes } from "./types"
-
 export const presetColors = ["#000000", "#14213D", "#FCA311", "#E5E5E5", "#FFFFFF"]
 export const inputBackgroundColors = ["#ffcdb2", "#ffb4a2", "#e5989b", "#b5838d", "#6d6875"]
 export const inputLabelColors = ['#131316', '#0066cc', '#008000', '#c41e3d', '#af5500']
@@ -132,22 +130,5 @@ export const handleStyles = {
         height: 10,
         boxSizing: "border-box",
         zIndex: 1
-    }
-}
-
-export const getButtonStyling = (type) => {
-    switch (type) {
-        case ButtonTypes.default:
-            return ''
-        case ButtonTypes.accent:
-            return 'btn-accent'
-        case ButtonTypes.ghost:
-            return 'btn-ghost'
-        case ButtonTypes.link:
-            return 'btn-link'
-        case ButtonTypes.primary:
-            return 'btn-primary'
-        case ButtonTypes.secondary:
-            return 'btn-secondary'
     }
 }
