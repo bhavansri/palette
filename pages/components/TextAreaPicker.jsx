@@ -6,8 +6,9 @@ const EditableLabel = ({ setEditMode, text, onChange }) => (
     <input className="bg-transparent outline-none" type="text" value={text} onChange={onChange} onClick={setEditMode} />
 )
 
-const TextInputPicker = ({ boundsRef, onCreate }) => {
+const TextAreaPicker = ({ boundsRef, onCreate }) => {
     const [label, setLabel] = useState("Type a question here")
+    const [textColor, setTextColor] = useState('#000')
     const [bgColor, setBgColor] = useState("#D6D1D3")
     const [isEditing, setIsEditing] = useState(false)
     const pickerRef = useOutsideClick(() => setIsEditing(false), boundsRef)
@@ -18,7 +19,7 @@ const TextInputPicker = ({ boundsRef, onCreate }) => {
                 <label className="label">
                     <span className="label-text text-white"><EditableLabel setEditMode={() => setIsEditing(true)} text={label} onChange={(e) => setLabel(e.target.value)}/></span>
                 </label>
-                <input type="text" placeholder="Type Something" className="input input-sm input-bordered text-black placeholder-black w-full max-w-xs" style={{ backgroundColor: bgColor }} />
+                <input type="textarea" className="textarea textarea-bordered text-black h-24" style={{ backgroundColor: bgColor }} />
             </div>
             <div className="mt-2">
                 <span className="label-text">Background Color</span>
@@ -33,9 +34,9 @@ const TextInputPicker = ({ boundsRef, onCreate }) => {
                     ))}
                 </div>
             </div>
-            <button className="btn btn-wide mt-5 uppercase" onClick={() => onCreate(label, bgColor)}>Add to Page</button>
+            <button className="btn btn-wide mt-5 uppercase" onClick={() => onCreate(label, textColor, bgColor)}>Add to Page</button>
         </div>
     )
 }
 
-export default TextInputPicker
+export default TextAreaPicker

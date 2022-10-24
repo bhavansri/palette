@@ -61,7 +61,7 @@ const Container = () => {
     setSelectedBlock(imageBlock)
   }
 
-  const addTextInputHandler = (label, textColor, bgColor) => {
+  const addTextInputHandler = (label, bgColor) => {
     const inputFieldBlock = {
       type: ItemTypes.TEXT_INPUT,
       id: uuid(),
@@ -69,7 +69,6 @@ const Container = () => {
       y: 100,
       height: 90,
       label: label,
-      textColor: textColor,
       bgColor: bgColor
     }
 

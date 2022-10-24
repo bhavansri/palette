@@ -3,6 +3,7 @@ export const Editors = {
     Image: 'ImagePicker',
     Graphics: 'GraphicsPicker',
     Text: 'TextEditor',
+    TextArea: 'TextArea',
     TextInput: 'TextInput',
     Video: 'Video',
     Dropdown: 'Dropdown'

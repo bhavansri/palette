@@ -3,7 +3,7 @@ import { handleStyles } from "../../utils/config"
 import { useOutsideClick } from "../../utils/hooks"
 
 const TextFieldElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, deleteBlock }) => {
-    const { id, bgColor, label, textColor } = block || {}
+    const { id, bgColor, label } = block || {}
 
     const onResize = (event, direction, ref, delta) => {
         const { width, height } = ref.style
@@ -46,7 +46,7 @@ const TextFieldElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef
             className={`flex items-center justify-center p-2 ${isSelected ? 'border border-blue-500' : 'border-0'}`}>
             <div ref={ref} onClick={() => handleSelection(true)} className="form-control w-full max-w-xs">
                 <label className="label">
-                    <span className="label-text" style={{ color: textColor }}>{label}</span>
+                    <span className="label-text text-black">{label}</span>
                 </label>
                 <input type="text" className="input input-sm input-bordered w-full max-w-xs" style={{ backgroundColor: bgColor }} />
             </div>

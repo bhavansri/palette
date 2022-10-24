@@ -5,11 +5,12 @@ import ColorPicker from "./ColorPicker"
 import DropdownPicker from "./DropdownPicker"
 import GraphicsPicker from "./GraphicsPicker"
 import PhotoPicker from "./PhotoPicker"
+import TextAreaPicker from "./TextAreaPicker"
 import TextInputPicker from "./TextInputPicker"
 import TextPicker from "./TextPicker"
 import VideoPicker from "./VideoPicker"
 
-const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, onGraphicsSelect, onVideoSelect, createNewTextBlock, onTextInputCreate, onDropdownInputCreate }) => {
+const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, onGraphicsSelect, onVideoSelect, createNewTextBlock, onTextInputCreate, onTextAreaCreate, onDropdownInputCreate }) => {
     const [editor, setEditor] = useState('')
     const sidebarRef = useRef()
     
@@ -33,6 +34,10 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
 
     const onTextInputExpanded = () => {
         setEditor(Editors.TextInput)
+    }
+
+    const onTextAreaExpanded = () => {
+        setEditor(Editors.TextArea)
     }
 
     const onDropdownInputExpanded = () => {
@@ -87,6 +92,12 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
                         <VideoPicker boundsRef={sidebarRef} onCreate={onVideoSelect} />
                     </div>
                 )
+            case Editors.TextArea:
+                return (
+                    <div ref={sidebarRef} className="w-60 h-full ml-5 overflow-y-auto py-12 px-3">
+                        <TextAreaPicker boundsRef={sidebarRef} onCreate={onTextAreaCreate} />
+                    </div>
+                )
             default:
                 return <></>
         }
@@ -111,6 +122,7 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
                         <span>Form Elements</span>
                     </li>
                     <li><a onClick={onTextInputExpanded}><Image src="/icons/textfield.svg" alt="Short Answer Icon" height={30} width={30} /><span className="text-xs">Short Answer</span></a></li>
+                    <li><a onClick={onTextAreaExpanded}><Image src="/icons/textarea.svg" alt="Short Answer Icon" height={30} width={30} /><span className="text-xs">Long Answer</span></a></li>
                     <li><a onClick={onDropdownInputExpanded}><Image src="/icons/dropdown.svg" alt="Dropdown Icon" height={30} width={30} /><span className="text-xs">Dropdown</span></a></li>
                 </ul>
             </nav>

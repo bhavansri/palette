@@ -1,6 +1,5 @@
 export const presetColors = ["#000000", "#14213D", "#FCA311", "#E5E5E5", "#FFFFFF"]
-export const inputBackgroundColors = ["#ffcdb2", "#ffb4a2", "#e5989b", "#b5838d", "#6d6875"]
-export const inputLabelColors = ['#131316', '#0066cc', '#008000', '#c41e3d', '#af5500']
+export const inputBackgroundColors = ["#F8F9FA", "#E9ECEF", "#DEE2E6", "#CED4DA", "#ADB5BD", "#6C757D", "#495057", "#343A40", "#212529"]
 
 export const handleStyles = {
     top: {
