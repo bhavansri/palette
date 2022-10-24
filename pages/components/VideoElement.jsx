@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { Rnd } from "react-rnd"
-import { handleStyles } from "../utils/config"
-import { useOutsideClick } from "../utils/hooks"
+import { handleStyles } from "../../utils/config"
+import { useOutsideClick } from "../../utils/hooks"
 import YouTubeVideo from "./YoutubeVideo"
 
 const VideoElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, deleteBlock }) => {
-    const { id, width, height } = block
+    const { id, width, height } = block || {}
     const [disabled, setDisabled] = useState(true)
 
     const onResize = (event, direction, ref, delta) => {

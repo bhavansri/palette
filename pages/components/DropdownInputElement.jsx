@@ -1,9 +1,10 @@
 import { Rnd } from "react-rnd"
-import { handleStyles } from "../utils/config"
-import { useOutsideClick } from "../utils/hooks"
+import { handleStyles } from "../../utils/config"
+import { useOutsideClick } from "../../utils/hooks"
 
 const DropdownInputElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, deleteBlock }) => {
-    const { id, bgColor, label, textColor, options } = block
+    const { id, bgColor, label, textColor, options } = block || {}
+    const dropdownOptions = options || []
 
     const onResize = (event, direction, ref, delta) => {
         const { width, height } = ref.style
@@ -49,7 +50,7 @@ const DropdownInputElement = ({ block, setBlock, didSelectBlock, isSelected, pag
                     <span className="label-text" style={{ color: textColor }}>{label}</span>
                 </label>
                 <select className="select w-full max-w-xs text-black" style={{ backgroundColor: bgColor }}>
-                    {options.map(option => <option key={option.id}>{option.text}</option>)}
+                    {dropdownOptions.map(option => <option key={option.id}>{option.text}</option>)}
                 </select>
             </div>
         </Rnd>

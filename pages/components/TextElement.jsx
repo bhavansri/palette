@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Rnd } from 'react-rnd'
-import { handleStyles } from '../utils/config'
-import { useOutsideClick } from '../utils/hooks'
-import { TextAlignments, TextSizes } from '../utils/types'
+import { handleStyles } from '../../utils/config'
+import { useOutsideClick } from '../../utils/hooks'
+import { TextAlignments, TextSizes } from '../../utils/types'
 
 const calculateWidth = (text, font) => {
     const canvas = document.createElement('canvas')
@@ -14,7 +14,7 @@ const calculateWidth = (text, font) => {
 }
 
 const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef }) => {
-    const { id, text, font, color, size, alignment, bold, underline, italic } = block
+    const { id, text, font, color, size, alignment, bold, underline, italic } = block || {}
     const [isDragging, setDragging] = useState(false)
     const [edit, setEdit] = useState(false)
 

@@ -1,7 +1,7 @@
 import { useState } from "react"
 
-import { inputBackgroundColors, inputLabelColors } from "../utils/config"
-import { useOutsideClick } from "../utils/hooks"
+import { inputBackgroundColors, inputLabelColors } from "../../utils/config"
+import { useOutsideClick } from "../../utils/hooks"
 
 const initialOptions = [
     { id: 1, text: 'Option 1' },

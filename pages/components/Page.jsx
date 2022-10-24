@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { ItemTypes } from "../utils/types"
+import { ItemTypes } from "../../utils/types"
 import ButtonElement from "./ButtonElement"
 import DropdownInputElement from "./DropdownInputElement"
 import GraphicsElement from "./GraphicElement"
@@ -13,7 +13,7 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
 
     return (
         <div ref={pageRef} style={{ backgroundColor: backgroundColor }} className="relative artboard artboard-horizontal shadow-xl phone-3 mb-5">
-            {blocks.map(block => {
+            {blocks?.map(block => {
                 const id = block.id
                 const isSelected = selectedBlock !== null ? selectedBlock.id === id : false
 

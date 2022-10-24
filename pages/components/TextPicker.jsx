@@ -1,6 +1,6 @@
 import Select from 'react-select'
-import { TextAlignments, TextDecorations, TextSizes } from '../utils/types'
-import { presetColors } from '../utils/config'
+import { TextAlignments, TextDecorations, TextSizes } from '../../utils/types'
+import { presetColors } from '../../utils/config'
 import Image from 'next/image'
 
 const customStyles = {
@@ -21,14 +21,14 @@ const options = [
     { value: 'playfair display', label: 'Playfair Display' }
 ]
 
-export const TextPicker = ({ selectedBlock, setSelectedBlock }) => {
-    const { id, font, color, size, alignment } = selectedBlock
+const TextPicker = ({ selectedBlock, setSelectedBlock }) => {
+    const { id, font, color, size, alignment } = selectedBlock || {}
 
     return (
         <div className="flex flex-col gap-5 px-3">
             <Select
                 styles={customStyles}
-                value={options.filter(option => option.value === font.toLowerCase())[0]}
+                value={options.filter(option => option.value === (font || '').toLowerCase())[0]}
                 className="w-full"
                 onChange={(selectedOption) => setSelectedBlock({ id: id, font: selectedOption.value})}
                 options={options}
@@ -91,3 +91,5 @@ export const TextPicker = ({ selectedBlock, setSelectedBlock }) => {
         </div>
     )
 }
+
+export default TextPicker

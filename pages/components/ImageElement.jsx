@@ -1,9 +1,9 @@
 import { Rnd } from 'react-rnd'
-import { useOutsideClick } from '../utils/hooks'
-import { handleStyles } from '../utils/config'
+import { useOutsideClick } from '../../utils/hooks'
+import { handleStyles } from '../../utils/config'
 
 const ImageElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, deleteBlock }) => {
-    const { id } = block
+    const { id, url } = block || {}
 
     const onResize = (event, direction, ref, delta) => {
         const { width, height } = ref.style
@@ -44,7 +44,7 @@ const ImageElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, de
             className={isSelected ? 'border border-blue-500' : 'border-0'}
             tabIndex={0}
             onKeyDown={handleKeyDown}>
-            <div ref={ref} onClick={() => handleSelection(true)} className="w-full h-full" style={{ backgroundImage: `url(${block.url})`, backgroundRepeat: 'no-repeat', backgroundSize: '100%' }} />
+            <div ref={ref} onClick={() => handleSelection(true)} className="w-full h-full" style={{ backgroundImage: `url(${url})`, backgroundRepeat: 'no-repeat', backgroundSize: '100%' }} />
         </Rnd>
     )
 }

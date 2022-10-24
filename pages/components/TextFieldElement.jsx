@@ -1,9 +1,9 @@
 import { Rnd } from "react-rnd"
-import { handleStyles } from "../utils/config"
-import { useOutsideClick } from "../utils/hooks"
+import { handleStyles } from "../../utils/config"
+import { useOutsideClick } from "../../utils/hooks"
 
 const TextFieldElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, deleteBlock }) => {
-    const { id, bgColor, label, textColor } = block
+    const { id, bgColor, label, textColor } = block || {}
 
     const onResize = (event, direction, ref, delta) => {
         const { width, height } = ref.style

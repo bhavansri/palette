@@ -1,9 +1,9 @@
 import { Rnd } from "react-rnd"
-import { getButtonStyling, handleStyles } from "../utils/config"
-import { useOutsideClick } from "../utils/hooks"
+import { getButtonStyling, handleStyles } from "../../utils/config"
+import { useOutsideClick } from "../../utils/hooks"
 
 const ButtonElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, deleteBlock }) => {
-    const { id, buttonType, buttonTitle } = block
+    const { id, buttonType, buttonTitle } = block || {}
 
     const onResize = (event, direction, ref, delta) => {
         const { width, height } = ref.style

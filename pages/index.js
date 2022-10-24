@@ -6,7 +6,7 @@ import styles from '../styles/Home.module.css'
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
 import Page from './components/Page'
-import { ItemTypes } from './utils/types'
+import { ItemTypes } from '../utils/types'
 
 const Container = () => {
   const [page, setPage] = useState({ backgroundColor: '#fff' })
@@ -172,7 +172,6 @@ const Container = () => {
         onDropdownInputCreate={addDropdownInputHandler}
         />
         <main className="p-7 h-screen flex-1 overflow-y-auto">
-          <Navbar />
           <div className="min-h-full bg-stone-300 flex flex-col items-center justify-around py-5">
           <Page
             backgroundColor={page.backgroundColor}

@@ -1,13 +1,13 @@
 import Image from "next/image"
 import { useRef, useState } from "react"
-import { Editors } from "../utils/types"
+import { Editors } from "../../utils/types"
 import ButtonPicker from "./ButtonPicker"
-import { ColorPicker } from "./ColorPicker"
+import ColorPicker from "./ColorPicker"
 import DropdownPicker from "./DropdownPicker"
 import GraphicsPicker from "./GraphicsPicker"
 import PhotoPicker from "./PhotoPicker"
 import TextInputPicker from "./TextInputPicker"
-import { TextPicker } from "./TextPicker"
+import TextPicker from "./TextPicker"
 import VideoPicker from "./VideoPicker"
 
 const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onButtonSelect, onImageSelect, onGraphicsSelect, onVideoSelect, createNewTextBlock, onTextInputCreate, onDropdownInputCreate }) => {

@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { inputBackgroundColors, inputLabelColors } from "../utils/config"
-import { useOutsideClick } from "../utils/hooks"
+import { inputBackgroundColors, inputLabelColors } from "../../utils/config"
+import { useOutsideClick } from "../../utils/hooks"
 
 const EditableLabel = ({ setEditMode, text, onChange }) => (
     <input className="bg-transparent outline-none" type="text" value={text} onChange={onChange} onClick={setEditMode} />

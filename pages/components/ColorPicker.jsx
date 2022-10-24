@@ -1,7 +1,7 @@
 import { HexColorPicker } from "react-colorful"
-import { presetColors } from "../utils/config"
+import { presetColors } from "../../utils/config"
 
-export const ColorPicker = ({ color, onChange }) => {
+const ColorPicker = ({ color, onChange }) => {
     return (
         <div className="flex flex-col items-center">
             <HexColorPicker color={color} onChange={onChange} />
@@ -18,3 +18,5 @@ export const ColorPicker = ({ color, onChange }) => {
         </div>
     )
 }
+
+export default ColorPicker
