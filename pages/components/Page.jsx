@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import { ItemTypes } from "../../utils/types"
-import DropdownInputElement from "./DropdownInputElement"
+import CheckboxInputElement from "./CheckboxInputElement"
 import GraphicsElement from "./GraphicElement"
 import ImageElement from "./ImageElement"
 import TextAreaElement from "./TextAreaElement"
@@ -76,9 +76,9 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
                             deleteBlock={deleteBlock}
                         />
                     )
-                } else if (block.type === ItemTypes.DROPDOWN_INPUT) {
+                } else if (block.type === ItemTypes.CHECKBOX_INPUT) {
                     return (
-                        <DropdownInputElement
+                        <CheckboxInputElement
                             key={id}
                             block={block}
                             setBlock={setBlock}

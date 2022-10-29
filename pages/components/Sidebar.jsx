@@ -2,7 +2,7 @@ import Image from "next/image"
 import { useRef, useState } from "react"
 import { Editors } from "../../utils/types"
 import ColorPicker from "./ColorPicker"
-import DropdownPicker from "./DropdownPicker"
+import CheckboxPicker from "./CheckboxPicker"
 import GraphicsPicker from "./GraphicsPicker"
 import PhotoPicker from "./PhotoPicker"
 import TextAreaPicker from "./TextAreaPicker"
@@ -10,7 +10,7 @@ import TextInputPicker from "./TextInputPicker"
 import TextPicker from "./TextPicker"
 import VideoPicker from "./VideoPicker"
 
-const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, onGraphicsSelect, onVideoSelect, createNewTextBlock, onTextInputCreate, onTextAreaCreate, onDropdownInputCreate }) => {
+const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, onGraphicsSelect, onVideoSelect, createNewTextBlock, onTextInputCreate, onTextAreaCreate, onCheckboxInputCreate }) => {
     const [editor, setEditor] = useState('')
     const sidebarRef = useRef()
     
@@ -40,8 +40,8 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
         setEditor(Editors.TextArea)
     }
 
-    const onDropdownInputExpanded = () => {
-        setEditor(Editors.Dropdown)
+    const onCheckboxInputExpanded = () => {
+        setEditor(Editors.Checkbox)
     }
 
     const onVideoEditorExpanded = () => {
@@ -80,10 +80,10 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
                         <TextInputPicker boundsRef={sidebarRef} onCreate={onTextInputCreate} />
                     </div>
                 )
-            case Editors.Dropdown:
+            case Editors.Checkbox:
                 return (
                     <div ref={sidebarRef} className="w-69 h-full ml-5 overflow-y-auto py-12">
-                        <DropdownPicker boundsRef={sidebarRef} onCreate={onDropdownInputCreate} />
+                        <CheckboxPicker boundsRef={sidebarRef} onCreate={onCheckboxInputCreate} />
                     </div>
                 )
             case Editors.Video:
@@ -123,7 +123,7 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
                     </li>
                     <li><a onClick={onTextInputExpanded}><Image src="/icons/textfield.svg" alt="Short Answer Icon" height={30} width={30} /><span className="text-xs">Short Answer</span></a></li>
                     <li><a onClick={onTextAreaExpanded}><Image src="/icons/textarea.svg" alt="Short Answer Icon" height={30} width={30} /><span className="text-xs">Long Answer</span></a></li>
-                    <li><a onClick={onDropdownInputExpanded}><Image src="/icons/dropdown.svg" alt="Dropdown Icon" height={30} width={30} /><span className="text-xs">Dropdown</span></a></li>
+                    <li><a onClick={onCheckboxInputExpanded}><Image src="/icons/checkbox.svg" alt="Checkbox Icon" height={30} width={30} /><span className="text-xs">Checkbox</span></a></li>
                 </ul>
             </nav>
             {

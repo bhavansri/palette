@@ -44,7 +44,7 @@ const TextAreaPicker = ({ boundsRef, onCreate }) => {
                     <input type="checkbox" className="toggle toggle-primary" checked={displayLines} onClick={() => setDisplayLines(currDisplay => !currDisplay)} />
                 </label>
             </div>
-            <button className="btn btn-wide mt-5 uppercase" onClick={() => onCreate(label, bgColor, displayLines)}>Add to Page</button>
+            <button className="btn mt-5 uppercase w-full" onClick={() => onCreate(label, bgColor, displayLines)}>Add to Page</button>
         </div>
     )
 }

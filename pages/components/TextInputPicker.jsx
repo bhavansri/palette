@@ -33,7 +33,7 @@ const TextInputPicker = ({ boundsRef, onCreate }) => {
                     ))}
                 </div>
             </div>
-            <button className="btn btn-wide mt-5 uppercase" onClick={() => onCreate(label, bgColor)}>Add to Page</button>
+            <button className="btn w-full mt-5 uppercase" onClick={() => onCreate(label, bgColor)}>Add to Page</button>
         </div>
     )
 }

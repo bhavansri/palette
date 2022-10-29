@@ -2,9 +2,9 @@ import { Rnd } from "react-rnd"
 import { handleStyles } from "../../utils/config"
 import { useOutsideClick } from "../../utils/hooks"
 
-const DropdownInputElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, deleteBlock }) => {
-    const { id, bgColor, label, textColor, options } = block || {}
-    const dropdownOptions = options || []
+const CheckboxInputElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, deleteBlock }) => {
+    const { id, label, options } = block || {}
+    const checkboxOptions = options || []
 
     const onResize = (event, direction, ref, delta) => {
         const { width, height } = ref.style
@@ -47,14 +47,17 @@ const DropdownInputElement = ({ block, setBlock, didSelectBlock, isSelected, pag
             onKeyDown={handleKeyDown}>
             <div ref={ref} onClick={() => handleSelection(true)} className="form-control w-full max-w-xs">
                 <label className="label">
-                    <span className="label-text" style={{ color: textColor }}>{label}</span>
+                    <span className="label-text text-black">{label}</span>
                 </label>
-                <select className="select w-full max-w-xs text-black" style={{ backgroundColor: bgColor }}>
-                    {dropdownOptions.map(option => <option key={option.id}>{option.text}</option>)}
-                </select>
+                {options.map(option => (
+                    <label key={option.id} className="label cursor-pointer">
+                        <span className="label-text text-sm text-black">{option.text}</span> 
+                        <input type="checkbox" className="checkbox border-1 border-gray-800" />
+                    </label>
+                ))}
             </div>
         </Rnd>
     )
 }
 
-export default DropdownInputElement
+export default CheckboxInputElement

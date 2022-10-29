@@ -91,22 +91,20 @@ const Container = () => {
     setSelectedBlock(textareaBlock)
   }
 
-  const addDropdownInputHandler = (label, options, textColor, bgColor) => {
-    const dropdownFieldBlock = {
-      type: ItemTypes.DROPDOWN_INPUT,
+  const addCheckboxInputHandler = (label, options) => {
+    const checkboxFieldBlock = {
+      type: ItemTypes.CHECKBOX_INPUT,
       id: uuid(),
       x: 100,
       y: 100,
-      height: 90,
+      height: 180,
       width: 250,
       label: label,
-      options: options,
-      textColor: textColor,
-      bgColor: bgColor
+      options: options
     }
 
-    setBlocks(prevBlocks => [...prevBlocks, dropdownFieldBlock])
-    setSelectedBlock(dropdownFieldBlock)
+    setBlocks(prevBlocks => [...prevBlocks, checkboxFieldBlock])
+    setSelectedBlock(checkboxFieldBlock)
   }
 
   const createNewTextBlock = () => {
@@ -167,7 +165,7 @@ const Container = () => {
         createNewTextBlock={createNewTextBlock}
         onTextInputCreate={addTextInputHandler}
         onTextAreaCreate={addTextAreaInputHandler}
-        onDropdownInputCreate={addDropdownInputHandler}
+        onCheckboxInputCreate={addCheckboxInputHandler}
         />
         <main className="p-7 h-screen flex-1 overflow-y-auto">
           <div className="min-h-full bg-stone-300 flex flex-col items-center justify-around py-5">
