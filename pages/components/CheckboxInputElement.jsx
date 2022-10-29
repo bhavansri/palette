@@ -49,7 +49,7 @@ const CheckboxInputElement = ({ block, setBlock, didSelectBlock, isSelected, pag
                 <label className="label">
                     <span className="label-text text-black">{label}</span>
                 </label>
-                {options.map(option => (
+                {checkboxOptions.map(option => (
                     <label key={option.id} className="label cursor-pointer">
                         <span className="label-text text-sm text-black">{option.text}</span> 
                         <input type="checkbox" className="checkbox border-1 border-gray-800" />
