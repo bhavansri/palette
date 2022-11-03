@@ -10,13 +10,11 @@ import TextInputPicker from "./TextInputPicker"
 import TextPicker from "./TextPicker"
 import VideoPicker from "./VideoPicker"
 
-const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageSelect, onGraphicsSelect, onVideoSelect, createNewTextBlock, onTextInputCreate, onTextAreaCreate, onCheckboxInputCreate }) => {
+const Sidebar = ({ page, onPageChange, onImageSelect, onGraphicsSelect, onVideoSelect, onTextCreate, onTextInputCreate, onTextAreaCreate, onCheckboxInputCreate }) => {
     const [editor, setEditor] = useState('')
     const sidebarRef = useRef()
     
     const onTextEditorExpanded = () => {
-        createNewTextBlock()
-        
         setEditor(Editors.Text)
     }
 
@@ -52,8 +50,8 @@ const Sidebar = ({ page, selectedBlock, setSelectedBlock, onPageChange, onImageS
         switch (editor) {
             case Editors.Text:
                 return (
-                    selectedBlock && <div className="w-60 h-full ml-5 overflow-y-auto py-12">
-                        <TextPicker selectedBlock={selectedBlock} setSelectedBlock={setSelectedBlock} />
+                    <div className="w-60 h-full ml-5 overflow-y-auto py-12">
+                        <TextPicker onTextCreate={onTextCreate} />
                     </div>
                 )
             case Editors.BackgroundColor:

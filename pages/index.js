@@ -107,21 +107,15 @@ const Container = () => {
     setSelectedBlock(checkboxFieldBlock)
   }
 
-  const createNewTextBlock = () => {
+  const addTextHandler = (text) => {
     const textBlock = {
       type: ItemTypes.TEXT,
       id: uuid(),
       x: 20,
       y: 80,
-      height: 30,
-      text: "Text Placeholder",
-      font: 'Cinzel',
-      color: '#000000',
-      size: 'md',
-      alignment: 'left',
-      bold: false,
-      italic: false,
-      underline: false
+      width: 200,
+      height: 200,
+      text: text,
     }
 
     setBlocks(prevBlocks => [...prevBlocks, textBlock])
@@ -162,7 +156,7 @@ const Container = () => {
         onImageSelect={addImageHandler}
         onGraphicsSelect={addGraphicsHandler}
         onVideoSelect={addVideoHandler}
-        createNewTextBlock={createNewTextBlock}
+        onTextCreate={addTextHandler}
         onTextInputCreate={addTextInputHandler}
         onTextAreaCreate={addTextAreaInputHandler}
         onCheckboxInputCreate={addCheckboxInputHandler}

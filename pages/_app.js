@@ -1,8 +1,8 @@
 import '../styles/globals.css'
 import "@fontsource/cinzel"
 import "@fontsource/dancing-script"
-import "@fontsource/great-vibes"
-import "@fontsource/kalam"
+import "@fontsource/open-sans"
+import "@fontsource/bodoni-moda"
 import "@fontsource/lato"
 import "@fontsource/merriweather"
 import "@fontsource/montserrat"

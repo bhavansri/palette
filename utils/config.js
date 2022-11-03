@@ -1,6 +1,43 @@
 export const presetColors = ["#000000", "#14213D", "#FCA311", "#E5E5E5", "#FFFFFF"]
 export const inputBackgroundColors = ["#F8F9FA", "#E9ECEF", "#DEE2E6", "#CED4DA", "#ADB5BD", "#6C757D", "#495057", "#343A40", "#212529"]
 
+export const handleTextStyles = {
+    left: {
+        marginTop: -5,
+        marginLeft: -3,
+        top: "50%",
+        left: 0,
+        cursor: "ew-resize",
+        border: "3px solid #999",
+        borderTop: "none",
+        borderRight: "none",
+        borderBottom: "none",
+        borderWidth: 5,
+        borderColor: "#09f",
+        width: 10,
+        height: 10,
+        boxSizing: "border-box",
+        zIndex: 1
+    },
+    right: {
+        marginTop: -5,
+        marginLeft: -7,
+        top: "50%",
+        left: "100%",
+        cursor: "ew-resize",
+        border: "3px solid #999",
+        borderTop: "none",
+        borderLeft: "none",
+        borderBottom: "none",
+        borderWidth: 5,
+        borderColor: "#09f",
+        width: 10,
+        height: 10,
+        boxSizing: "border-box",
+        zIndex: 1
+    }
+}
+
 export const handleStyles = {
     top: {
         marginTop: -3,
