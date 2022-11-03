@@ -39,16 +39,15 @@ const TextFieldElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef
             onResize={onResize}
             onDragStop={onDragStop}
             bounds="parent"
-            lockAspectRatio={true}
             resizeHandleStyles={isSelected ? handleStyles : {}}
             tabIndex={0}
             onKeyDown={handleKeyDown}
             className={`flex items-center justify-center p-2 ${isSelected ? 'border border-blue-500' : 'border-0'}`}>
-            <div ref={ref} onClick={() => handleSelection(true)} className="form-control w-full max-w-xs">
+            <div ref={ref} onClick={() => handleSelection(true)} className="form-control w-full">
                 <label className="label">
                     <span className="label-text text-black">{label}</span>
                 </label>
-                <input type="text" className="input input-sm input-bordered w-full max-w-xs" style={{ backgroundColor: bgColor }} />
+                <input type="text" className="input input-sm input-bordered w-full max-w-xs text-black" style={{ backgroundColor: bgColor }} />
             </div>
         </Rnd>
     )

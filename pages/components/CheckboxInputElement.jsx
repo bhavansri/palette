@@ -40,7 +40,6 @@ const CheckboxInputElement = ({ block, setBlock, didSelectBlock, isSelected, pag
             onResize={onResize}
             onDragStop={onDragStop}
             bounds="parent"
-            lockAspectRatio={true}
             resizeHandleStyles={isSelected ? handleStyles : {}}
             className={`flex items-center justify-center ${isSelected ? 'border border-blue-500' : 'border-0'}`}
             tabIndex={0}

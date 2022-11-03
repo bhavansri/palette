@@ -39,7 +39,6 @@ const TextAreaElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef,
             onResize={onResize}
             onDragStop={onDragStop}
             bounds="parent"
-            lockAspectRatio={true}
             resizeHandleStyles={isSelected ? handleStyles : {}}
             tabIndex={0}
             onKeyDown={handleKeyDown}
