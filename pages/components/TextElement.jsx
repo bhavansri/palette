@@ -14,7 +14,7 @@ const Leaf = props => {
             case 'lg':
                 return 'text-xl'
             case 'xl':
-                return 'text-5xl text-cyan-700'
+                return 'text-4xl'
         }
     }
 

@@ -1,6 +1,23 @@
 export const presetColors = ["#000000", "#14213D", "#FCA311", "#E5E5E5", "#FFFFFF"]
 export const inputBackgroundColors = ["#F8F9FA", "#E9ECEF", "#DEE2E6", "#CED4DA", "#ADB5BD", "#6C757D", "#495057", "#343A40", "#212529"]
 
+export const getButtonStyling = (type) => {
+    switch (type) {
+        case 'default':
+            return ''
+        case 'primary':
+            return 'btn-primary'
+        case 'secondary':
+            return 'btn-secondary'
+        case 'accent':
+            return 'btn-accent'
+        case 'ghost':
+            return 'btn-ghost'
+        case 'link':
+            return 'btn-link'
+    }
+}
+
 export const handleTextStyles = {
     left: {
         marginTop: -5,

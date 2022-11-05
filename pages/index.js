@@ -45,6 +45,22 @@ const Container = () => {
     setSelectedBlock(videoBlock)
   }
 
+  const addButtonHandler = (buttonType, buttonTitle) => {
+    const buttonBlock = {
+      type: ItemTypes.BUTTON,
+      id: uuid(),
+      x: 80,
+      y: 80,
+      width: 180,
+      height: 50,
+      buttonType,
+      buttonTitle
+    }
+
+    setBlocks(prevBlocks => [...prevBlocks, buttonBlock])
+    setSelectedBlock(buttonBlock)
+  }
+
   const addImageHandler = (url) => {
     const imageBlock = {
       type: ItemTypes.IMAGE,
@@ -153,6 +169,7 @@ const Container = () => {
         selectedBlock={selectedBlock}
         setSelectedBlock={updateBlock}
         onPageChange={onPageChange}
+        onButtonSelect={addButtonHandler}
         onImageSelect={addImageHandler}
         onGraphicsSelect={addGraphicsHandler}
         onVideoSelect={addVideoHandler}

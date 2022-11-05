@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { useRef, useState } from "react"
 import { Editors } from "../../utils/types"
+import ButtonPicker from './ButtonPicker'
 import ColorPicker from "./ColorPicker"
 import CheckboxPicker from "./CheckboxPicker"
 import GraphicsPicker from "./GraphicsPicker"
@@ -10,12 +11,16 @@ import TextInputPicker from "./TextInputPicker"
 import TextPicker from "./TextPicker"
 import VideoPicker from "./VideoPicker"
 
-const Sidebar = ({ page, onPageChange, onImageSelect, onGraphicsSelect, onVideoSelect, onTextCreate, onTextInputCreate, onTextAreaCreate, onCheckboxInputCreate }) => {
+const Sidebar = ({ page, onPageChange, onButtonSelect, onImageSelect, onGraphicsSelect, onVideoSelect, onTextCreate, onTextInputCreate, onTextAreaCreate, onCheckboxInputCreate }) => {
     const [editor, setEditor] = useState('')
     const sidebarRef = useRef()
     
     const onTextEditorExpanded = () => {
         setEditor(Editors.Text)
+    }
+
+    const onButtonExpanded = () => {
+        setEditor(Editors.Button)
     }
 
     const onImageEditorExpanded = () => {
@@ -58,6 +63,12 @@ const Sidebar = ({ page, onPageChange, onImageSelect, onGraphicsSelect, onVideoS
                 return (
                     <div className="w-60 h-full ml-5 overflow-y-auto py-12">
                         <ColorPicker color={page.backgroundColor} onChange={(value) => { onPageChange('backgroundColor', value) }} />
+                    </div>
+                )
+            case Editors.Button:
+                return (
+                    <div className="w-60 h-full ml-5 overflow-y-auto py-12">
+                        <ButtonPicker handleOnClick={onButtonSelect}/>
                     </div>
                 )
             case Editors.Image:
@@ -122,6 +133,7 @@ const Sidebar = ({ page, onPageChange, onImageSelect, onGraphicsSelect, onVideoS
                     <li><a onClick={onTextInputExpanded}><Image src="/icons/textfield.svg" alt="Short Answer Icon" height={30} width={30} /><span className="text-xs">Short Answer</span></a></li>
                     <li><a onClick={onTextAreaExpanded}><Image src="/icons/textarea.svg" alt="Short Answer Icon" height={30} width={30} /><span className="text-xs">Long Answer</span></a></li>
                     <li><a onClick={onCheckboxInputExpanded}><Image src="/icons/checkbox.svg" alt="Checkbox Icon" height={30} width={30} /><span className="text-xs">Checkbox</span></a></li>
+                    <li><a onClick={onButtonExpanded}><Image src="/icons/button.svg" alt="Button Icon" height={30} width={30} /><span className="text-xs">Button</span></a></li>
                 </ul>
             </nav>
             {

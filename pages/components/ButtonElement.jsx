@@ -1,9 +1,9 @@
-import { Rnd } from 'react-rnd'
-import { useOutsideClick } from '../../utils/hooks'
-import { handleStyles } from '../../utils/config'
+import { Rnd } from "react-rnd"
+import { getButtonStyling, handleStyles } from "../../utils/config"
+import { useOutsideClick } from "../../utils/hooks"
 
-const ImageElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, deleteBlock }) => {
-    const { id, url } = block || {}
+const ButtonElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, deleteBlock }) => {
+    const { id, buttonType, buttonTitle } = block || {}
 
     const onResize = (event, direction, ref, delta) => {
         const { width, height } = ref.style
@@ -32,7 +32,7 @@ const ImageElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, de
     }
 
     const ref = useOutsideClick(() => handleSelection(false), pageRef)
-    
+
     return (
         <Rnd
             default={block}
@@ -40,12 +40,14 @@ const ImageElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef, de
             onDragStop={onDragStop}
             bounds="parent"
             resizeHandleStyles={isSelected ? handleStyles : {}}
-            className={isSelected ? 'border border-blue-500' : 'border-0'}
             tabIndex={0}
-            onKeyDown={handleKeyDown}>
-            <div ref={ref} onClick={() => handleSelection(true)} className="w-full h-full" style={{ backgroundImage: `url(${url})`, backgroundRepeat: 'no-repeat', backgroundSize: '100%' }} />
+            onKeyDown={handleKeyDown}
+            className={`flex items-center justify-center ${isSelected ? 'border border-blue-500' : 'border-0'}`}>
+            <div ref={ref} onClick={() => handleSelection(true)}>
+                <button className={`btn w-full ${getButtonStyling(buttonType)}`}>{buttonTitle}</button>
+            </div>
         </Rnd>
     )
 }
 
-export default ImageElement
+export default ButtonElement

@@ -1,4 +1,5 @@
 export const Editors = {
+    Button: 'Button',
     BackgroundColor: 'BackgroundColor',
     Image: 'ImagePicker',
     Graphics: 'GraphicsPicker',
@@ -10,6 +11,7 @@ export const Editors = {
 }
 
 export const ItemTypes = {
+    BUTTON: 'BUTTON',
     GRAPHIC: 'GRAPHIC',
     IMAGE: 'IMAGE',
     TEXT: 'TEXT',

@@ -1,5 +1,6 @@
 import { useRef } from "react"
 import { ItemTypes } from "../../utils/types"
+import ButtonElement from "./ButtonElement"
 import CheckboxInputElement from "./CheckboxInputElement"
 import GraphicsElement from "./GraphicElement"
 import ImageElement from "./ImageElement"
@@ -12,7 +13,7 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
     const pageRef = useRef()
 
     return (
-        <div ref={pageRef} style={{ backgroundColor: backgroundColor, width: 700, height: 600 }} className="relative shadow-xl mb-5">
+        <div ref={pageRef} style={{ backgroundColor: backgroundColor }} className="relative shadow-xl mb-5 artboard phone-3">
             {blocks?.map(block => {
                 const id = block.id
                 const isSelected = selectedBlock !== null ? selectedBlock.id === id : false
@@ -29,7 +30,19 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
                             deleteBlock={deleteBlock}
                         />
                     )
-                } else if (block.type === ItemTypes.GRAPHIC) {
+                } else if (block.type === ItemTypes.BUTTON) {
+                    return (
+                        <ButtonElement
+                            key={id}
+                            block={block}
+                            setBlock={setBlock}
+                            didSelectBlock={didSelectBlock}
+                            isSelected={isSelected}
+                            pageRef={pageRef}
+                            deleteBlock={deleteBlock}
+                        />
+                    )
+                }  else if (block.type === ItemTypes.GRAPHIC) {
                     return (
                         <GraphicsElement
                             key={id}
