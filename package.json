@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/annie-use-your-telescope": "^4.5.9",
     "@fontsource/bodoni-moda": "^4.5.9",
     "@fontsource/cinzel": "^4.5.9",
     "@fontsource/dancing-script": "^4.5.10",

@@ -2,8 +2,7 @@ import { Rnd } from 'react-rnd'
 import { useOutsideClick } from '../../utils/hooks'
 import { createEditor } from 'slate'
 import { Slate, Editable, withReact } from 'slate-react'
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { handleTextStyles } from '../../utils/config'
+import { useCallback, useMemo } from 'react'
 
 const Leaf = props => {
     const getSize = () => {
@@ -15,7 +14,7 @@ const Leaf = props => {
             case 'lg':
                 return 'text-xl'
             case 'xl':
-                return 'text-2xl'
+                return 'text-5xl text-cyan-700'
         }
     }
 

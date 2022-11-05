@@ -49,9 +49,9 @@ const CheckboxInputElement = ({ block, setBlock, didSelectBlock, isSelected, pag
                     <span className="label-text text-black">{label}</span>
                 </label>
                 {checkboxOptions.map(option => (
-                    <label key={option.id} className="label cursor-pointer">
-                        <span className="label-text text-sm text-black">{option.text}</span> 
+                    <label key={option.id} className="cursor-pointer flex items-center gap-2 mb-5">
                         <input type="checkbox" className="checkbox border-1 border-gray-800" />
+                        <span className="label-text text-sm text-black">{option.text}</span>
                     </label>
                 ))}
             </div>

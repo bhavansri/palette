@@ -187,6 +187,11 @@
   dependencies:
     "@floating-ui/core" "^1.0.1"
 
+"@fontsource/annie-use-your-telescope@^4.5.9":
+  version "4.5.9"
+  resolved "https://registry.yarnpkg.com/@fontsource/annie-use-your-telescope/-/annie-use-your-telescope-4.5.9.tgz#a6d872f982598d5fcd4721cb05b5215e32acf02d"
+  integrity sha512-FmVs17Yy8xSTTyw/wzWKTwYRQ9mxzRBsqVJZgy3EaaAGKWAgPmqNkRHDVPC7sziqkbtUh7sng4NuHiUHdVq55w==
+
 "@fontsource/bodoni-moda@^4.5.9":
   version "4.5.9"
   resolved "https://registry.yarnpkg.com/@fontsource/bodoni-moda/-/bodoni-moda-4.5.9.tgz#cd009d2e21f00ca922b7afef5618c77f20e69c77"

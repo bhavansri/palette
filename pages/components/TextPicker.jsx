@@ -12,7 +12,8 @@ const fontOptions = [
     { value: 'bodoniModa', label: 'Bodoni Moda' },
     { value: 'lato', label: 'Lato' },
     { value: 'merriweather', label: 'Merriweather' },
-    { value: 'playfairDisplay', label: 'Playfair Display' }
+    { value: 'playfairDisplay', label: 'Playfair Display' },
+    { value: 'annieUseYourTelescope', label: 'Annie Use Your Telescope' }
 ]
 
 const selectStyles = {
