@@ -6,7 +6,6 @@ export const Editors = {
     Text: 'TextEditor',
     TextArea: 'TextArea',
     TextInput: 'TextInput',
-    Video: 'Video',
     Checkbox: 'Checkbox'
 }
 
@@ -16,6 +15,5 @@ export const ItemTypes = {
     IMAGE: 'IMAGE',
     TEXT: 'TEXT',
     TEXT_INPUT: 'TEXT INPUT',
-    TEXT_AREA: 'TEXT AREA',
-    VIDEO: 'VIDEO'
+    TEXT_AREA: 'TEXT AREA'
 }

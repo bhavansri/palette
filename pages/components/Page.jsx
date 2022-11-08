@@ -7,7 +7,6 @@ import ImageElement from "./ImageElement"
 import TextAreaElement from "./TextAreaElement"
 import TextElement from "./TextElement"
 import TextFieldElement from "./TextFieldElement"
-import VideoElement from "./VideoElement"
 
 const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock, deleteBlock }) => {
     const pageRef = useRef()
@@ -93,18 +92,6 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
                 } else if (block.type === ItemTypes.CHECKBOX_INPUT) {
                     return (
                         <CheckboxInputElement
-                            key={id}
-                            block={block}
-                            setBlock={setBlock}
-                            didSelectBlock={didSelectBlock}
-                            isSelected={isSelected}
-                            pageRef={pageRef}
-                            deleteBlock={deleteBlock}
-                        />
-                    )
-                } else if (block.type === ItemTypes.VIDEO) {
-                    return (
-                        <VideoElement
                             key={id}
                             block={block}
                             setBlock={setBlock}

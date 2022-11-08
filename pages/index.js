@@ -31,20 +31,6 @@ const Container = () => {
     setSelectedBlock(graphicsBlock)
   }
 
-  const addVideoHandler = (width, height) => {
-    const videoBlock = {
-      type: ItemTypes.VIDEO,
-      id: uuid(),
-      x: 20,
-      y: 80,
-      width,
-      height
-    }
-
-    setBlocks(prevBlocks => [...prevBlocks, videoBlock])
-    setSelectedBlock(videoBlock)
-  }
-
   const addButtonHandler = (buttonType, buttonTitle) => {
     const buttonBlock = {
       type: ItemTypes.BUTTON,
@@ -172,7 +158,6 @@ const Container = () => {
         onButtonSelect={addButtonHandler}
         onImageSelect={addImageHandler}
         onGraphicsSelect={addGraphicsHandler}
-        onVideoSelect={addVideoHandler}
         onTextCreate={addTextHandler}
         onTextInputCreate={addTextInputHandler}
         onTextAreaCreate={addTextAreaInputHandler}
