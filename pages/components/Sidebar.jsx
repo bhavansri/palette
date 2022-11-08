@@ -102,7 +102,7 @@ const Sidebar = ({ page, onPageChange, onButtonSelect, onImageSelect, onGraphics
     }
 
     return (
-        <aside className="flex items-start pt-12 overflow-y-auto">
+        <aside className="flex items-start pt-12 px-3 overflow-x-hidden">
             <nav>
                 <ul className="menu menu-compact p-2">
                     <li className="menu-title">

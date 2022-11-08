@@ -149,22 +149,22 @@ const Container = () => {
   }
 
   return (
-    <div className="flex h-screen">
-      <Sidebar
-        page={page}
-        selectedBlock={selectedBlock}
-        setSelectedBlock={updateBlock}
-        onPageChange={onPageChange}
-        onButtonSelect={addButtonHandler}
-        onImageSelect={addImageHandler}
-        onGraphicsSelect={addGraphicsHandler}
-        onTextCreate={addTextHandler}
-        onTextInputCreate={addTextInputHandler}
-        onTextAreaCreate={addTextAreaInputHandler}
-        onCheckboxInputCreate={addCheckboxInputHandler}
+    <div className={styles.container}>
+      <main className={styles.main}>
+        <Sidebar
+          page={page}
+          selectedBlock={selectedBlock}
+          setSelectedBlock={updateBlock}
+          onPageChange={onPageChange}
+          onButtonSelect={addButtonHandler}
+          onImageSelect={addImageHandler}
+          onGraphicsSelect={addGraphicsHandler}
+          onTextCreate={addTextHandler}
+          onTextInputCreate={addTextInputHandler}
+          onTextAreaCreate={addTextAreaInputHandler}
+          onCheckboxInputCreate={addCheckboxInputHandler}
         />
-        <main className="p-7 h-screen flex-1 overflow-y-auto">
-          <div className="min-h-full bg-stone-300 flex flex-col items-center justify-around py-5">
+        <div className="bg-stone-300 flex flex-col items-center justify-around py-5" style={{ width: '-webkit-fill-available' }}>
           <Page
             backgroundColor={page.backgroundColor}
             blocks={blocks}
