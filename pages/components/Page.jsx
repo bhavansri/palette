@@ -12,7 +12,7 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
     const pageRef = useRef()
 
     return (
-        <div ref={pageRef} style={{ backgroundColor: backgroundColor }} className="relative shadow-xl mb-5 artboard phone-3">
+        <div ref={pageRef} style={{ backgroundColor: backgroundColor, width: '21cm', minHeight: '29.7cm', boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)' }}>
             {blocks?.map(block => {
                 const id = block.id
                 const isSelected = selectedBlock !== null ? selectedBlock.id === id : false
