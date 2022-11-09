@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import React, { useState } from 'react'
 import uuid from 'react-uuid'
-import html2canvas from 'html2canvas'
-import { jsPDF } from 'jspdf'
 
 import styles from '../styles/Home.module.css'
 import Sidebar from './components/Sidebar'
 import Page from './components/Page'
 import { ItemTypes } from '../utils/types'
+
+import 'react-quill/dist/quill.bubble.css';
 
 const Container = () => {
   const [page, setPage] = useState({ backgroundColor: '#fff' })
@@ -16,28 +16,6 @@ const Container = () => {
 
   const onPageChange = (property, value) => {
     setPage(page => ({...page, [property]: value}))
-  }
-
-  const onPreviewClick = async () => {
-    const pdf = new jsPDF()
-    
-    for (const block of blocks) {
-      switch (block.type) {
-        case ItemTypes.TEXT:
-          const textCanvas = await html2canvas(block.html)
-          const imageData = textCanvas.toDataURL('image/png')
-
-          const imgProperties = pdf.getImageProperties(imageData)
-          const pdfWidth = pdf.internal.pageSize.getWidth()
-          const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width
-
-          pdf.addImage(imageData, 'PNG', 0, 0, pdfWidth, pdfHeight)
-        default:
-          console.log("Hello world!")
-      }
-    }
-
-    pdf.save('print.pdf')
   }
 
   const addGraphicsHandler = (filename) => {

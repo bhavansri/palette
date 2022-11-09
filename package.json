@@ -19,8 +19,6 @@
     "@fontsource/open-sans": "^4.5.13",
     "@fontsource/playfair-display": "^4.5.12",
     "daisyui": "^2.31.0",
-    "html2canvas": "^1.4.1",
-    "jspdf": "^2.5.1",
     "next": "12.3.1",
     "react": "^18.2.0",
     "react-colorful": "^5.6.1",
