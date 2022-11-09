@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import React, { useState } from 'react'
 import uuid from 'react-uuid'
+import html2canvas from 'html2canvas'
+import { jsPDF } from 'jspdf'
 
 import styles from '../styles/Home.module.css'
 import Sidebar from './components/Sidebar'
@@ -14,6 +16,28 @@ const Container = () => {
 
   const onPageChange = (property, value) => {
     setPage(page => ({...page, [property]: value}))
+  }
+
+  const onPreviewClick = async () => {
+    const pdf = new jsPDF()
+    
+    for (const block of blocks) {
+      switch (block.type) {
+        case ItemTypes.TEXT:
+          const textCanvas = await html2canvas(block.html)
+          const imageData = textCanvas.toDataURL('image/png')
+
+          const imgProperties = pdf.getImageProperties(imageData)
+          const pdfWidth = pdf.internal.pageSize.getWidth()
+          const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width
+
+          pdf.addImage(imageData, 'PNG', 0, 0, pdfWidth, pdfHeight)
+        default:
+          console.log("Hello world!")
+      }
+    }
+
+    pdf.save('print.pdf')
   }
 
   const addGraphicsHandler = (filename) => {
@@ -109,15 +133,15 @@ const Container = () => {
     setSelectedBlock(checkboxFieldBlock)
   }
 
-  const addTextHandler = (text) => {
+  const addTextHandler = () => {
     const textBlock = {
       type: ItemTypes.TEXT,
       id: uuid(),
       x: 20,
       y: 80,
-      width: 200,
-      height: 200,
-      text: text,
+      width: 500,
+      height: 'auto',
+      text: 'This is a test value'
     }
 
     setBlocks(prevBlocks => [...prevBlocks, textBlock])
@@ -164,19 +188,25 @@ const Container = () => {
           onTextAreaCreate={addTextAreaInputHandler}
           onCheckboxInputCreate={addCheckboxInputHandler}
         />
-        <div className="bg-stone-300 flex flex-col items-center justify-around py-5" style={{ width: '-webkit-fill-available' }}>
-          <Page
-            backgroundColor={page.backgroundColor}
-            blocks={blocks}
-            setBlock={updateBlock}
-            didSelectBlock={(selectedBlock) => {
-              setSelectedBlock(selectedBlock)
-            }}
-            selectedBlock={selectedBlock}
-            deleteBlock={deleteBlock}
-          />
+        <div style={{ width: '-webkit-fill-available' }}>
+          <div className="navbar bg-base-100 flex justify-between mb-2">
+            <a className="btn btn-ghost normal-case text-2xl">Pageblox</a>
+            <button className="btn" onClick={() => { onPreviewClick() }}>Preview Page</button>
           </div>
-        </main>
+          <div className="bg-stone-300 flex flex-col items-center justify-around py-5">
+            <Page
+              backgroundColor={page.backgroundColor}
+              blocks={blocks}
+              setBlock={updateBlock}
+              didSelectBlock={(selectedBlock) => {
+                setSelectedBlock(selectedBlock)
+              }}
+              selectedBlock={selectedBlock}
+              deleteBlock={deleteBlock}
+            />
+          </div>
+        </div>
+      </main>
     </div>
   )
 }

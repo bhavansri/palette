@@ -1,52 +1,18 @@
+import dynamic from 'next/dynamic'
 import { Rnd } from 'react-rnd'
 import { useOutsideClick } from '../../utils/hooks'
-import { createEditor } from 'slate'
-import { Slate, Editable, withReact } from 'slate-react'
-import { useCallback, useMemo } from 'react'
 
-const Leaf = props => {
-    const getSize = () => {
-        switch (props.leaf.size) {
-            case 'sm':
-                return 'text-md'
-            case 'md':
-                return 'text-lg'
-            case 'lg':
-                return 'text-xl'
-            case 'xl':
-                return 'text-4xl'
-        }
-    }
-
-    return (
-        <span {...props.attributes}
-            className={getSize()}
-            style={
-                {
-                    fontWeight: props.leaf.bold ? 'bold' : 'normal',
-                    fontStyle: props.leaf.italic ? 'italic' : 'normal',
-                    textDecoration: props.leaf.underline ? 'underline' : 'none',
-                    fontFamily: props.leaf.font ? props.leaf.font.label : 'Merriweather'
-                }
-            }>
-            {props.children}
-        </span>
-    )
-}
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
+import 'react-quill/dist/quill.bubble.css';
+import { handleTextStyles } from '../../utils/config'
 
 const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef, deleteBlock }) => {
-    const { id, text, width, height, x, y } = block || {}
-    const textData = text ? JSON.parse(text) : []
-    const editor = useMemo(() => withReact(createEditor()), [])
+    const { id, width, x, y, text } = block || {}
 
-    const renderLeaf = useCallback(props => {
-        return <Leaf {...props} />
-    }, [])
-     
     const onResize = (event, direction, ref, delta) => {
-        const { width, height } = ref.style
+        const { width } = ref.style
 
-        setBlock({ id: id, width: width, height: height })
+        setBlock({ id: id, width: width })
     }
 
     const onDragStop = (event, direction) => {
@@ -64,7 +30,7 @@ const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef, del
     }
 
     const handleKeyDown = (event) => {
-        if (event.key === 'Backspace') {
+        if (event.key === '1') {
             deleteBlock()
         }
     }
@@ -72,22 +38,31 @@ const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef, del
     const ref = useOutsideClick(() => handleSelection(false), pageRef)
 
     return (
-        <Slate editor={editor} value={textData}>
-            <Rnd
-                className={`${isSelected ? 'border border-blue-500' : 'border-0'} flex items-center justify-center`}
-                position={{ x: x, y: y }}
-                onResize={onResize}
-                onDragStop={onDragStop}
-                bounds="parent"
-                tabIndex={0}
-                onKeyDown={handleKeyDown}
-                maxHeight="fit-content"
-            >
-                <div ref={ref} onClick={() => handleSelection(true)} className="h-full">
-                    <Editable renderLeaf={renderLeaf} readOnly className="text-clip text-black" />
-                </div>
-            </Rnd>
-        </Slate>
+        <Rnd
+            className={`${ isSelected ? 'border border-blue-500' : 'border-0' }`}
+            position={{ x: x, y: y }}
+            size={{ width: width, height: 'auto' }}
+            resizeHandleStyles={isSelected ? handleTextStyles : {}}
+            tabIndex={0}
+            onResize={onResize}
+            onDragStop={onDragStop}
+            onKeyDown={handleKeyDown}
+            enableResizing={{
+                top: false,
+                right: true,
+                bottom: false,
+                left: true,
+                topRight: false,
+                topLeft: false,
+                bottomRight: false,
+                bottomLeft: false,
+            }}
+            bounds="parent"
+            enableUserSelectHack={false}>
+            <div ref={ref} onClick={() => { handleSelection(true) }} className="text-black">
+                <ReactQuill theme='bubble' value={text} onChange={(value) => { setBlock({ id: id, text: value }) }} />
+            </div>
+        </Rnd>
     )
 }
 

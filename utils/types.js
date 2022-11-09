@@ -3,7 +3,6 @@ export const Editors = {
     BackgroundColor: 'BackgroundColor',
     Image: 'ImagePicker',
     Graphics: 'GraphicsPicker',
-    Text: 'TextEditor',
     TextArea: 'TextArea',
     TextInput: 'TextInput',
     Checkbox: 'Checkbox'
@@ -11,6 +10,7 @@ export const Editors = {
 
 export const ItemTypes = {
     BUTTON: 'BUTTON',
+    CHECKBOX_INPUT: 'CHECKBOX INPUT',
     GRAPHIC: 'GRAPHIC',
     IMAGE: 'IMAGE',
     TEXT: 'TEXT',

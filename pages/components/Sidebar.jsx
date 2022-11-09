@@ -8,14 +8,13 @@ import GraphicsPicker from "./GraphicsPicker"
 import PhotoPicker from "./PhotoPicker"
 import TextAreaPicker from "./TextAreaPicker"
 import TextInputPicker from "./TextInputPicker"
-import TextPicker from "./TextPicker"
 
 const Sidebar = ({ page, onPageChange, onButtonSelect, onImageSelect, onGraphicsSelect, onTextCreate, onTextInputCreate, onTextAreaCreate, onCheckboxInputCreate }) => {
     const [editor, setEditor] = useState('')
     const sidebarRef = useRef()
     
     const onTextEditorExpanded = () => {
-        setEditor(Editors.Text)
+        onTextCreate()
     }
 
     const onButtonExpanded = () => {
@@ -48,12 +47,6 @@ const Sidebar = ({ page, onPageChange, onButtonSelect, onImageSelect, onGraphics
 
     const displaySideToolbar = () => {
         switch (editor) {
-            case Editors.Text:
-                return (
-                    <div className="w-60 h-full ml-5 overflow-y-auto py-12">
-                        <TextPicker onTextCreate={onTextCreate} />
-                    </div>
-                )
             case Editors.BackgroundColor:
                 return (
                     <div className="w-60 h-full ml-5 overflow-y-auto py-12">
