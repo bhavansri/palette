@@ -5,6 +5,7 @@ import { useOutsideClick } from '../../utils/hooks'
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
 import 'react-quill/dist/quill.bubble.css';
 import { handleTextStyles } from '../../utils/config'
+import { useEffect } from 'react';
 
 const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef, deleteBlock }) => {
     const { id, width, x, y, text } = block || {}
@@ -37,6 +38,10 @@ const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef, del
 
     const ref = useOutsideClick(() => handleSelection(false), pageRef)
 
+    useEffect(() => {
+        console.log(text)
+    })
+
     return (
         <Rnd
             className={`${ isSelected ? 'border border-blue-500' : 'border-0' }`}
@@ -60,7 +65,7 @@ const TextElement = ({ block, setBlock, isSelected, didSelectBlock, pageRef, del
             bounds="parent"
             enableUserSelectHack={false}>
             <div ref={ref} onClick={() => { handleSelection(true) }} className="text-black">
-                <ReactQuill theme='bubble' value={text} onChange={(value) => { setBlock({ id: id, text: value }) }} />
+                <ReactQuill theme='bubble' value={text} onChange={(value, delta, source, editor) => { setBlock({ id: id, text: editor.getContents() }) }} />
             </div>
         </Rnd>
     )

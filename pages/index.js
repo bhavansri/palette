@@ -14,6 +14,14 @@ const Container = () => {
   const [blocks, setBlocks] = useState([])
   const [selectedBlock, setSelectedBlock] = useState(null)
 
+  const onPreviewClick = () => {
+    for (const block of blocks) {
+      if (block.type === ItemTypes.TEXT) {
+        console.log(block.html)
+      }
+    }
+  }
+
   const onPageChange = (property, value) => {
     setPage(page => ({...page, [property]: value}))
   }
