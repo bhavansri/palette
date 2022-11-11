@@ -5,8 +5,9 @@ import CheckboxInputElement from "./CheckboxInputElement"
 import GraphicsElement from "./GraphicElement"
 import ImageElement from "./ImageElement"
 import TextAreaElement from "./TextAreaElement"
-import TextElement from "./TextElement"
+import HeadingElement from "./HeadingElement"
 import TextFieldElement from "./TextFieldElement"
+import ParagraphElement from "./ParagraphElement"
 
 const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock, deleteBlock }) => {
     const pageRef = useRef()
@@ -41,7 +42,7 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
                             deleteBlock={deleteBlock}
                         />
                     )
-                }  else if (block.type === ItemTypes.GRAPHIC) {
+                } else if (block.type === ItemTypes.GRAPHIC) {
                     return (
                         <GraphicsElement
                             key={id}
@@ -53,17 +54,20 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
                             deleteBlock={deleteBlock}
                         />
                     )
-                } else if (block.type === ItemTypes.TEXT) {
+                } else if (block.type === ItemTypes.HEADING || block.type === ItemTypes.SUB_HEADING) {
                     return (
-                        <TextElement
+                        <HeadingElement
                             key={id}
                             block={block}
                             setBlock={setBlock}
                             didSelectBlock={didSelectBlock}
                             isSelected={isSelected}
                             pageRef={pageRef}
-                            deleteBlock={deleteBlock}
                         />
+                    )
+                } else if (block.type === ItemTypes.BODY) {
+                    return (
+                        <ParagraphElement key={id} />
                     )
                 } else if (block.type === ItemTypes.TEXT_AREA) {
                     return (

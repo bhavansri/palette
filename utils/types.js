@@ -13,7 +13,9 @@ export const ItemTypes = {
     CHECKBOX_INPUT: 'CHECKBOX INPUT',
     GRAPHIC: 'GRAPHIC',
     IMAGE: 'IMAGE',
-    TEXT: 'TEXT',
+    HEADING: 'HEADING',
+    SUB_HEADING: 'SUB HEADING',
+    BODY: 'BODY',
     TEXT_INPUT: 'TEXT INPUT',
     TEXT_AREA: 'TEXT AREA'
 }

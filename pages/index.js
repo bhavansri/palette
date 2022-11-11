@@ -5,9 +5,10 @@ import uuid from 'react-uuid'
 import styles from '../styles/Home.module.css'
 import Sidebar from './components/Sidebar'
 import Page from './components/Page'
+import EditorToolbar from './components/EditorToolbar'
 import { ItemTypes } from '../utils/types'
 
-import 'react-quill/dist/quill.bubble.css';
+import 'react-quill/dist/quill.snow.css';
 
 const Container = () => {
   const [page, setPage] = useState({ backgroundColor: '#fff' })
@@ -119,15 +120,14 @@ const Container = () => {
     setSelectedBlock(checkboxFieldBlock)
   }
 
-  const addTextHandler = () => {
+  const addTextHandler = (type) => {
     const textBlock = {
-      type: ItemTypes.TEXT,
+      type: type,
       id: uuid(),
       x: 20,
       y: 80,
-      width: 500,
-      height: 'auto',
-      text: 'This is a test value'
+      width: 300,
+      value: "This is a test"
     }
 
     setBlocks(prevBlocks => [...prevBlocks, textBlock])
@@ -169,17 +169,18 @@ const Container = () => {
           onButtonSelect={addButtonHandler}
           onImageSelect={addImageHandler}
           onGraphicsSelect={addGraphicsHandler}
-          onTextCreate={addTextHandler}
+          onAddText={addTextHandler}
           onTextInputCreate={addTextInputHandler}
           onTextAreaCreate={addTextAreaInputHandler}
           onCheckboxInputCreate={addCheckboxInputHandler}
         />
-        <div style={{ width: '-webkit-fill-available' }}>
-          <div className="navbar bg-base-100 flex justify-between mb-2">
-            <a className="btn btn-ghost normal-case text-2xl">Pageblox</a>
+        <div className='bg-stone-300' style={{ width: '-webkit-fill-available' }}>
+          <div className="navbar flex justify-between mb-2">
+            <a className="btn btn-ghost text-black normal-case text-2xl">Pageblox</a>
+            <EditorToolbar/>
             <button className="btn" onClick={() => { onPreviewClick() }}>Preview Page</button>
           </div>
-          <div className="bg-stone-300 flex flex-col items-center justify-around py-5">
+          <div className="text-editor flex flex-col items-center justify-around py-5">
             <Page
               backgroundColor={page.backgroundColor}
               blocks={blocks}

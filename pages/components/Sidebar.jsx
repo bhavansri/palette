@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { useRef, useState } from "react"
-import { Editors } from "../../utils/types"
+import { Editors, ItemTypes } from "../../utils/types"
 import ButtonPicker from './ButtonPicker'
 import ColorPicker from "./ColorPicker"
 import CheckboxPicker from "./CheckboxPicker"
@@ -9,12 +9,20 @@ import PhotoPicker from "./PhotoPicker"
 import TextAreaPicker from "./TextAreaPicker"
 import TextInputPicker from "./TextInputPicker"
 
-const Sidebar = ({ page, onPageChange, onButtonSelect, onImageSelect, onGraphicsSelect, onTextCreate, onTextInputCreate, onTextAreaCreate, onCheckboxInputCreate }) => {
+const Sidebar = ({ page, onPageChange, onButtonSelect, onImageSelect, onGraphicsSelect, onAddText, onTextInputCreate, onTextAreaCreate, onCheckboxInputCreate }) => {
     const [editor, setEditor] = useState('')
     const sidebarRef = useRef()
     
-    const onTextEditorExpanded = () => {
-        onTextCreate()
+    const onHeadingSelected = () => {
+        onAddText(ItemTypes.HEADING)
+    }
+
+    const onSubheadingSelected = () => {
+        onAddText(ItemTypes.SUB_HEADING)
+    }
+
+    const onBodySelected = () => {
+        onAddText(ItemTypes.BODY)
     }
 
     const onButtonExpanded = () => {
@@ -99,22 +107,30 @@ const Sidebar = ({ page, onPageChange, onButtonSelect, onImageSelect, onGraphics
             <nav>
                 <ul className="menu menu-compact p-2">
                     <li className="menu-title">
+                        <span>Text</span>
+                    </li>
+                    <li><a onClick={onHeadingSelected}><span className="text-xs">Heading</span></a></li>
+                    <li><a onClick={onSubheadingSelected}><span className="text-xs">Subheading</span></a></li>
+                    <li><a onClick={onBodySelected}><span className="text-xs">Body</span></a></li>
+                </ul>
+                <div className="divider"></div>
+                <ul className="menu menu-compact p-2">
+                    <li className="menu-title">
                         <span>Design Elements</span>
                     </li>
-                    <li><a onClick={onTextEditorExpanded}><Image src="/icons/text.svg" alt="Text Icon" height={30} width={30} /><span className="text-xs">Text</span></a></li>
-                    <li><a onClick={onImageEditorExpanded}><Image src="/icons/image.svg" alt="Image Icon" height={30} width={30} /><span className="text-xs">Images</span></a></li>
-                    <li><a onClick={onBGEditorExpanded} ><Image src="/icons/background.svg" alt="Background Icon" height={30} width={30} /><span className="text-xs">Colors</span></a></li>
-                    <li><a onClick={onGraphicsEditorExpanded} ><Image src="/icons/illustrations.svg" alt="Background Icon" height={30} width={30} /><span className="text-xs">Illustrations</span></a></li>
+                    <li><a onClick={onImageEditorExpanded}><span className="text-xs">Images</span></a></li>
+                    <li><a onClick={onBGEditorExpanded} ><span className="text-xs">Colors</span></a></li>
+                    <li><a onClick={onGraphicsEditorExpanded} ><span className="text-xs">Illustrations</span></a></li>
                 </ul>
                 <div className='divider'></div>
                 <ul className="menu menu-compact p-2">
                     <li className="menu-title">
                         <span>Form Elements</span>
                     </li>
-                    <li><a onClick={onTextInputExpanded}><Image src="/icons/textfield.svg" alt="Short Answer Icon" height={30} width={30} /><span className="text-xs">Short Answer</span></a></li>
-                    <li><a onClick={onTextAreaExpanded}><Image src="/icons/textarea.svg" alt="Short Answer Icon" height={30} width={30} /><span className="text-xs">Long Answer</span></a></li>
-                    <li><a onClick={onCheckboxInputExpanded}><Image src="/icons/checkbox.svg" alt="Checkbox Icon" height={30} width={30} /><span className="text-xs">Checkbox</span></a></li>
-                    <li><a onClick={onButtonExpanded}><Image src="/icons/button.svg" alt="Button Icon" height={30} width={30} /><span className="text-xs">Button</span></a></li>
+                    <li><a onClick={onTextInputExpanded}><span className="text-xs">Short Answer</span></a></li>
+                    <li><a onClick={onTextAreaExpanded}><span className="text-xs">Long Answer</span></a></li>
+                    <li><a onClick={onCheckboxInputExpanded}><span className="text-xs">Checkbox</span></a></li>
+                    <li><a onClick={onButtonExpanded}><span className="text-xs">Button</span></a></li>
                 </ul>
             </nav>
             {
