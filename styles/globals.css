@@ -19,12 +19,8 @@ a {
   box-sizing: border-box;
 }
 
-.ql-toolbar {
-  background: rgb(214 211 209) !important;
-}
-
-.ql-picker-label {
-  color: black !important;
+.ql-tooltip {
+  width: 260px !important;
 }
 
 @media (prefers-color-scheme: dark) {

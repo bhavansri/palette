@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import 'react-quill/dist/quill.bubble.css'
 import "@fontsource/annie-use-your-telescope"
 import "@fontsource/cinzel"
 import "@fontsource/dancing-script"

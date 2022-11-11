@@ -5,15 +5,18 @@ import uuid from 'react-uuid'
 import styles from '../styles/Home.module.css'
 import Sidebar from './components/Sidebar'
 import Page from './components/Page'
-import EditorToolbar from './components/EditorToolbar'
 import { ItemTypes } from '../utils/types'
-
-import 'react-quill/dist/quill.snow.css';
 
 const Container = () => {
   const [page, setPage] = useState({ backgroundColor: '#fff' })
   const [blocks, setBlocks] = useState([])
   const [selectedBlock, setSelectedBlock] = useState(null)
+
+  const isTextSelected = () => {
+    return (selectedBlock?.type === ItemTypes.BODY ||
+      selectedBlock?.type === ItemTypes.HEADING ||
+      selectedBlock?.type === ItemTypes.SUB_HEADING)
+  }
 
   const onPreviewClick = () => {
     for (const block of blocks) {
@@ -127,7 +130,7 @@ const Container = () => {
       x: 20,
       y: 80,
       width: 300,
-      value: "This is a test"
+      value: '<h1>Hello World!</h1>'
     }
 
     setBlocks(prevBlocks => [...prevBlocks, textBlock])
@@ -177,7 +180,6 @@ const Container = () => {
         <div className='bg-stone-300' style={{ width: '-webkit-fill-available' }}>
           <div className="navbar flex justify-between mb-2">
             <a className="btn btn-ghost text-black normal-case text-2xl">Pageblox</a>
-            <EditorToolbar/>
             <button className="btn" onClick={() => { onPreviewClick() }}>Preview Page</button>
           </div>
           <div className="text-editor flex flex-col items-center justify-around py-5">
