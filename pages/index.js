@@ -12,12 +12,6 @@ const Container = () => {
   const [blocks, setBlocks] = useState([])
   const [selectedBlock, setSelectedBlock] = useState(null)
 
-  const isTextSelected = () => {
-    return (selectedBlock?.type === ItemTypes.BODY ||
-      selectedBlock?.type === ItemTypes.HEADING ||
-      selectedBlock?.type === ItemTypes.SUB_HEADING)
-  }
-
   const onPreviewClick = () => {
     for (const block of blocks) {
       if (block.type === ItemTypes.TEXT) {
@@ -124,13 +118,33 @@ const Container = () => {
   }
 
   const addTextHandler = (type) => {
+    let value = ''
+    let width = 'auto'
+    
+    switch (type) {
+      case ItemTypes.HEADING:
+        value = '<h1>Write a title</h1>'
+        break
+      case ItemTypes.SUB_HEADING:
+        value = '<h2>Write a subtitle</h2>'
+        break
+      case ItemTypes.BODY:
+        value = `<p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mollis quam metus, eget vulputate metus congue sed. Proin blandit efficitur erat id dapibus. Morbi tristique, enim eget accumsan faucibus, lorem tortor mollis eros, eget congue justo eros a mi. Ut risus magna, cursus et velit eu, vehicula dapibus dui. Etiam a maximus massa, ac vestibulum tellus. Sed ut volutpat nisi, fringilla consequat nisi. Suspendisse non pulvinar diam. Suspendisse eu mauris erat.
+        </p>`
+        width = 450
+        break
+      default:
+        value = ''
+    }
+
     const textBlock = {
       type: type,
       id: uuid(),
       x: 20,
       y: 80,
-      width: 300,
-      value: '<h1>Hello World!</h1>'
+      width: width,
+      value: value
     }
 
     setBlocks(prevBlocks => [...prevBlocks, textBlock])

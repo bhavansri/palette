@@ -7,6 +7,7 @@ import ImageElement from "./ImageElement"
 import TextAreaElement from "./TextAreaElement"
 import HeadingElement from "./HeadingElement"
 import TextFieldElement from "./TextFieldElement"
+import BodyElement from "./BodyElement"
 
 const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock, deleteBlock }) => {
     const pageRef = useRef()
@@ -63,6 +64,16 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
                             isSelected={isSelected}
                             pageRef={pageRef}
                         />
+                    )
+                } else if (block.type === ItemTypes.BODY) {
+                    return (
+                        <BodyElement
+                            key={id}
+                            block={block}
+                            setBlock={setBlock}
+                            didSelectBlock={didSelectBlock}
+                            isSelected={isSelected}
+                            pageRef={pageRef} />
                     )
                 } else if (block.type === ItemTypes.TEXT_AREA) {
                     return (

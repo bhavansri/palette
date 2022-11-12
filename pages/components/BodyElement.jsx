@@ -9,13 +9,16 @@ const ReactQuill = dynamic(import('react-quill'), { ssr: false, loading: () => <
 const modules  = {
     toolbar: [
         [{ font: [] }],
-        [{ header: [1, 2, 3, 4, 5, 6, false] }],
         ["bold", "italic", "underline"],
         [{ color: [] }],
+        ["blockquote"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        [{ align: [] }],
+        ["link"]
     ],
 }
 
-const HeadingElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef }) => {
+const BodyElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef }) => {
     const { id, x, y, width, value } = block
     const [text, setText] = useState(value)
     const [isEditable, setEditable] = useState(false)
@@ -75,10 +78,10 @@ const HeadingElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef }
                     value={text}
                     onChange={setText}
                     modules={modules}
-            />
+                />
             </div>
         </Rnd>
     )
 }
 
-export default HeadingElement
+export default BodyElement
