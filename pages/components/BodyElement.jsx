@@ -11,7 +11,6 @@ const modules  = {
         [{ font: [] }],
         ["bold", "italic", "underline"],
         [{ color: [] }],
-        ["blockquote"],
         [{ list: "ordered" }, { list: "bullet" }],
         [{ align: [] }],
         ["link"]
@@ -72,7 +71,7 @@ const BodyElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef }) =
             <div ref={ref}
                 onDoubleClick={() => { setEditable(true) }}
                 onClick={() => { handleSelection(true) }}
-                className={`${isSelected ? 'border border-blue-500' : 'border-0'} text-black`}>
+                className={`ql-tooltip-body ${isSelected ? 'border border-blue-500' : 'border-0'} text-black ${ isEditable ?  'quill-wrapper-text' : 'quill-wrapper-pointer'}`}>
                 <ReactQuill
                     theme="bubble"
                     value={text}

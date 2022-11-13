@@ -9,9 +9,8 @@ const ReactQuill = dynamic(import('react-quill'), { ssr: false, loading: () => <
 const modules  = {
     toolbar: [
         [{ font: [] }],
-        [{ header: [1, 2, 3, 4, 5, 6, false] }],
         ["bold", "italic", "underline"],
-        [{ color: [] }],
+        [{ color: [] }]
     ],
 }
 
@@ -69,7 +68,7 @@ const HeadingElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef }
             <div ref={ref}
                 onDoubleClick={() => { setEditable(true) }}
                 onClick={() => { handleSelection(true) }}
-                className={`${isSelected ? 'border border-blue-500' : 'border-0'} text-black`}>
+                className={`ql-tooltip-heading ${isSelected ? 'border border-blue-500' : 'border-0'} text-black ${ isEditable ?  'quill-wrapper-text' : 'quill-wrapper-pointer'}`}>
                 <ReactQuill
                     theme="bubble"
                     value={text}
