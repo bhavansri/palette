@@ -6,19 +6,12 @@ import styles from '../styles/Home.module.css'
 import Sidebar from './components/Sidebar'
 import Page from './components/Page'
 import { ItemTypes } from '../utils/types'
+import Link from 'next/link'
 
 const Container = () => {
   const [page, setPage] = useState({ backgroundColor: '#fff' })
   const [blocks, setBlocks] = useState([])
   const [selectedBlock, setSelectedBlock] = useState(null)
-
-  const onPreviewClick = () => {
-    for (const block of blocks) {
-      if (block.type === ItemTypes.TEXT) {
-        console.log(block.html)
-      }
-    }
-  }
 
   const onPageChange = (property, value) => {
     setPage(page => ({...page, [property]: value}))
@@ -191,10 +184,10 @@ const Container = () => {
           onTextAreaCreate={addTextAreaInputHandler}
           onCheckboxInputCreate={addCheckboxInputHandler}
         />
-        <div className='bg-stone-300' style={{ width: '-webkit-fill-available' }}>
+        <div style={{ width: '-webkit-fill-available' }}>
           <div className="navbar flex justify-between mb-2">
-            <a className="btn btn-ghost text-black normal-case text-2xl">Pageblox</a>
-            <button className="btn" onClick={() => { onPreviewClick() }}>Preview Page</button>
+            <a className="btn btn-ghost text-slate-100 normal-case text-2xl">Pageblox</a>
+            <Link href="/preview"><button className="btn">Preview Page</button></Link>
           </div>
           <div className="text-editor flex flex-col items-center justify-around py-5">
             <Page
