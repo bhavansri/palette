@@ -19,7 +19,7 @@ const options = {
         } else if (domNode.type === 'tag' && domNode.name === 'h2') {
             return <Text style={{ fontSize: '24px' }}>{domToReact(domNode.children, options)}</Text>
         } else if (domNode.type === 'tag' && domNode.name === 'p') {
-            return <Text style={{ fontSize: '13px' }}>{domToReact(domNode.children, options)}</Text>
+            return <Text style={{ fontSize: '13px', paddingHorizontal: '15px', paddingVertical: '12px' }}>{domToReact(domNode.children, options)}</Text>
         } else if (domNode.type === 'tag' && domNode.name === 'strong') {
             return <Text style={{ fontFamily: 'Times-Bold' }}>{domToReact(domNode.children, options)}</Text>
         } else if (domNode.type === 'tag' && domNode.name === 'u') {
