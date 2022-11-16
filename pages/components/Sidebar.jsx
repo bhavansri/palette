@@ -9,20 +9,20 @@ import PhotoPicker from "./PhotoPicker"
 import TextAreaPicker from "./TextAreaPicker"
 import TextInputPicker from "./TextInputPicker"
 
-const Sidebar = ({ page, onPageChange, onButtonSelect, onImageSelect, onGraphicsSelect, onAddText, onTextInputCreate, onTextAreaCreate, onCheckboxInputCreate }) => {
+const Sidebar = ({ page, onPageChange, onButtonSelect, onImageSelect, onGraphicsSelect, onAddHeading, onAddSubheading, onAddBody, onTextInputCreate, onTextAreaCreate, onCheckboxInputCreate }) => {
     const [editor, setEditor] = useState('')
     const sidebarRef = useRef()
     
     const onHeadingSelected = () => {
-        onAddText(ItemTypes.HEADING)
+        onAddHeading()
     }
 
     const onSubheadingSelected = () => {
-        onAddText(ItemTypes.SUB_HEADING)
+        onAddSubheading()
     }
 
     const onBodySelected = () => {
-        onAddText(ItemTypes.BODY)
+        onAddBody()
     }
 
     const onButtonExpanded = () => {

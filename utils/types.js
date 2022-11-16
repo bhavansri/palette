@@ -14,7 +14,6 @@ export const ItemTypes = {
     GRAPHIC: 'GRAPHIC',
     IMAGE: 'IMAGE',
     HEADING: 'HEADING',
-    SUB_HEADING: 'SUB HEADING',
     BODY: 'BODY',
     TEXT_INPUT: 'TEXT INPUT',
     TEXT_AREA: 'TEXT AREA'

@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Rnd } from "react-rnd"
 import { handleTextStyles } from "../../utils/config"
 import { useOutsideClick } from "../../utils/hooks"
@@ -16,7 +16,6 @@ const modules  = {
 
 const HeadingElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef }) => {
     const { id, x, y, width, value } = block
-    const [text, setText] = useState(value)
     const [isEditable, setEditable] = useState(false)
     
     const handleSelection = (isSelected) => {
@@ -41,7 +40,7 @@ const HeadingElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef }
 
         setBlock({ id: id, width: width })
     }
-    
+
     return (
         <Rnd
             size={{ width: width, height: 'auto' }}
@@ -71,8 +70,8 @@ const HeadingElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef }
                 className={`ql-tooltip-heading ${isSelected ? 'border border-blue-500' : 'border-0'} text-black ${ isEditable ?  'quill-wrapper-text' : 'quill-wrapper-pointer'}`}>
                 <ReactQuill
                     theme="bubble"
-                    value={text}
-                    onChange={setText}
+                    value={value}
+                    onChange={(newValue) => { setBlock({ id: id, value: newValue }) }}
                     modules={modules}
             />
             </div>

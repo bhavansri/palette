@@ -19,7 +19,6 @@ const modules  = {
 
 const BodyElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef }) => {
     const { id, x, y, width, value } = block
-    const [text, setText] = useState(value)
     const [isEditable, setEditable] = useState(false)
     
     const handleSelection = (isSelected) => {
@@ -74,8 +73,8 @@ const BodyElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef }) =
                 className={`ql-tooltip-body ${isSelected ? 'border border-blue-500' : 'border-0'} text-black ${ isEditable ?  'quill-wrapper-text' : 'quill-wrapper-pointer'}`}>
                 <ReactQuill
                     theme="bubble"
-                    value={text}
-                    onChange={setText}
+                    value={value}
+                    onChange={(newValue) => { setBlock({ id: id, value: newValue }) }}
                     modules={modules}
                 />
             </div>

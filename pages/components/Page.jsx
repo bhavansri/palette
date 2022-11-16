@@ -13,7 +13,7 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
     const pageRef = useRef()
 
     return (
-        <div ref={pageRef} style={{ backgroundColor: backgroundColor, width: '21cm', minHeight: '29.7cm', boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)' }}>
+        <div ref={pageRef} style={{ backgroundColor: backgroundColor, width: '595px', height: '841px', boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)' }}>
             {blocks?.map(block => {
                 const id = block.id
                 const isSelected = selectedBlock !== null ? selectedBlock.id === id : false
@@ -54,7 +54,7 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
                             deleteBlock={deleteBlock}
                         />
                     )
-                } else if (block.type === ItemTypes.HEADING || block.type === ItemTypes.SUB_HEADING) {
+                } else if (block.type === ItemTypes.HEADING) {
                     return (
                         <HeadingElement
                             key={id}

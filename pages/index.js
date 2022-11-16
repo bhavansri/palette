@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import uuid from 'react-uuid'
 
 import styles from '../styles/Home.module.css'
@@ -12,6 +12,17 @@ const Container = () => {
   const [page, setPage] = useState({ backgroundColor: '#fff' })
   const [blocks, setBlocks] = useState([])
   const [selectedBlock, setSelectedBlock] = useState(null)
+
+  useEffect(() => {
+    console.log(blocks)
+  })
+  const generateBlocksParams = () => {
+    const pageParam = page
+    const blocksParam = { blocks: blocks }
+    const params = Object.assign(blocksParam, pageParam)
+    
+    return JSON.stringify(params)
+  }
 
   const onPageChange = (property, value) => {
     setPage(page => ({...page, [property]: value}))
@@ -110,27 +121,26 @@ const Container = () => {
     setSelectedBlock(checkboxFieldBlock)
   }
 
-  const addTextHandler = (type) => {
-    let value = ''
-    let width = 'auto'
-    
-    switch (type) {
-      case ItemTypes.HEADING:
-        value = '<h1>Write a title</h1>'
-        break
-      case ItemTypes.SUB_HEADING:
-        value = '<h2>Write a subtitle</h2>'
-        break
-      case ItemTypes.BODY:
-        value = `<p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mollis quam metus, eget vulputate metus congue sed. Proin blandit efficitur erat id dapibus. Morbi tristique, enim eget accumsan faucibus, lorem tortor mollis eros, eget congue justo eros a mi. Ut risus magna, cursus et velit eu, vehicula dapibus dui. Etiam a maximus massa, ac vestibulum tellus. Sed ut volutpat nisi, fringilla consequat nisi. Suspendisse non pulvinar diam. Suspendisse eu mauris erat.
-        </p>`
-        width = 450
-        break
-      default:
-        value = ''
-    }
+  const addHeadingHandler = () => {
+    addTextHandler(ItemTypes.HEADING, '<h1>Write a heading</h1>')
+  }
 
+  const addSubheadingHandler = () => {
+    addTextHandler(ItemTypes.HEADING, '<h2>Write a subtitle</h2>')
+  }
+
+  const addBodyHandler = () => {
+    addTextHandler(
+      ItemTypes.BODY, 
+      `<p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mollis quam metus, eget vulputate metus congue sed. Proin blandit efficitur erat id dapibus. Morbi tristique, enim eget accumsan faucibus, lorem tortor mollis eros, eget congue justo eros a mi. Ut risus magna, cursus et velit eu, vehicula dapibus dui. Etiam a maximus massa, ac vestibulum tellus. Sed ut volutpat nisi, fringilla consequat nisi. Suspendisse non pulvinar diam. Suspendisse eu mauris erat.
+      </p>`
+    )
+  }
+
+  const addTextHandler = (type, value) => {
+    let width = type === ItemTypes.BODY ? 450 : 'auto'
+    
     const textBlock = {
       type: type,
       id: uuid(),
@@ -179,7 +189,9 @@ const Container = () => {
           onButtonSelect={addButtonHandler}
           onImageSelect={addImageHandler}
           onGraphicsSelect={addGraphicsHandler}
-          onAddText={addTextHandler}
+          onAddHeading={addHeadingHandler}
+          onAddSubheading={addSubheadingHandler}
+          onAddBody={addBodyHandler}
           onTextInputCreate={addTextInputHandler}
           onTextAreaCreate={addTextAreaInputHandler}
           onCheckboxInputCreate={addCheckboxInputHandler}
@@ -187,9 +199,9 @@ const Container = () => {
         <div style={{ width: '-webkit-fill-available' }}>
           <div className="navbar flex justify-between mb-2">
             <a className="btn btn-ghost text-slate-100 normal-case text-2xl">Pageblox</a>
-            <Link href="/preview"><button className="btn">Preview Page</button></Link>
+            <Link href={{ pathname: '/preview/[slug]', query: { slug: encodeURIComponent(generateBlocksParams()) } }}><a target="_blank"><button className="btn">Preview Page</button></a></Link>
           </div>
-          <div className="text-editor flex flex-col items-center justify-around py-5">
+          <div className="bg-stone-300 flex flex-col items-center justify-around py-5">
             <Page
               backgroundColor={page.backgroundColor}
               blocks={blocks}
