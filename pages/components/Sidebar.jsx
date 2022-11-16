@@ -3,13 +3,12 @@ import { useRef, useState } from "react"
 import { Editors, ItemTypes } from "../../utils/types"
 import ButtonPicker from './ButtonPicker'
 import ColorPicker from "./ColorPicker"
-import CheckboxPicker from "./CheckboxPicker"
 import GraphicsPicker from "./GraphicsPicker"
 import PhotoPicker from "./PhotoPicker"
 import TextAreaPicker from "./TextAreaPicker"
 import TextInputPicker from "./TextInputPicker"
 
-const Sidebar = ({ page, onPageChange, onButtonSelect, onImageSelect, onGraphicsSelect, onAddHeading, onAddSubheading, onAddBody, onTextInputCreate, onTextAreaCreate, onCheckboxInputCreate }) => {
+const Sidebar = ({ page, onPageChange, onButtonSelect, onImageSelect, onGraphicsSelect, onAddHeading, onAddSubheading, onAddBody, onTextInputCreate, onTextAreaCreate }) => {
     const [editor, setEditor] = useState('')
     const sidebarRef = useRef()
     
@@ -49,10 +48,6 @@ const Sidebar = ({ page, onPageChange, onButtonSelect, onImageSelect, onGraphics
         setEditor(Editors.TextArea)
     }
 
-    const onCheckboxInputExpanded = () => {
-        setEditor(Editors.Checkbox)
-    }
-
     const displaySideToolbar = () => {
         switch (editor) {
             case Editors.BackgroundColor:
@@ -83,12 +78,6 @@ const Sidebar = ({ page, onPageChange, onButtonSelect, onImageSelect, onGraphics
                 return (
                     <div ref={sidebarRef} className="w-60 h-full ml-5 overflow-y-auto py-12">
                         <TextInputPicker boundsRef={sidebarRef} onCreate={onTextInputCreate} />
-                    </div>
-                )
-            case Editors.Checkbox:
-                return (
-                    <div ref={sidebarRef} className="w-69 h-full ml-5 overflow-y-auto py-12">
-                        <CheckboxPicker boundsRef={sidebarRef} onCreate={onCheckboxInputCreate} />
                     </div>
                 )
             case Editors.TextArea:
@@ -129,7 +118,6 @@ const Sidebar = ({ page, onPageChange, onButtonSelect, onImageSelect, onGraphics
                     </li>
                     <li><a onClick={onTextInputExpanded}><span className="text-xs">Short Answer</span></a></li>
                     <li><a onClick={onTextAreaExpanded}><span className="text-xs">Long Answer</span></a></li>
-                    <li><a onClick={onCheckboxInputExpanded}><span className="text-xs">Checkbox</span></a></li>
                     <li><a onClick={onButtonExpanded}><span className="text-xs">Button</span></a></li>
                 </ul>
             </nav>

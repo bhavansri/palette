@@ -105,22 +105,6 @@ const Container = () => {
     setSelectedBlock(textareaBlock)
   }
 
-  const addCheckboxInputHandler = (label, options) => {
-    const checkboxFieldBlock = {
-      type: ItemTypes.CHECKBOX_INPUT,
-      id: uuid(),
-      x: 100,
-      y: 100,
-      height: 180,
-      width: 250,
-      label: label,
-      options: options
-    }
-
-    setBlocks(prevBlocks => [...prevBlocks, checkboxFieldBlock])
-    setSelectedBlock(checkboxFieldBlock)
-  }
-
   const addHeadingHandler = () => {
     addTextHandler(ItemTypes.HEADING, '<h1>Write a heading</h1>')
   }
@@ -194,7 +178,6 @@ const Container = () => {
           onAddBody={addBodyHandler}
           onTextInputCreate={addTextInputHandler}
           onTextAreaCreate={addTextAreaInputHandler}
-          onCheckboxInputCreate={addCheckboxInputHandler}
         />
         <div style={{ width: '-webkit-fill-available' }}>
           <div className="navbar flex justify-between mb-2">

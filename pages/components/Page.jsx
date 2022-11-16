@@ -1,7 +1,6 @@
 import { useRef } from "react"
 import { ItemTypes } from "../../utils/types"
 import ButtonElement from "./ButtonElement"
-import CheckboxInputElement from "./CheckboxInputElement"
 import GraphicsElement from "./GraphicElement"
 import ImageElement from "./ImageElement"
 import TextAreaElement from "./TextAreaElement"
@@ -90,18 +89,6 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
                 } else if (block.type === ItemTypes.TEXT_INPUT) {
                     return (
                         <TextFieldElement
-                            key={id}
-                            block={block}
-                            setBlock={setBlock}
-                            didSelectBlock={didSelectBlock}
-                            isSelected={isSelected}
-                            pageRef={pageRef}
-                            deleteBlock={deleteBlock}
-                        />
-                    )
-                } else if (block.type === ItemTypes.CHECKBOX_INPUT) {
-                    return (
-                        <CheckboxInputElement
                             key={id}
                             block={block}
                             setBlock={setBlock}

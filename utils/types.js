@@ -4,13 +4,11 @@ export const Editors = {
     Image: 'ImagePicker',
     Graphics: 'GraphicsPicker',
     TextArea: 'TextArea',
-    TextInput: 'TextInput',
-    Checkbox: 'Checkbox'
+    TextInput: 'TextInput'
 }
 
 export const ItemTypes = {
     BUTTON: 'BUTTON',
-    CHECKBOX_INPUT: 'CHECKBOX INPUT',
     GRAPHIC: 'GRAPHIC',
     IMAGE: 'IMAGE',
     HEADING: 'HEADING',
