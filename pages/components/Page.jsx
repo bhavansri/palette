@@ -12,35 +12,36 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
     const pageRef = useRef()
 
     return (
-        <div ref={pageRef} style={{ backgroundColor: backgroundColor, width: '595px', height: '841px', boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)' }}>
-            {blocks?.map(block => {
-                const id = block.id
-                const isSelected = selectedBlock !== null ? selectedBlock.id === id : false
+        <div className="bg-stone-300 flex flex-col items-center justify-around py-5">
+            <div ref={pageRef} style={{ backgroundColor: backgroundColor, width: '595px', height: '841px', boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)' }}>
+                {blocks?.map(block => {
+                    const id = block.id
+                    const isSelected = selectedBlock !== null ? selectedBlock.id === id : false
 
-                if (block.type === ItemTypes.IMAGE) {
-                    return (
-                        <ImageElement
-                            key={id}
-                            block={block}
-                            setBlock={setBlock}
-                            didSelectBlock={didSelectBlock}
-                            isSelected={isSelected}
-                            pageRef={pageRef}
-                            deleteBlock={deleteBlock}
-                        />
-                    )
-                } else if (block.type === ItemTypes.BUTTON) {
-                    return (
-                        <ButtonElement
-                            key={id}
-                            block={block}
-                            setBlock={setBlock}
-                            didSelectBlock={didSelectBlock}
-                            isSelected={isSelected}
-                            pageRef={pageRef}
-                            deleteBlock={deleteBlock}
-                        />
-                    )
+                    if (block.type === ItemTypes.IMAGE) {
+                        return (
+                            <ImageElement
+                                key={id}
+                                block={block}
+                                setBlock={setBlock}
+                                didSelectBlock={didSelectBlock}
+                                isSelected={isSelected}
+                                pageRef={pageRef}
+                                deleteBlock={deleteBlock}
+                            />
+                        )
+                    } else if (block.type === ItemTypes.BUTTON) {
+                        return (
+                            <ButtonElement
+                                key={id}
+                                block={block}
+                                setBlock={setBlock}
+                                didSelectBlock={didSelectBlock}
+                                isSelected={isSelected}
+                                pageRef={pageRef}
+                                deleteBlock={deleteBlock}
+                            />
+                        )
                 } else if (block.type === ItemTypes.GRAPHIC) {
                     return (
                         <GraphicsElement
@@ -53,54 +54,55 @@ const Page = ({ backgroundColor, blocks, setBlock, didSelectBlock, selectedBlock
                             deleteBlock={deleteBlock}
                         />
                     )
-                } else if (block.type === ItemTypes.HEADING) {
-                    return (
-                        <HeadingElement
-                            key={id}
-                            block={block}
-                            setBlock={setBlock}
-                            didSelectBlock={didSelectBlock}
-                            isSelected={isSelected}
-                            pageRef={pageRef}
-                        />
-                    )
-                } else if (block.type === ItemTypes.BODY) {
-                    return (
-                        <BodyElement
-                            key={id}
-                            block={block}
-                            setBlock={setBlock}
-                            didSelectBlock={didSelectBlock}
-                            isSelected={isSelected}
-                            pageRef={pageRef} />
-                    )
-                } else if (block.type === ItemTypes.TEXT_AREA) {
-                    return (
-                        <TextAreaElement
-                            key={id}
-                            block={block}
-                            setBlock={setBlock}
-                            didSelectBlock={didSelectBlock}
-                            isSelected={isSelected}
-                            pageRef={pageRef}
-                            deleteBlock={deleteBlock}
-                        />
-                    )
-                } else if (block.type === ItemTypes.TEXT_INPUT) {
-                    return (
-                        <TextFieldElement
-                            key={id}
-                            block={block}
-                            setBlock={setBlock}
-                            didSelectBlock={didSelectBlock}
-                            isSelected={isSelected}
-                            pageRef={pageRef}
-                            deleteBlock={deleteBlock}
-                        />
-                    )
-                }
+                    } else if (block.type === ItemTypes.HEADING) {
+                        return (
+                            <HeadingElement
+                                key={id}
+                                block={block}
+                                setBlock={setBlock}
+                                didSelectBlock={didSelectBlock}
+                                isSelected={isSelected}
+                                pageRef={pageRef}
+                            />
+                        )
+                    } else if (block.type === ItemTypes.BODY) {
+                        return (
+                            <BodyElement
+                                key={id}
+                                block={block}
+                                setBlock={setBlock}
+                                didSelectBlock={didSelectBlock}
+                                isSelected={isSelected}
+                                pageRef={pageRef} />
+                        )
+                    } else if (block.type === ItemTypes.TEXT_AREA) {
+                        return (
+                            <TextAreaElement
+                                key={id}
+                                block={block}
+                                setBlock={setBlock}
+                                didSelectBlock={didSelectBlock}
+                                isSelected={isSelected}
+                                pageRef={pageRef}
+                                deleteBlock={deleteBlock}
+                            />
+                        )
+                    } else if (block.type === ItemTypes.TEXT_INPUT) {
+                        return (
+                            <TextFieldElement
+                                key={id}
+                                block={block}
+                                setBlock={setBlock}
+                                didSelectBlock={didSelectBlock}
+                                isSelected={isSelected}
+                                pageRef={pageRef}
+                                deleteBlock={deleteBlock}
+                            />
+                        )
+                    }
             })}
-        </div>
+            </div>
+            </div>
     )
 }
 

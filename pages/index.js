@@ -7,21 +7,20 @@ import Sidebar from './components/Sidebar'
 import Page from './components/Page'
 import { ItemTypes } from '../utils/types'
 import Link from 'next/link'
+import PreviewPDF from './components/PreviewPDF'
 
 const Container = () => {
   const [page, setPage] = useState({ backgroundColor: '#fff' })
   const [blocks, setBlocks] = useState([])
   const [selectedBlock, setSelectedBlock] = useState(null)
-
-  useEffect(() => {
-    console.log(blocks)
-  })
+  const [displayPreview, setDisplayPreview] = useState(false)
+  
   const generateBlocksParams = () => {
     const pageParam = page
     const blocksParam = { blocks: blocks }
     const params = Object.assign(blocksParam, pageParam)
     
-    return JSON.stringify(params)
+    return params
   }
 
   const onPageChange = (property, value) => {
@@ -182,10 +181,12 @@ const Container = () => {
         <div style={{ width: '-webkit-fill-available' }}>
           <div className="navbar flex justify-between mb-2">
             <a className="btn btn-ghost text-slate-100 normal-case text-2xl">Pageblox</a>
-            <Link href={{ pathname: '/preview/[slug]', query: { slug: encodeURIComponent(generateBlocksParams()) } }}><a target="_blank"><button className="btn">Preview Page</button></a></Link>
+            <div className="tabs">
+              <a className={`tab tab-bordered ${ displayPreview ? '' : 'tab-active' }`} onClick={() => { setDisplayPreview(false) } }>Design Mode</a>
+              <a className={`tab tab-bordered ${ displayPreview ? 'tab-active' : ''}`} onClick={() => { setDisplayPreview(true) }}>Preview Mode</a>
+            </div>
           </div>
-          <div className="bg-stone-300 flex flex-col items-center justify-around py-5">
-            <Page
+          {displayPreview ? <PreviewPDF pageData={generateBlocksParams()} /> : <Page
               backgroundColor={page.backgroundColor}
               blocks={blocks}
               setBlock={updateBlock}
@@ -194,8 +195,7 @@ const Container = () => {
               }}
               selectedBlock={selectedBlock}
               deleteBlock={deleteBlock}
-            />
-          </div>
+            />}
         </div>
       </main>
     </div>
