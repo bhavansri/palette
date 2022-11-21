@@ -50,9 +50,9 @@ const renderGraphic = (block) => (
     <Image src={`/illustrations/${block.filename}`} alt={block.filename} style={{ width: block.width, height: block.height }} />
 )
 
-const renderImage = (block) => (
-    <Image src={block.url} alt={block.url} style={{ width: block.width, height: block.height }} />
-)
+// const renderImage = (block) => (
+//     <Image src={block.url} alt={block.url} style={{ width: block.width, height: block.height }} />
+// )
 
 const Doc = ({ data }) => {
     const pageStyle = (({ backgroundColor }) => ({ backgroundColor }))(data)
@@ -66,7 +66,7 @@ const Doc = ({ data }) => {
                         <View key={block.id} style={{ position: 'absolute', left: block.x, top: block.y, width: block.width, border: 'solid' }}>
                             {(block.type === ItemTypes.BODY || block.type === ItemTypes.HEADING) && parse(`${block.value.toString()}`, options)}
                             {block.type === ItemTypes.GRAPHIC && renderGraphic(block)}
-                            {block.type === ItemTypes.IMAGE && renderImage(block)}
+                            {/* {block.type === ItemTypes.IMAGE && renderImage(block)} */}
                         </View>
                     )
                 })}
