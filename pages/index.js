@@ -1,12 +1,11 @@
 import Head from 'next/head'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import uuid from 'react-uuid'
 
 import styles from '../styles/Home.module.css'
 import Sidebar from './components/Sidebar'
 import Page from './components/Page'
 import { ItemTypes } from '../utils/types'
-import Link from 'next/link'
 import PreviewPDF from './components/PreviewPDF'
 
 const Container = () => {
