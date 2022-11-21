@@ -15,7 +15,7 @@ const modules  = {
 }
 
 const HeadingElement = ({ block, setBlock, didSelectBlock, isSelected, pageRef }) => {
-    const { id, x, y, width, value } = block
+    const { id, x, y, width, value } = block || {}
     const [isEditable, setEditable] = useState(false)
     
     const handleSelection = (isSelected) => {
