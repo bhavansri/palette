@@ -2,67 +2,70 @@ import { useState } from "react"
 import { useCallback } from "react"
 import { useEffect } from "react"
 import { useRef } from "react"
+import uuid from "react-uuid"
 import socketIO from "socket.io-client"
 import Comment from "./Comment"
 const socket = socketIO.connect("http://localhost:4000")
 
-const Page = ({ blocks, setBlock }) => {
-    const url = 'https://blog.logrocket.com/implementing-websocket-communication-next-js/'
-    const ref = useRef(null)
+const Page = () => {
+    const url = 'https://www.pageblox.io'
+    const pageRef = useRef(null)
     const [image, setImage] = useState('')
-    const [cursor, setCursor] = useState('')
-    const [fullHeight, setFullHeight] = useState('')
+    const [blocks, setBlocks] = useState([])
+
+    const updateBlock = (blockProps) => {
+        setBlocks(prevBlocks => {
+            const newBlocks = prevBlocks.map(prevBlock => {
+                if (prevBlock.id === blockProps.id) {
+                    return Object.assign(prevBlock, blockProps)
+                }
+                
+                return prevBlock
+            })
+            
+            return newBlocks
+        })
+    }
+
+    const deleteBlock = (id) => {
+        setBlocks(prevBlocks => {
+          const newBlocks = prevBlocks.filter(block => block.id !== id)
+    
+          return newBlocks
+        })
+    }
 
     useEffect(() => {
         socket.emit('browse', {
             url
         })
 
-        socket.on('image', ({img, fullHeight}) => {
-            setImage('data:image/png;base64,' + img);
-            setFullHeight(fullHeight);
-        })
-
-        socket.on("cursor", (cur) => {
-            setCursor(cur);
+        socket.on('image', ({ image, buffer }) => {
+            if (image) {
+                setImage('data:image/png;base64,' + buffer)
+            }
         })
     }, [url])
 
-    const mouseMove = useCallback((event) => {
-        const position = event.currentTarget.getBoundingClientRect()
-        const widthChange = 1255 / position.width
-        const heightChange = 800 / position.height
-        socket.emit('mouseMove', {
-            x: widthChange * (event.pageX - position.left),
-            y: heightChange * (event.pageY - position.top - document.documentElement.scrollTop),
-        })
-    }, [])
+    useEffect(() => {
+        console.log(blocks)
+    })
 
-    const mouseClick = useCallback((event) => {
+    const createComment = useCallback((event) => {
         const position = event.currentTarget.getBoundingClientRect()
-        const widthChange = 1255 / position.width
-        const heightChange = 800 / position.height
-        socket.emit('mouseClick', {
-            x: widthChange * (event.pageX - position.left),
-            y: heightChange * (event.pageY - position.top - document.documentElement.scrollTop),
-        })
-    }, [])
 
-    const mouseScroll = useCallback((event) => {
-        const position = event.currentTarget.scrollTop
-        socket.emit('scroll', {
-            position
-        })
+        setBlocks(prevBlocks => [...prevBlocks, {
+            id: uuid(),
+            comment: "",
+            x: event.clientX - position.left,
+            y: event.clientY - position.top}])
     }, [])
 
     return (
-        <div className="w-full px-5 overflow-auto" style={{ height: '700px' }} onScroll={mouseScroll}>
-            <div ref={ref} className="bg-white w-full h-full relative" style={{ cursor, height: fullHeight }}>
-                {blocks?.map(block => {
-                    const id = block.id
-                    return <Comment key={id} block={block} setBlock={setBlock} />
-                })}
-                {image && <picture><img alt='hello' src={image} onMouseMove={mouseMove} onClick={mouseClick} className="top-0 sticky w-full" /></picture>}
+        <div className="w-full px-5 overflow-auto" style={{ height: '700px' }}>
+            <div ref={pageRef} className="bg-white w-full h-full relative" onDoubleClick={createComment}>
+                {blocks.map(block => { return <div key={block.id} style={{ top: block.y, left: block.x, position: 'absolute', zIndex: 10 }}><Comment pageRef={pageRef} block={block} setBlock={updateBlock} deleteBlock={deleteBlock} /></div> })}
+                {image && <picture><img alt='hello' src={image} className="top-0 sticky w-full" /></picture>}
             </div>
         </div>
     )

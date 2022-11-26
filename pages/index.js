@@ -4,64 +4,14 @@ import React, { useState } from 'react'
 import styles from '../styles/Home.module.css'
 import Sidebar from './components/Sidebar'
 import Page from './components/Page'
-import uuid from 'react-uuid'
 
 const Container = () => {
-  const [blocks, setBlocks] = useState([])
-  const [selectedBlock, setSelectedBlock] = useState(null)
-
-  const addCommentHandler = () => {
-    const commentBlock = {
-      id: uuid(),
-      x: 50,
-      y: 50,
-      width: 250,
-      height: 120
-    }
-
-    setBlocks(prevBlocks => [...prevBlocks, commentBlock])
-    setSelectedBlock(commentBlock)
-  }
-
-  const updateBlock = (blockProps) => {
-    setBlocks(prevBlocks => {
-      const newBlocks = prevBlocks.map(prevBlock => {
-        if (prevBlock.id === blockProps.id) {
-          return Object.assign(prevBlock, blockProps)
-        }
-
-        return prevBlock
-      })
-
-      return newBlocks
-    })
-  }
-
-  const deleteBlock = () => {
-    setBlocks(prevBlocks => {
-      const newBlocks = prevBlocks.filter(block => block.id !== selectedBlock.id)
-
-      return newBlocks
-    })
-
-    setSelectedBlock(null)
-  }
 
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <Sidebar
-          addCommentHandler={addCommentHandler}
-        />
         <div style={{ width: '-webkit-fill-available' }}>
           <Page
-              blocks={blocks}
-              setBlock={updateBlock}
-              didSelectBlock={(selectedBlock) => {
-                setSelectedBlock(selectedBlock)
-              }}
-              selectedBlock={selectedBlock}
-              deleteBlock={deleteBlock}
             />
         </div>
       </main>
