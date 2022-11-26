@@ -7,6 +7,13 @@ import socketIO from "socket.io-client"
 import Comment from "./Comment"
 const socket = socketIO.connect("http://localhost:4000")
 
+const firstNames = [
+    'Sasha', 'Iris', 'Aniya', 'Karlie', 'Maleah', 'Leonel', 'Riley', 'Itzel', 'Kody', 'Natasha', 'Jonathon', 'Isabela', 'Genesis'
+]
+
+const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`
+const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)]
+
 const Page = () => {
     const url = 'https://www.pageblox.io'
     const pageRef = useRef(null)
@@ -25,6 +32,8 @@ const Page = () => {
             
             return newBlocks
         })
+
+        socket.emit("blocks", blocks)
     }
 
     const deleteBlock = (id) => {
@@ -45,24 +54,32 @@ const Page = () => {
                 setImage('data:image/png;base64,' + buffer)
             }
         })
-    }, [url])
+    }, [])
 
     useEffect(() => {
-        console.log(blocks)
-    })
+        socket.on('new-blocks', blocks => {
+            setBlocks(blocks)
+        })
+    }, [blocks])
 
     const createComment = useCallback((event) => {
         const position = event.currentTarget.getBoundingClientRect()
 
         setBlocks(prevBlocks => [...prevBlocks, {
             id: uuid(),
+            profileColor: randomColor,
+            profileName: randomFirstName,
             comment: "",
+            submitted: false,
             x: event.clientX - position.left,
             y: event.clientY - position.top}])
     }, [])
 
     return (
-        <div className="w-full px-5 overflow-auto" style={{ height: '700px' }}>
+        <div className="flex w-full px-5 overflow-auto" style={{ height: '700px' }}>
+            <aside className="flex flex-col items-center px-3">
+
+            </aside>
             <div ref={pageRef} className="bg-white w-full h-full relative" onDoubleClick={createComment}>
                 {blocks.map(block => { return <div key={block.id} style={{ top: block.y, left: block.x, position: 'absolute', zIndex: 10 }}><Comment pageRef={pageRef} block={block} setBlock={updateBlock} deleteBlock={deleteBlock} /></div> })}
                 {image && <picture><img alt='hello' src={image} className="top-0 sticky w-full" /></picture>}

@@ -1,25 +1,10 @@
 import Head from 'next/head'
-import React, { useState } from 'react'
+import React from 'react'
 
 import styles from '../styles/Home.module.css'
-import Sidebar from './components/Sidebar'
 import Page from './components/Page'
 
-const Container = () => {
-
-  return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <div style={{ width: '-webkit-fill-available' }}>
-          <Page
-            />
-        </div>
-      </main>
-    </div>
-  )
-}
-
-const MemoizedContainer = React.memo(Container)
+const MemoizedContainer = React.memo(Page)
 
 export default function Home() {
 
