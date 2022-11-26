@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { Fragment, useState } from "react"
 import { useCallback } from "react"
 import { useEffect } from "react"
 import { useRef } from "react"
@@ -30,10 +30,10 @@ const Page = () => {
                 return prevBlock
             })
             
+            socket.emit("blocks", newBlocks)
+            
             return newBlocks
         })
-
-        socket.emit("blocks", blocks)
     }
 
     const deleteBlock = (id) => {
@@ -76,9 +76,26 @@ const Page = () => {
     }, [])
 
     return (
-        <div className="flex w-full px-5 overflow-auto" style={{ height: '700px' }}>
-            <aside className="flex flex-col items-center px-3">
-
+        <div className="flex w-full pr-5 overflow-auto" style={{ height: '700px' }}>
+            <aside>
+                <ul className="menu menu-compact bg-base-100 w-48 rounded-box mt-5">
+                    {blocks.map(block => {
+                        if (block.submitted) {
+                            return (
+                                <Fragment key={block.id}>
+                                    <li>
+                                        <div>
+                                            <span className='h-3 w-3 inline-block' style={{ borderRadius: '50%', background: block.profileColor }}></span>
+                                            <span>{block.profileName}</span>
+                                        </div>
+                                        <div className="text-xs pl-5 text-gray-400">{block.comment}</div>
+                                    </li>
+                                    <div className="divider px-5"></div>
+                                </Fragment>
+                            )
+                        }
+                    }) }
+                </ul>
             </aside>
             <div ref={pageRef} className="bg-white w-full h-full relative" onDoubleClick={createComment}>
                 {blocks.map(block => { return <div key={block.id} style={{ top: block.y, left: block.x, position: 'absolute', zIndex: 10 }}><Comment pageRef={pageRef} block={block} setBlock={updateBlock} deleteBlock={deleteBlock} /></div> })}
