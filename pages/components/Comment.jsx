@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useOutsideClick } from '../../utils/hooks'
 
 const Comment = ({ pageRef, block, setBlock, deleteBlock }) => {
-    const { id, comment, submitted, profileColor, profileName } = block
+    const { id, comment, submitted, profileColor, profileName } = block || {}
 
     const handleSubmit = (event) => {
         if (comment.length > 0) {
