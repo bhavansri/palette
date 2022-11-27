@@ -28,7 +28,7 @@ const Comment = ({ pageRef, block, setBlock, deleteBlock }) => {
             </span>
             <div>
                 {submitted ?
-                    <div className='flex flex-col items-start gap-2 bg-gray-900 py-2 px-3 rounded'>
+                    <div className='flex flex-col items-start gap-2 bg-gray-900 py-2 px-3 rounded' style={{ minWidth: '222px' }}>
                         <div className='flex items-center justify-between w-full'>
                             <span className='text-white'>{`${profileName}`}</span>
                             <button className="btn btn-sm btn-square" onClick={handleDelete}>

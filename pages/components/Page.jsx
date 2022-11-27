@@ -2,6 +2,7 @@ import { Fragment, useState } from "react"
 import { useCallback } from "react"
 import { useEffect } from "react"
 import { useRef } from "react"
+import { Rnd } from "react-rnd"
 import uuid from "react-uuid"
 import socketIO from "socket.io-client"
 import Comment from "./Comment"
@@ -75,6 +76,10 @@ const Page = () => {
             y: event.clientY - position.top}])
     }, [])
 
+    const onDragStop = useCallback((d, id) => {
+        updateBlock({ id: id, x: d.x, y: d.y })
+    }, [])
+
     return (
         <div className="flex w-full pr-5 overflow-auto" style={{ height: '700px' }}>
             <aside>
@@ -98,7 +103,10 @@ const Page = () => {
                 </ul>
             </aside>
             <div ref={pageRef} className="bg-white w-full h-full relative" onDoubleClick={createComment}>
-                {blocks.map(block => { return <div key={block.id} style={{ top: block.y, left: block.x, position: 'absolute', zIndex: 10 }}><Comment pageRef={pageRef} block={block} setBlock={updateBlock} deleteBlock={deleteBlock} /></div> })}
+                {blocks.map(block => <Rnd size={{ width: 'auto', height: 'auto' }} position={{ x: block.x, y: block.y }} enableResizing={false} onDragStop={(e, d) => { onDragStop(d, block.id) }} key={block.id} style={{ position: 'absolute', zIndex: 10, cursor: 'default' }}>
+                        <Comment pageRef={pageRef} block={block} setBlock={updateBlock} deleteBlock={deleteBlock} />
+                    </Rnd>
+                )}
                 {image && <picture><img alt='hello' src={image} className="top-0 sticky w-full" /></picture>}
             </div>
         </div>
