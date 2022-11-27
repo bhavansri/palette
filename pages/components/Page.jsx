@@ -6,7 +6,7 @@ import { Rnd } from "react-rnd"
 import uuid from "react-uuid"
 import socketIO from "socket.io-client"
 import Comment from "./Comment"
-const socket = socketIO.connect("http://localhost:4000")
+const socket = socketIO.connect("http://198.199.78.124/")
 
 const urlRegex = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
 const firstNames = [
