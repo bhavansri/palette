@@ -102,9 +102,9 @@ const Page = () => {
                     </button>
                 </div>
             </div>
-            <div className="flex w-full pr-5 overflow-auto">
+            <div className="flex w-full pr-5 overflow-auto h-screen">
                 <aside>
-                    <ul className="menu menu-compact bg-base-100 w-48 rounded-box mt-5">
+                    <ul className="menu menu-compact w-48 rounded-box mt-5">
                         {blocks.map(block => {
                             if (block.submitted) {
                                 return (

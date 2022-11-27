@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useOutsideClick } from '../../utils/hooks'
 
 const Comment = ({ pageRef, block, setBlock, deleteBlock }) => {
